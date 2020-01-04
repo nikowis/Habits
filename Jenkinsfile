@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build backend') {
             steps {
-                sh 'mvn clean install -f /api/pom.xml'
+                sh 'mvn clean install -f ./api/pom.xml'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
