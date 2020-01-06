@@ -80,3 +80,5 @@ api/.mvn/*
 api/mvnw
 api/mvnw.cmd
 
+
+api/data/selfcaredb.mv.db
