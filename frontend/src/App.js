@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
 import './App.css';
+import Login from "./Login";
+
 
 class App extends Component {
 
-    state = {
-        data: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {name: ''};
+    }
 
     componentDidMount() {
     }
 
-    
+    handleLogin = (login) => {
+        this.setState({name: login})
+    };
+
     render() {
         return (
             <div className="App">
@@ -21,8 +27,11 @@ class App extends Component {
                           crossOrigin="anonymous"/>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
                     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-                          Hello world!
                 </header>
+
+                {this.state.name? null : <Login onLoginSubmit={this.handleLogin}/>}
+                {this.state.name ? "Logged in as " + this.state.name : ""}
+
             </div>
         );
     }
