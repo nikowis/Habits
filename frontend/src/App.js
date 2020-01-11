@@ -40,7 +40,7 @@ class App extends Component {
                     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
                 </header>
                 {this.state.login ? null : <Login onLoginSubmit={this.handleLogin}/>}
-                {this.state.login ? <TopMenu login={this.state.login}/> : null}
+                <TopMenu login={this.state.login}/>
                 {this.state.login ? this.mainView() : null}
             </div>
         );

@@ -11,10 +11,18 @@ class TopMenu extends React.Component {
     render() {
         return (
             <div className="top-menu">
-                Welcome {this.props.login}
+                {this.headerContent()}
             </div>
         );
 
+    }
+
+    headerContent() {
+        if(this.props.login) {
+            return "Welcome " + this.props.login;
+        } else {
+            return "";
+        }
     }
 }
 
