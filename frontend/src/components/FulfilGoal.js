@@ -11,7 +11,7 @@ class FulfilGoal extends React.Component {
     render() {
         return (
             <div className="fulfil-goal-form">
-                Create goal
+                Fulfil goal
             </div>
         );
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import './../App.css';
+import {Redirect} from "react-router-dom";
 
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: ''};
+        this.state = {name: '', redirect: false};
     }
 
     handleChange = (event) => {
@@ -15,10 +16,14 @@ class Login extends React.Component {
 
     handleSubmit = (event) => {
         this.props.onLoginSubmit(this.state.name)
+        this.setState({redirect: true})
         event.preventDefault();
     };
 
     render() {
+        if(this.state.redirect) {
+            return <Redirect to='/' />
+        }
         return (
             <div className="login">
                 <form onSubmit={this.handleSubmit}>
