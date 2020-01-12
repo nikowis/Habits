@@ -7,13 +7,14 @@ import * as MainViewStates from "./MainViewStates";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
+import CreatedGoal from "./components/CreatedGoal";
 
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {login: '', view: MainViewStates.FULFIL_GOAL};
+        this.state = {login: 'Niko', view: MainViewStates.FULFIL_GOAL};
     }
 
     handleLogin = (login) => {
@@ -51,10 +52,13 @@ class App extends Component {
                             <Login onLoginSubmit={this.handleLogin}/>
                         </Route>
                         <Route path="/create">
-                            <CreateGoal/>
+                            <CreateGoal login={this.state.login}/>
+                        </Route>
+                        <Route path="/created">
+                            <CreatedGoal/>
                         </Route>
                         <Route path="/fulfil">
-                            <FulfilGoal/>
+                            <FulfilGoal login={this.state.login}/>
                         </Route>
                     </Switch>
                 </div>

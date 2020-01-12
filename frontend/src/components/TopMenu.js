@@ -5,10 +5,6 @@ import {Link} from "react-router-dom";
 
 class TopMenu extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="top-menu">
