@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import Login from "./components/Login";
 import CreateGoal from "./components/CreateGoal";
 import FulfilGoal from "./components/FulfilGoal";
