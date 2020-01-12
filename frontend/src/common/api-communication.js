@@ -10,9 +10,15 @@ const Api = {
         .then((response) => {
             return response.json();
         })
+        .catch(console.log)
     },
 
 
+    getGoals: function (login) {
+        return fetch('http://localhost:8080/goals')
+            .then(res => res.json())
+            .catch(console.log)
+    }
 };
 
 export default Api;

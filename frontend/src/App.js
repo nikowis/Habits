@@ -3,7 +3,6 @@ import './App.scss';
 import Login from "./components/Login";
 import CreateGoal from "./components/CreateGoal";
 import FulfilGoal from "./components/FulfilGoal";
-import * as MainViewStates from "./MainViewStates";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
@@ -14,21 +13,11 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {login: 'Niko', view: MainViewStates.FULFIL_GOAL};
+        this.state = {login: 'Niko'};
     }
 
     handleLogin = (login) => {
         this.setState({login: login})
-    };
-
-    mainView = () => {
-        let view;
-        if (this.state.view === MainViewStates.CREATE_GOAL) {
-            view = <CreateGoal/>;
-        } else if (this.state.view === MainViewStates.FULFIL_GOAL) {
-            view = <FulfilGoal/>;
-        }
-        return view;
     };
 
     render() {
