@@ -3,12 +3,12 @@ package pl.nikowis.selfcare.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import java.util.Date;
 
 @Entity
@@ -20,8 +20,16 @@ public class Fulfilment {
     private Long id;
     private Date createdAt;
     private String createdBy;
-    private Boolean fulfiled;
+    private Boolean fulfilled;
     @ManyToOne
+    @JoinColumn(name = "goalId")
     private Goal goal;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = new Date();
+        }
+    }
 
 }
