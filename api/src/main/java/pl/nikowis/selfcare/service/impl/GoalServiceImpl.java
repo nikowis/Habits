@@ -2,9 +2,9 @@ package pl.nikowis.selfcare.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.nikowis.selfcare.model.DailyGoalDTO;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
+import pl.nikowis.selfcare.model.GoalDTO;
 import pl.nikowis.selfcare.repository.impl.FulfilmentRepository;
 import pl.nikowis.selfcare.repository.impl.GoalRepository;
 import pl.nikowis.selfcare.service.GoalService;
@@ -24,10 +24,10 @@ class GoalServiceImpl implements GoalService {
     private FulfilmentRepository fulfilmentRepository;
 
     @Override
-    public List<DailyGoalDTO> getDailyGoals(String login) {
+    public List<GoalDTO> getDailyGoals(String login) {
         List<Goal> goals = goalRepository.findAll();
         List<Long> goalIds = goals.stream().map(Goal::getId).collect(Collectors.toList());
-        List<DailyGoalDTO> dailyGoals = goals.stream().map(DailyGoalDTO::new).collect(Collectors.toList());
+        List<GoalDTO> dailyGoals = goals.stream().map(GoalDTO::new).collect(Collectors.toList());
 
         Date startDate = DateUtils.getTodayDayStart();
         Date endDate = DateUtils.getTodayDayEnd();

@@ -2,9 +2,10 @@ package pl.nikowis.selfcare.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.nikowis.selfcare.model.FulfillGoalDTO;
+import pl.nikowis.selfcare.model.FulfillGoalRequestDTO;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
+import pl.nikowis.selfcare.model.GoalDTO;
 import pl.nikowis.selfcare.repository.impl.FulfilmentRepository;
 import pl.nikowis.selfcare.repository.impl.GoalRepository;
 import pl.nikowis.selfcare.service.FulfilmentService;
@@ -21,14 +22,16 @@ class FulfilmentServiceImpl implements FulfilmentService {
     private FulfilmentRepository fulfilmentRepository;
 
     @Override
-    public Fulfilment fulfilGoal(FulfillGoalDTO fulfilDTO) {
-        Optional<Goal> goal = goalRepository.findById(fulfilDTO.getGoalId());
-        if (goal.isPresent()) {
+    public GoalDTO fulfilGoal(FulfillGoalRequestDTO fulfilDTO) {
+        Optional<Goal> optGoal = goalRepository.findById(fulfilDTO.getGoalId());
+        if (optGoal.isPresent()) {
             Fulfilment f = new Fulfilment();
-            f.setGoal(goal.get());
+            Goal goal = optGoal.get();
+            f.setGoal(goal);
             f.setCreatedBy(fulfilDTO.getLogin());
             f.setFulfilled(true);
-            return fulfilmentRepository.save(f);
+            fulfilmentRepository.save(f);
+            return new GoalDTO(goal, true);
         }
         return null;
     }

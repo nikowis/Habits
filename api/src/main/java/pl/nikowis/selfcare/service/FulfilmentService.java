@@ -1,8 +1,8 @@
 package pl.nikowis.selfcare.service;
 
-import pl.nikowis.selfcare.model.FulfillGoalDTO;
-import pl.nikowis.selfcare.model.Fulfilment;
+import pl.nikowis.selfcare.model.FulfillGoalRequestDTO;
+import pl.nikowis.selfcare.model.GoalDTO;
 
 public interface FulfilmentService {
-    Fulfilment fulfilGoal(FulfillGoalDTO fulfilDTO);
+    GoalDTO fulfilGoal(FulfillGoalRequestDTO fulfilDTO);
 }

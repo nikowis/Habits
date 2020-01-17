@@ -12,8 +12,6 @@ import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.util.DateUtils;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;

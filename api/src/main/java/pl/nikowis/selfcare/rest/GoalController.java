@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.nikowis.selfcare.model.DailyGoalDTO;
 import pl.nikowis.selfcare.model.Goal;
+import pl.nikowis.selfcare.model.GoalDTO;
 import pl.nikowis.selfcare.service.GoalService;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class GoalController {
     private GoalService goalService;
 
     @GetMapping
-    public List<DailyGoalDTO> goalsList(@RequestParam("login") String login) {
+    public List<GoalDTO> goalsList(@RequestParam("login") String login) {
         return goalService.getDailyGoals(login);
     }
 

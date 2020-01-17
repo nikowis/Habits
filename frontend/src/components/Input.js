@@ -11,6 +11,7 @@ class Input extends React.Component {
                 <input type={this.props.type}
                        onChange={this.props.onChange}
                        value={this.props.value}
+                       {...this.props}
                 />
             </label>
         );

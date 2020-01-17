@@ -27,7 +27,18 @@
     nav {
         position: absolute;
     }
+}
 
+.home {
+    width: 80%;
+    label {
+        border: 1px solid black;
+        display: block;
+        width: 100%;
+    }
+    input {
+        margin: 0.5rem;
+    }
 }
 
 .app-header {

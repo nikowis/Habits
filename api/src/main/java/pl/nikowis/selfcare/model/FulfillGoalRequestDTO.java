@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class FulfillGoalDTO {
+public class FulfillGoalRequestDTO {
 
     @NotNull
     private Long goalId;
