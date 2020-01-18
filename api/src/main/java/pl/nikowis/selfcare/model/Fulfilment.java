@@ -16,7 +16,7 @@ import java.util.Date;
 public class Fulfilment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date createdAt;
     private String createdBy;
