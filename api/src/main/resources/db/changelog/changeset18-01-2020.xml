@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changeset18-01-2020" author="nikowis">
+        <sql>
+            CREATE TABLE goal (
+            id serial PRIMARY KEY
+            , title VARCHAR(128) UNIQUE NOT NULL
+            , description VARCHAR(512)
+            , created_at TIMESTAMP NOT NULL
+            , created_by VARCHAR(128)
+            );
+
+            CREATE TABLE fulfilment (
+            id serial PRIMARY KEY
+            , fulfilled BOOLEAN NOT NULL
+            , created_at TIMESTAMP NOT NULL
+            , created_by VARCHAR(128) NOT NULL
+            , goal_id INTEGER
+            , FOREIGN KEY (goal_id) REFERENCES goal (id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
