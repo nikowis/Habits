@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
@@ -18,10 +19,14 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
+@ActiveProfiles(profiles = "test")
 public class FulfilmentRepositoryTests {
 
     @Autowired
     private FulfilmentRepository fulfilmentRepository;
+
+    @Autowired
+    private GoalRepository goalRepository;
 
     private Goal g1;
     private Fulfilment f1;
@@ -63,6 +68,7 @@ public class FulfilmentRepositoryTests {
 
     @Test
     public void testSave() {
+        goalRepository.save(g1);
         fulfilmentRepository.save(f1);
         fulfilmentRepository.save(f2);
         fulfilmentRepository.save(f3);
