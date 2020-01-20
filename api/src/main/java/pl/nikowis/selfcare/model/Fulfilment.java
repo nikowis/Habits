@@ -3,33 +3,19 @@ package pl.nikowis.selfcare.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import java.util.Date;
 
 @Entity
 @Data
-public class Fulfilment {
+public class Fulfilment extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Date createdAt;
-    private String createdBy;
     private Boolean fulfilled;
     @ManyToOne
     @JoinColumn(name = "goalId")
     private Goal goal;
-
-    @PrePersist
-    public void prePersist() {
-        if (createdAt == null) {
-            createdAt = new Date();
-        }
-    }
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
 }

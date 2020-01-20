@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.nikowis.selfcare.model.FulfillGoalRequestDTO;
-import pl.nikowis.selfcare.model.GoalDTO;
+import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
+import pl.nikowis.selfcare.dto.GoalDTO;
 import pl.nikowis.selfcare.service.FulfilmentService;
 
 @RestController

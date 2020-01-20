@@ -1,4 +1,4 @@
-package pl.nikowis.selfcare.model;
+package pl.nikowis.selfcare.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,5 @@ public class FulfillGoalRequestDTO {
 
     @NotNull
     private Long goalId;
-    @NotNull
-    private String login;
 
 }

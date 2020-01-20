@@ -25,8 +25,4 @@ public class H2TestProfileJPAConfig {
         dataSource.setPassword("sa");
         return dataSource;
     }
-
-    // configure entityManagerFactory
-    // configure transactionManager
-    // configure additional Hibernate properties
 }
