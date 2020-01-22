@@ -7,7 +7,7 @@
 
     <changeSet id="changeset19-01-2020-user.xml" author="nikowis">
         <sql>
-            CREATE TABLE user (
+            CREATE TABLE "user" (
             id serial PRIMARY KEY
             , login VARCHAR(128) UNIQUE NOT NULL
             , password VARCHAR(512) NOT NULL
@@ -16,11 +16,11 @@
             );
 
             ALTER TABLE fulfilment ADD COLUMN "user_id" INTEGER NOT NULL;
-            ALTER TABLE fulfilment ADD CONSTRAINT FK_fulfilment_user FOREIGN KEY (user_id) REFERENCES user (id);
+            ALTER TABLE fulfilment ADD CONSTRAINT FK_fulfilment_user FOREIGN KEY (user_id) REFERENCES "user" (id);
             ALTER TABLE fulfilment ADD COLUMN "updated_at" TIMESTAMP NOT NULL DEFAULT NOW();
 
             ALTER TABLE goal ADD COLUMN "user_id" INTEGER;
-            ALTER TABLE goal ADD CONSTRAINT FK_goal_user FOREIGN KEY (user_id) REFERENCES user (id);
+            ALTER TABLE goal ADD CONSTRAINT FK_goal_user FOREIGN KEY (user_id) REFERENCES "user" (id);
             ALTER TABLE goal ADD COLUMN "updated_at" TIMESTAMP NOT NULL DEFAULT NOW();
 
             ALTER TABLE fulfilment DROP COLUMN "created_by";
