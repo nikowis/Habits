@@ -1,4 +1,4 @@
-import {API_GOALS, API_FULFILMENTS} from './constants'
+import {API_GOALS, API_FULFILMENTS, API_LOGIN} from './constants'
 
 class Api {
 
@@ -20,6 +20,23 @@ class Api {
                 return response.json();
             })
             .catch(console.log)
+    };
+
+    postLogin(login, password) {
+        let url = this.API_URL + API_LOGIN;
+        var data = new URLSearchParams();
+        data.append('username', login);
+        data.append('password', password);
+
+        return fetch(url, {
+            method: 'POST',
+            headers : {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: data
+        }).then((response) => {
+            return response.json();
+        }).catch(console.log)
     };
 
     getGoals(login) {

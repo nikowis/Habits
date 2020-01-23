@@ -7,17 +7,19 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import CreatedGoal from "./components/CreatedGoal";
-
+import Api from './common/api-communication';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {login: 'Niko'};
+        this.state = {login: null};
     }
 
-    handleLogin = (login) => {
-        this.setState({login: login})
+    handleLogin = (login, password) => {
+        Api.postLogin(login, password).then( res => {
+            this.setState({login: res.login})
+        });
     };
 
     render() {
