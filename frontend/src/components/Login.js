@@ -2,6 +2,9 @@ import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Input from "./Input";
+import {LOGIN_ACTION} from '../actions/actions'
+import Api from "../common/api-communication";
+import {connect} from "react-redux";
 
 
 class Login extends React.Component {
@@ -20,9 +23,15 @@ class Login extends React.Component {
     };
 
     handleSubmit = (event) => {
-        this.props.onLoginSubmit(this.state.login, this.state.password);
-        this.setState({redirect: true});
-
+        const {dispatch} = this.props;
+        Api.postLogin(this.state.login, this.state.password).then(res => {
+            this.setState({redirect: true});
+            dispatch({
+                type: LOGIN_ACTION
+                , id: res.id
+                , login: res.login
+            });
+        });
         event.preventDefault();
     };
 
@@ -33,14 +42,15 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <form onSubmit={this.handleSubmit}>
-                    <Input label='Login:' type="text" onChange={this.handleLoginChange} value={this.state.login}/>
-                    <Input label='Password:' type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
+                    <Input id='login' label='Login:' type="text" onChange={this.handleLoginChange} value={this.state.login}/>
+                    <Input id='password' label='Password:' type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
         );
-
     }
 }
 
-export default Login;
+export default connect( state => ({
+    user: state.user,
+}))(Login);

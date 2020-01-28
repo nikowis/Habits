@@ -7,20 +7,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import CreatedGoal from "./components/CreatedGoal";
-import Api from './common/api-communication';
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {login: null};
-    }
-
-    handleLogin = (login, password) => {
-        Api.postLogin(login, password).then( res => {
-            this.setState({login: res.login})
-        });
-    };
 
     render() {
         return (
@@ -34,26 +22,27 @@ class App extends Component {
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
                         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
                     </header>
-                    <TopMenu login={this.state.login}/>
+                    <TopMenu/>
                     <Switch>
                         <Route path="/home">
-                            <Home login={this.state.login}/>
+                            <Home/>
                         </Route>
                         <Route path="/login">
-                            <Login onLoginSubmit={this.handleLogin}/>
+                            <Login/>
                         </Route>
                         <Route path="/create">
-                            <CreateGoal login={this.state.login}/>
+                            <CreateGoal/>
                         </Route>
                         <Route path="/created">
                             <CreatedGoal/>
                         </Route>
                         <Route path="/fulfil">
-                            <FulfilGoal login={this.state.login}/>
+                            <FulfilGoal/>
                         </Route>
                     </Switch>
                 </div>
             </Router>
+
         );
     }
 }
