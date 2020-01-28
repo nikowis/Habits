@@ -1,4 +1,4 @@
-import {API_GOALS, API_FULFILMENTS, API_LOGIN} from './constants'
+import {API_FULFILMENTS, API_GOALS, API_LOGIN} from './constants'
 
 class Api {
 
@@ -14,6 +14,7 @@ class Api {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(goal)
         })
             .then((response) => {
@@ -30,26 +31,25 @@ class Api {
 
         return fetch(url, {
             method: 'POST',
-            headers : {
-                'Content-Type':'application/x-www-form-urlencoded'
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
+            credentials: 'include',
             body: data
         }).then((response) => {
             return response.json();
         }).catch(console.log)
     };
 
-    getGoals(login) {
+    getGoals() {
         const url = new URL(this.API_URL + API_GOALS);
-        const params = {login: login};
-        url.search = new URLSearchParams(params).toString();
 
-        return fetch(url)
+        return fetch(url, {credentials: 'include'})
             .then(res => res.json())
             .catch(console.log)
     };
 
-    fulfilGoal(login, goal) {
+    fulfilGoal(goal) {
         const url = new URL(this.API_URL + API_FULFILMENTS);
 
         return fetch(url, {
@@ -57,12 +57,12 @@ class Api {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 goalId: goal.id,
-                login: login
             })
         }).then(res => res.json())
-        .catch(console.log)
+            .catch(console.log)
     }
 }
 

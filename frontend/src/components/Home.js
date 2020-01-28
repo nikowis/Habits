@@ -2,39 +2,41 @@ import React from 'react';
 import '../App.scss';
 import Api from "./../common/api-communication"
 import Input from "./Input";
+import {connect} from "react-redux";
+import {LOADED_GOALS} from "../actions/actions";
 
 class Home extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            goals: []
-        };
-    }
-
     componentDidMount() {
-        Api.getGoals(this.props.login).then((response) => {
-            this.setState({goals: response})
+        const {dispatch} = this.props;
+        Api.getGoals().then((response) => {
+            dispatch({
+                type: LOADED_GOALS,
+                goals: response
+            });
         });
     }
 
     handleCheckboxChange = (event) => {
         if (event.target.checked) {
-            const selectedGoal = this.state.goals.filter((goal) =>
+            const selectedGoal = this.props.goals.filter((goal) =>
                 goal.id.toString() === event.target.id
             )[0];
-            const self = this;
-            Api.fulfilGoal(this.props.login, selectedGoal)
+            const {dispatch} = this.props;
+            Api.fulfilGoal(selectedGoal)
                 .then(res => {
-                var curGoals = this.state.goals;
-                curGoals.forEach(g => g.fulfilled = g.id === res.id ?  res.fulfilled : g.fulfilled);
-                self.setState({goals: curGoals});
+                    const curGoals = this.props.goals;
+                    curGoals.forEach(g => g.fulfilled = g.id === res.id ? res.fulfilled : g.fulfilled);
+                    dispatch({
+                        type: LOADED_GOALS,
+                        goals: curGoals
+                    });
             });
         }
     };
 
     goalRows = () => {
-        return this.state.goals.map((goal) => {
+        return this.props.goals.map((goal) => {
             return <Input label={goal.title + ': ' + goal.description} type='checkbox'
                           onChange={this.handleCheckboxChange} checked={goal.fulfilled} id={goal.id} key={goal.id}/>
         });
@@ -54,4 +56,6 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default connect( state => ({
+    goals: state.goals,
+}))(Home);
