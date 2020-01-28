@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,14 @@ public class MainController {
     private UserService userService;
 
     @PostMapping("/registration")
-    public UserDTO getMessage(@RequestBody RegisterUserDTO userDTO) {
+    public UserDTO register(@RequestBody RegisterUserDTO userDTO) {
         UserDTO registered = userService.register(userDTO);
         return registered;
     }
 
+    @GetMapping("/me")
+    public UserDTO getMe() {
+        return userService.getCurrentUser();
+    }
 
 }

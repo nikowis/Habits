@@ -9,6 +9,7 @@ import pl.nikowis.selfcare.dto.UserDTO;
 import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.repository.impl.UserRepository;
 import pl.nikowis.selfcare.service.UserService;
+import pl.nikowis.selfcare.util.SecurityUtils;
 
 @Service
 @Transactional
@@ -43,6 +44,15 @@ public class UserServiceImpl implements UserService {
         User saved = userRepository.save(u);
         userDTO.setId(saved.getId());
         return userDTO;
+    }
+
+    @Override
+    public UserDTO getCurrentUser() {
+        User currentUser = SecurityUtils.getCurrentUser();
+        UserDTO currentDto = new UserDTO();
+        currentDto.setId(currentUser.getId());
+        currentDto.setLogin(currentUser.getLogin());
+        return currentDto;
     }
 
 }

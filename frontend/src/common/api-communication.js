@@ -1,4 +1,4 @@
-import {API_FULFILMENTS, API_GOALS, API_LOGIN} from './constants'
+import {API_FULFILMENTS, API_GOALS, API_LOGIN, API_ME} from './constants'
 
 class Api {
 
@@ -47,6 +47,11 @@ class Api {
         return fetch(url, {credentials: 'include'})
             .then(res => res.json())
             .catch(console.log)
+    };
+
+    getMe() {
+        const url = new URL(this.API_URL + API_ME);
+        return fetch(url, {credentials: 'include'}).catch(console.log);
     };
 
     fulfilGoal(goal) {
