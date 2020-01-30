@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.dto.GoalDTO;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
-import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.repository.impl.FulfilmentRepository;
 import pl.nikowis.selfcare.repository.impl.GoalRepository;
 import pl.nikowis.selfcare.service.GoalService;
