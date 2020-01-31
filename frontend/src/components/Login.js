@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Input from "./Input";
-import {LOGIN_ACTION} from '../actions/actions'
+import ActionType from "./actions/actions";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
 
@@ -27,7 +27,7 @@ class Login extends React.Component {
         Api.postLogin(this.state.login, this.state.password).then(res => {
             this.setState({redirect: true});
             dispatch({
-                type: LOGIN_ACTION
+                type: ActionType.LOGIN_ACTION
                 , id: res.id
                 , login: res.login
             });

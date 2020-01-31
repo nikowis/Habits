@@ -1,4 +1,8 @@
-export const LOGIN_ACTION = 'LOGIN_ACTION';
-export const LOGOUT_ACTION = 'LOGOUT_ACTION';
-export const LOADED_GOALS = 'LOADED_GOALS';
+
+export default class ActionType {
+    static LOGIN_ACTION = 'LOGIN_ACTION';
+    static LOGOUT_ACTION = 'LOGOUT_ACTION';
+    static LOADED_GOALS = 'LOADED_GOALS';
+}
+
 

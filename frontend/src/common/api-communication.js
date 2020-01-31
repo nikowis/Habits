@@ -1,4 +1,4 @@
-import {API_FULFILMENTS, API_GOALS, API_LOGIN, API_ME} from './constants'
+import ApiEndpoint from './endpoints'
 
 class Api {
 
@@ -7,7 +7,7 @@ class Api {
     }
 
     createGoal(goal) {
-        let url = this.API_URL + API_GOALS;
+        let url = this.API_URL + ApiEndpoint.API_GOALS;
 
         return fetch(url, {
             method: 'POST',
@@ -24,7 +24,7 @@ class Api {
     };
 
     postLogin(login, password) {
-        let url = this.API_URL + API_LOGIN;
+        let url = this.API_URL + ApiEndpoint.API_LOGIN;
         var data = new URLSearchParams();
         data.append('username', login);
         data.append('password', password);
@@ -42,7 +42,7 @@ class Api {
     };
 
     getGoals() {
-        const url = new URL(this.API_URL + API_GOALS);
+        const url = new URL(this.API_URL + ApiEndpoint.API_GOALS);
 
         return fetch(url, {credentials: 'include'})
             .then(res => res.json())
@@ -50,12 +50,12 @@ class Api {
     };
 
     getMe() {
-        const url = new URL(this.API_URL + API_ME);
+        const url = new URL(this.API_URL + ApiEndpoint.API_ME);
         return fetch(url, {credentials: 'include'}).catch(console.log);
     };
 
     fulfilGoal(goal) {
-        const url = new URL(this.API_URL + API_FULFILMENTS);
+        const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
 
         return fetch(url, {
             method: 'POST',

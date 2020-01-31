@@ -1,4 +1,4 @@
-import {LOGIN_ACTION} from "../actions/actions";
+import ActionType from "./actions/actions";
 
 const initialState = {
     id: '',
@@ -7,7 +7,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN_ACTION:
+        case ActionType.LOGIN_ACTION:
             return {
                 ...state,
                 id: action.id,

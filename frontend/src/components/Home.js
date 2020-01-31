@@ -3,7 +3,7 @@ import '../App.scss';
 import Api from "./../common/api-communication"
 import Input from "./Input";
 import {connect} from "react-redux";
-import {LOADED_GOALS} from "../actions/actions";
+import ActionType from "./actions/actions";
 
 class Home extends React.Component {
 
@@ -28,7 +28,7 @@ class Home extends React.Component {
                     const curGoals = this.props.goals;
                     curGoals.forEach(g => g.fulfilled = g.id === res.id ? res.fulfilled : g.fulfilled);
                     dispatch({
-                        type: LOADED_GOALS,
+                        type: ActionType.LOADED_GOALS,
                         goals: curGoals
                     });
             });

@@ -1,10 +1,10 @@
-import {LOADED_GOALS} from "../actions/actions";
+import ActionType from "./actions/actions";
 
 const initialState = [];
 
 const goalReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOADED_GOALS:
+        case ActionType.LOADED_GOALS:
             return [
                 ...action.goals
             ];

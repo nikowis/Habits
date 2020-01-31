@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import CreatedGoal from "./components/CreatedGoal";
 import {connect} from "react-redux";
 import Api from "./common/api-communication";
-import {LOGIN_ACTION} from "./actions/actions";
+import ActionType from "./actions/actions";
 
 class App extends Component {
 
@@ -25,7 +25,7 @@ class App extends Component {
             if (res.status === 200) {
                 res.json().then(user => {
                     dispatch({
-                        type: LOGIN_ACTION
+                        type: ActionType.LOGIN_ACTION
                         , id: user.id
                         , login: user.login
                     });
@@ -47,8 +47,6 @@ class App extends Component {
                           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
                           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
                           crossOrigin="anonymous"/>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
-                    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
                 </header>
                 <TopMenu/>
                 <Switch>
