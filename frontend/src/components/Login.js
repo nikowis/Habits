@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Input from "./Input";
-import ActionType from "./actions/actions";
+import ActionType from "../actions/actions";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
 

@@ -1,4 +1,5 @@
 import ApiEndpoint from './endpoints'
+import HttpUtility from './http-utility'
 
 class Api {
 
@@ -9,65 +10,49 @@ class Api {
     createGoal(goal) {
         let url = this.API_URL + ApiEndpoint.API_GOALS;
 
-        return fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify(goal)
-        })
-            .then((response) => {
-                return response.json();
-            })
-            .catch(console.log)
+        return HttpUtility.post({
+            url: url,
+            payload: goal
+        });
     };
 
     postLogin(login, password) {
         let url = this.API_URL + ApiEndpoint.API_LOGIN;
-        var data = new URLSearchParams();
+
+        const data = new URLSearchParams();
         data.append('username', login);
         data.append('password', password);
 
-        return fetch(url, {
-            method: 'POST',
+        return HttpUtility.post({
+            url: url,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            credentials: 'include',
-            body: data
-        }).then((response) => {
-            return response.json();
-        }).catch(console.log)
+            payload: data,
+            json: false
+        });
     };
 
     getGoals() {
         const url = new URL(this.API_URL + ApiEndpoint.API_GOALS);
-
-        return fetch(url, {credentials: 'include'})
-            .then(res => res.json())
-            .catch(console.log)
+        return HttpUtility.get({
+            url: url
+        });
     };
 
     getMe() {
         const url = new URL(this.API_URL + ApiEndpoint.API_ME);
-        return fetch(url, {credentials: 'include'}).catch(console.log);
+        return HttpUtility.get({
+            url: url
+        });
     };
 
     fulfilGoal(goal) {
         const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
-
-        return fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                goalId: goal.id,
-            })
-        }).then(res => res.json())
-            .catch(console.log)
+        return HttpUtility.post({
+            url: url,
+            payload: {goalId: goal.id}
+        });
     }
 }
 

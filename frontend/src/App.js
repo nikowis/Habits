@@ -21,20 +21,12 @@ class App extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
         const self = this;
-        Api.getMe().then(res => {
-            if (res.status === 200) {
-                res.json().then(user => {
-                    dispatch({
-                        type: ActionType.LOGIN_ACTION
-                        , id: user.id
-                        , login: user.login
-                    });
-                });
-            } else if (res.status === 401) {
-                self.setState({redirect: true});
-            } else {
-                console.log(res);
-            }
+        Api.getMe().then(user => {
+            dispatch({
+                type: ActionType.LOGIN_ACTION
+                , id: user.id
+                , login: user.login
+            });
         });
     }
 

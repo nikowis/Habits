@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.dto.RegisterUserDTO;
 import pl.nikowis.selfcare.dto.UserDTO;
 import pl.nikowis.selfcare.model.User;
+import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.repository.impl.UserRepository;
 import pl.nikowis.selfcare.service.UserService;
 import pl.nikowis.selfcare.util.SecurityUtils;
@@ -48,10 +49,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getCurrentUser() {
-        User currentUser = SecurityUtils.getCurrentUser();
+        UserDetailsImpl currentUser = SecurityUtils.getCurrentUser();
         UserDTO currentDto = new UserDTO();
         currentDto.setId(currentUser.getId());
-        currentDto.setLogin(currentUser.getLogin());
+        currentDto.setLogin(currentUser.getUsername());
         return currentDto;
     }
 

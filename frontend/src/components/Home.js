@@ -3,7 +3,7 @@ import '../App.scss';
 import Api from "./../common/api-communication"
 import Input from "./Input";
 import {connect} from "react-redux";
-import ActionType from "./actions/actions";
+import ActionType from "../actions/actions";
 
 class Home extends React.Component {
 
@@ -11,7 +11,7 @@ class Home extends React.Component {
         const {dispatch} = this.props;
         Api.getGoals().then((response) => {
             dispatch({
-                type: LOADED_GOALS,
+                type: ActionType.LOADED_GOALS,
                 goals: response
             });
         });

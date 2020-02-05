@@ -9,6 +9,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import pl.nikowis.selfcare.dto.UserDTO;
 import pl.nikowis.selfcare.model.User;
+import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.util.SecurityUtils;
 
 import javax.servlet.ServletException;
@@ -25,10 +26,10 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
             Authentication authentication)
             throws IOException {
 
-        User currentUser = (User) authentication.getPrincipal();
+        UserDetailsImpl currentUser = (UserDetailsImpl) authentication.getPrincipal();
         UserDTO dto = new UserDTO();
         dto.setId(currentUser.getId());
-        dto.setLogin(currentUser.getLogin());
+        dto.setLogin(currentUser.getUsername());
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString());
         response.getWriter().append(new ObjectMapper().writeValueAsString(dto));
         response.setStatus(HttpServletResponse.SC_OK);

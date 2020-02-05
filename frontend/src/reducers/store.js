@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux'
+import {combineReducers, createStore} from 'redux'
 import userReducer from "./userReducer";
 import goalReducer from "./goalReducer";
+import appReducer from "./appReducer";
 
-export default combineReducers({
+export default createStore(combineReducers({
     user: userReducer,
-    goals: goalReducer
-})
+    goals: goalReducer,
+    app: appReducer
+}));

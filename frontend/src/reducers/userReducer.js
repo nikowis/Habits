@@ -1,4 +1,4 @@
-import ActionType from "./actions/actions";
+import ActionType from "../actions/actions";
 
 const initialState = {
     id: '',

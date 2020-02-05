@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.model.User;
+import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.service.UserService;
 
 @Service
@@ -22,6 +23,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         if (userByLogin == null) {
             throw new UsernameNotFoundException("Username no found - " + username);
         }
-        return userByLogin;
+        return new UserDetailsImpl(userByLogin);
     }
 }

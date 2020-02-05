@@ -1,8 +1,13 @@
-
 export default class ActionType {
     static LOGIN_ACTION = 'LOGIN_ACTION';
     static LOGOUT_ACTION = 'LOGOUT_ACTION';
     static LOADED_GOALS = 'LOADED_GOALS';
+    static AUTH_ERROR = 'AUTH_ERROR';
+    static API_ERROR = 'API_ERROR';
+    static CLEAR_AUTH_ERROR = 'CLEAR_AUTH_ERROR';
+    static CLEAR_API_ERROR = 'CLEAR_API_ERROR';
+    static HTTP_REQUEST_FINISH = 'HTTP_REQUEST_FINISH';
+    static HTTP_REQUEST_START = 'HTTP_REQUEST_START';
 }
 
 

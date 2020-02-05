@@ -6,8 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.dto.GoalDTO;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
+import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.repository.impl.FulfilmentRepository;
 import pl.nikowis.selfcare.repository.impl.GoalRepository;
+import pl.nikowis.selfcare.repository.impl.UserRepository;
 import pl.nikowis.selfcare.service.GoalService;
 import pl.nikowis.selfcare.util.DateUtils;
 import pl.nikowis.selfcare.util.SecurityUtils;
@@ -25,6 +27,9 @@ class GoalServiceImpl implements GoalService {
 
     @Autowired
     private FulfilmentRepository fulfilmentRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<GoalDTO> getDailyGoals() {
@@ -49,10 +54,12 @@ class GoalServiceImpl implements GoalService {
 
     @Override
     public GoalDTO createGoal(GoalDTO dto) {
+        UserDetailsImpl currentUserDetails = SecurityUtils.getCurrentUser();
+
         Goal goal = new Goal();
         goal.setTitle(dto.getTitle());
         goal.setDescription(dto.getDescription());
-        goal.setUser(SecurityUtils.getCurrentUser());
+        goal.setUser(userRepository.findById(currentUserDetails.getId()).get());
         goal = goalRepository.save(goal);
 
         return new GoalDTO(goal);
