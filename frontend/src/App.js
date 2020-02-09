@@ -12,27 +12,20 @@ import ActionType from "./actions/actions";
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {redirect: false};
-    }
-
     componentDidMount() {
         const {dispatch} = this.props;
-        Api.getMe().then(user => {
-            dispatch({
-                type: ActionType.LOGIN_ACTION
-                , id: user.id
-                , login: user.login
+        if (!this.props.user.login) {
+            Api.getMe().then(user => {
+                dispatch({
+                    type: ActionType.LOGIN_ACTION
+                    , id: user.id
+                    , login: user.login
+                });
             });
-        });
+        }
     }
 
     render() {
-        if(window.location.pathname === '/') {
-            return <Redirect to='/home'/>
-        }
-
         return (
             <div className="app">
                 <header className="app-header">
@@ -56,9 +49,11 @@ class App extends Component {
                         <CreatedGoal/>
                     </Route>
                 </Switch>
-                {this.state.redirect ? <Redirect to='/login'/> : null}
+                {!this.props.user.login && window.location.pathname !== '/login' ? <Redirect to='/login'/> : null}
+                {this.props.user.login && window.location.pathname === '/' ? <Redirect to='/home'/> : null}
             </div>
         );
+
     }
 }
 

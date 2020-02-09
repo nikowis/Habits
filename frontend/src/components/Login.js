@@ -11,7 +11,7 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {login: '', password: '', redirect: false};
+        this.state = {login: '', password: ''};
     }
 
     handleLoginChange = (event) => {
@@ -25,18 +25,19 @@ class Login extends React.Component {
     handleSubmit = (event) => {
         const {dispatch} = this.props;
         Api.postLogin(this.state.login, this.state.password).then(res => {
-            this.setState({redirect: true});
-            dispatch({
-                type: ActionType.LOGIN_ACTION
-                , id: res.id
-                , login: res.login
-            });
+            if(res) {
+                dispatch({
+                    type: ActionType.LOGIN_ACTION
+                    , id: res.id
+                    , login: res.login
+                });
+            }
         });
         event.preventDefault();
     };
 
     render() {
-        if(this.state.redirect) {
+        if(this.props.user.login) {
             return <Redirect to='/home' />
         }
         return (

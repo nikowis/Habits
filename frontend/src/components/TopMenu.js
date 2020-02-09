@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.scss';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import ErrorContainer from "./ErrorContainer";
 
 class TopMenu extends React.Component {
 
@@ -9,6 +10,7 @@ class TopMenu extends React.Component {
         return (
             <div className="top-menu">
                 {this.headerContent()}
+                <ErrorContainer/>
             </div>
         );
     }
@@ -16,12 +18,12 @@ class TopMenu extends React.Component {
     headerContent() {
         return (<div>
                 <nav className="navigation">
-                    { this.props.login ? null : <Link to="/login">Login</Link>}
-                    { this.props.login ? <Link to="/home">Home</Link> : null}
-                    { this.props.login ? <Link to="/create">Create</Link> : null}
+                    { this.props.authenticated ? null : <Link to="/login">Login</Link>}
+                    { this.props.authenticated ? <Link to="/home">Home</Link> : null}
+                    { this.props.authenticated ? <Link to="/create">Create</Link> : null}
                 </nav>
                 <div className="welcome-message">
-                    { this.props.login ? "Welcome " + this.props.login : null}
+                    { this.props.authenticated ? "Welcome " + this.props.login : null}
                 </div>
             </div>
         );
@@ -30,4 +32,6 @@ class TopMenu extends React.Component {
 
 export default connect( state => ({
     login: state.user.login,
+    authenticated: state.app.authenticated,
+    authError: state.app.authError
 }))(TopMenu);

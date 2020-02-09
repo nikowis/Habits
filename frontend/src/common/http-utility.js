@@ -23,9 +23,6 @@ class HttpUtility {
                 return response.json();
             } else {
                 this.handleError(response);
-                const error = new Error(response.statusText);
-                error.response = response;
-                throw error;
             }
         }).finally(() => store.dispatch({type: endAction}));
     }

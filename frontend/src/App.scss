@@ -27,7 +27,16 @@
     nav {
         position: absolute;
     }
+
+    .error-container {
+        color: red;
+        position: absolute;
+        width: 100%;
+        top: 40px
+    }
 }
+
+
 
 .home {
     width: 80%;
