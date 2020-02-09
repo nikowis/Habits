@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.scss';
 import Login from "./components/Login";
 import CreateGoal from "./components/CreateGoal";
-import FulfilGoal from "./components/FulfilGoal";
 import {Redirect, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
@@ -20,7 +19,6 @@ class App extends Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        const self = this;
         Api.getMe().then(user => {
             dispatch({
                 type: ActionType.LOGIN_ACTION
@@ -31,6 +29,9 @@ class App extends Component {
     }
 
     render() {
+        if(window.location.pathname === '/') {
+            return <Redirect to='/home'/>
+        }
 
         return (
             <div className="app">
@@ -53,9 +54,6 @@ class App extends Component {
                     </Route>
                     <Route path="/created">
                         <CreatedGoal/>
-                    </Route>
-                    <Route path="/fulfil">
-                        <FulfilGoal/>
                     </Route>
                 </Switch>
                 {this.state.redirect ? <Redirect to='/login'/> : null}
