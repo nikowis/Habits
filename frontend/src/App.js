@@ -10,6 +10,8 @@ import {connect} from "react-redux";
 import Api from "./common/api-communication";
 import ActionType from "./actions/actions";
 import Logout from "./components/Logout";
+import Fulfilments from "./components/Fulfilments";
+import Goals from "./components/Goals";
 
 class App extends Component {
 
@@ -51,6 +53,12 @@ class App extends Component {
                     </Route>
                     <Route path="/created">
                         <CreatedGoal/>
+                    </Route>
+                    <Route path="/fulfilments">
+                        <Fulfilments/>
+                    </Route>
+                    <Route path="/goals">
+                        <Goals/>
                     </Route>
                 </Switch>
                 {!this.props.user.login && window.location.pathname !== '/login' ? <Redirect to='/login'/> : null}
