@@ -25,6 +25,12 @@ const appReducer = (state = initialState, action) => {
                 authenticated: true,
                 authError: false
             };
+        case ActionType.LOGOUT_ACTION:
+            return {
+                ...state,
+                authenticated: false,
+                authError: false
+            };
         case ActionType.CLEAR_AUTH_ERROR:
             return {
                 ...state,

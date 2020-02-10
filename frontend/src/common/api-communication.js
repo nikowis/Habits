@@ -33,6 +33,14 @@ class Api {
         });
     };
 
+    logout() {
+        let url = this.API_URL + ApiEndpoint.API_LOGOUT;
+
+        return HttpUtility.post({
+            url: url
+        });
+    };
+
     getGoals() {
         const url = new URL(this.API_URL + ApiEndpoint.API_GOALS);
         return HttpUtility.get({

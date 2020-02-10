@@ -21,6 +21,7 @@ class TopMenu extends React.Component {
                     { this.props.authenticated ? null : <Link to="/login">Login</Link>}
                     { this.props.authenticated ? <Link to="/home">Home</Link> : null}
                     { this.props.authenticated ? <Link to="/create">Create</Link> : null}
+                    { this.props.authenticated ? <Link to="/logout">Logout</Link> : null}
                 </nav>
                 <div className="welcome-message">
                     { this.props.authenticated ? "Welcome " + this.props.login : null}

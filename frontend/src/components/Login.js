@@ -38,7 +38,7 @@ class Login extends React.Component {
 
     render() {
         if(this.props.user.login) {
-            return <Redirect to='/home' />
+            return <Redirect to='/home' push={true} />
         }
         return (
             <div className="login">

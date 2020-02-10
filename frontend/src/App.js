@@ -9,6 +9,7 @@ import CreatedGoal from "./components/CreatedGoal";
 import {connect} from "react-redux";
 import Api from "./common/api-communication";
 import ActionType from "./actions/actions";
+import Logout from "./components/Logout";
 
 class App extends Component {
 
@@ -41,6 +42,9 @@ class App extends Component {
                     </Route>
                     <Route path="/login">
                         <Login/>
+                    </Route>
+                    <Route path="/logout">
+                        <Logout/>
                     </Route>
                     <Route path="/create">
                         <CreateGoal/>

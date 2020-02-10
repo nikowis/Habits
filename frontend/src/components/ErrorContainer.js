@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.scss';
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 class ErrorContainer extends React.Component {
