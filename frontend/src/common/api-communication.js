@@ -48,6 +48,13 @@ class Api {
         });
     };
 
+    getFulfilments() {
+        const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
+        return HttpUtility.get({
+            url: url
+        });
+    };
+
     getMe() {
         const url = new URL(this.API_URL + ApiEndpoint.API_ME);
         return HttpUtility.get({

@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.nikowis.selfcare.dto.FulfilableGoalDTO;
 import pl.nikowis.selfcare.dto.GoalDTO;
-import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.service.GoalService;
 
 import java.util.List;
@@ -22,11 +21,11 @@ public class GoalController {
 
     @GetMapping
     public List<GoalDTO> goalsList() {
-        return goalService.getDailyGoals();
+        return goalService.getGoals();
     }
 
     @PostMapping
-    public GoalDTO createGoal(@RequestBody GoalDTO goal) {
+    public GoalDTO createGoal(@RequestBody FulfilableGoalDTO goal) {
         return goalService.createGoal(goal);
     }
 }

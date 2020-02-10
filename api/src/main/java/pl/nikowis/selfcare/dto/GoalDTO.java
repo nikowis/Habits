@@ -4,35 +4,22 @@ import lombok.Data;
 import pl.nikowis.selfcare.model.Goal;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 public class GoalDTO {
 
-    private Long id;
+    protected Long id;
     @NotEmpty
-    private String title;
+    protected String title;
     @NotEmpty
-    private String description;
-    private Date createdAt;
-    private boolean fulfilled;
-
-    public GoalDTO() {
-    }
+    protected String description;
+    protected Date createdAt;
 
     public GoalDTO(Goal goal) {
         id = goal.getId();
         title = goal.getTitle();
         description = goal.getDescription();
         createdAt = goal.getCreatedAt();
-    }
-
-    public GoalDTO(Goal goal, boolean fulfilled) {
-        id = goal.getId();
-        title = goal.getTitle();
-        description = goal.getDescription();
-        createdAt = goal.getCreatedAt();
-        this.fulfilled = fulfilled;
     }
 }

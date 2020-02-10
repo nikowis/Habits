@@ -9,7 +9,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        Api.getGoals().then((response) => {
+        Api.getFulfilments().then((response) => {
             dispatch({
                 type: ActionType.LOADED_GOALS,
                 goals: response
