@@ -1,5 +1,6 @@
 package pl.nikowis.selfcare.service.impl;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,12 +18,15 @@ public class DatabaseUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MapperFacade mapperFacade;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User userByLogin = userService.findUserByLogin(username);
         if (userByLogin == null) {
             throw new UsernameNotFoundException("Username no found - " + username);
         }
-        return new UserDetailsImpl(userByLogin);
+        return mapperFacade.map(userByLogin, UserDetailsImpl.class);
     }
 }

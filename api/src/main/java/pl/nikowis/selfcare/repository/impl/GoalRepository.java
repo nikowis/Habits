@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.nikowis.selfcare.model.Goal;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface GoalRepository extends JpaRepository<Goal, Long> {

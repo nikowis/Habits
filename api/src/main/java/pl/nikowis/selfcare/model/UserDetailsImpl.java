@@ -13,6 +13,7 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private Boolean active;
 
     public UserDetailsImpl() {
     }
@@ -21,6 +22,7 @@ public class UserDetailsImpl implements UserDetails {
         this.id = user.getId();
         this.username = user.getLogin();
         this.password = user.getPassword();
+        this.active = user.getActive();
     }
 
     @Override
@@ -55,6 +57,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
     }
 }

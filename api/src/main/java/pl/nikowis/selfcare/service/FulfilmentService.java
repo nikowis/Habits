@@ -1,7 +1,7 @@
 package pl.nikowis.selfcare.service;
 
-import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
 import pl.nikowis.selfcare.dto.FulfilableGoalDTO;
+import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
 
 import java.util.List;
 

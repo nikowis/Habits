@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import pl.nikowis.selfcare.model.ApiError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -35,7 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler({BusinessException.class, JpaSystemException.class, DataIntegrityViolationException.class})
+    @ExceptionHandler({BusinessException.class, JpaSystemException.class, DataIntegrityViolationException.class, PSQLException.class, ConstraintViolationException.class})
     public final ResponseEntity handleBusinessException(BusinessException ex, WebRequest request) {
         return getResponse(ex, HttpStatus.BAD_REQUEST);
     }

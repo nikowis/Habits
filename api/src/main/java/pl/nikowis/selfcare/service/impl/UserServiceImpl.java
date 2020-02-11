@@ -1,5 +1,6 @@
 package pl.nikowis.selfcare.service.impl;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,14 @@ import pl.nikowis.selfcare.util.SecurityUtils;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+    private MapperFacade mapperFacade;
 
     @Override
     public User findUserByLogin(String login) {
@@ -43,8 +43,7 @@ public class UserServiceImpl implements UserService {
         u.setLogin(userDTO.getLogin());
         u.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         User saved = userRepository.save(u);
-        userDTO.setId(saved.getId());
-        return userDTO;
+        return mapperFacade.map(saved, UserDTO.class);
     }
 
     @Override
