@@ -15,11 +15,16 @@ public class GoalDTO {
     @NotEmpty
     protected String description;
     protected Date createdAt;
+    protected Boolean active;
+
+    public GoalDTO() {
+    }
 
     public GoalDTO(Goal goal) {
         id = goal.getId();
         title = goal.getTitle();
         description = goal.getDescription();
         createdAt = goal.getCreatedAt();
+        active = goal.getActive();
     }
 }

@@ -9,4 +9,8 @@ public interface GoalService {
     List<GoalDTO> getGoals();
 
     GoalDTO createGoal(GoalDTO goal);
+
+    GoalDTO updateGoal(Long goalId, GoalDTO goalDTO);
+
+    GoalDTO deleteGoal(Long goalDTO);
 }

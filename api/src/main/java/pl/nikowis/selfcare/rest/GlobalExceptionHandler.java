@@ -6,15 +6,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import pl.nikowis.selfcare.exception.BusinessException;
 import pl.nikowis.selfcare.model.ApiError;
 
@@ -24,34 +28,28 @@ import java.io.IOException;
 import java.util.Locale;
 
 @ControllerAdvice
-public class GlobalExceptionHandler implements AuthenticationFailureHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements AuthenticationFailureHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler({BusinessException.class})
-    public final ResponseEntity<ApiError> handleBusinessException(BusinessException ex, WebRequest request) {
-        return getResponse(ex, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler({DataIntegrityViolationException.class})
-    public final ResponseEntity<ApiError> handleBusinessException(DataIntegrityViolationException ex, WebRequest request) {
+    @ExceptionHandler({BusinessException.class, JpaSystemException.class, DataIntegrityViolationException.class})
+    public final ResponseEntity handleBusinessException(BusinessException ex, WebRequest request) {
         return getResponse(ex, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({AccessDeniedException.class})
-    public final ResponseEntity<ApiError> handleBusinessException(AccessDeniedException ex, WebRequest request) {
-        return getResponse(ex, HttpStatus.BAD_REQUEST);
+    public final ResponseEntity handleBusinessException(AccessDeniedException ex, WebRequest request) {
+        return getResponse(ex, HttpStatus.FORBIDDEN);
     }
 
 
     @ExceptionHandler({AuthenticationException.class})
-    public final ResponseEntity<ApiError> handleBusinessException(AuthenticationException ex, WebRequest request) {
-        return getResponse(ex, HttpStatus.BAD_REQUEST);
+    public final ResponseEntity handleBusinessException(AuthenticationException ex, WebRequest request) {
+        return getResponse(ex, HttpStatus.UNAUTHORIZED);
     }
-
 
     @ExceptionHandler({Exception.class})
     public final ResponseEntity<ApiError> handleUnexpectedException(Exception ex, WebRequest request) {
@@ -59,7 +57,12 @@ public class GlobalExceptionHandler implements AuthenticationFailureHandler {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private ResponseEntity<ApiError> getResponse(Exception ex, HttpStatus status) {
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return getResponse(ex, HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    private ResponseEntity<Object> getResponse(Exception ex, HttpStatus status) {
         LOGGER.warn("Exception handled ", ex);
         ApiError apiError = new ApiError();
         String exceptionName = ex.getClass().getSimpleName();

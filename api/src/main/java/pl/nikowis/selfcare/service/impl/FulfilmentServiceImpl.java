@@ -3,8 +3,9 @@ package pl.nikowis.selfcare.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
 import pl.nikowis.selfcare.dto.FulfilableGoalDTO;
+import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
+import pl.nikowis.selfcare.exception.CannotFulfilInactiveGoal;
 import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
@@ -35,25 +36,28 @@ class FulfilmentServiceImpl implements FulfilmentService {
 
     @Override
     public FulfilableGoalDTO fulfilGoal(FulfillGoalRequestDTO fulfilDTO) {
-        Optional<Goal> optGoal = goalRepository.findById(fulfilDTO.getGoalId());
+        Goal goal = goalRepository.findByIdAndUserId(fulfilDTO.getGoalId(), SecurityUtils.getCurrentUserId());
+        if(goal == null) {
+            throw new GoalDoesntExistException();
+        }
         UserDetailsImpl currentUserDetails = SecurityUtils.getCurrentUser();
 
-        if (optGoal.isPresent()) {
-            Fulfilment f = new Fulfilment();
-            Goal goal = optGoal.get();
-            f.setGoal(goal);
-
-            f.setUser(userRepository.findById(currentUserDetails.getId()).get());
-            f.setFulfilled(true);
-            fulfilmentRepository.save(f);
-            return new FulfilableGoalDTO(goal, true);
+        if(!goal.getActive()) {
+            throw new CannotFulfilInactiveGoal();
         }
-        return null;
+
+        Fulfilment f = new Fulfilment();
+        f.setGoal(goal);
+
+        f.setUser(userRepository.findById(currentUserDetails.getId()).get());
+        f.setFulfilled(true);
+        fulfilmentRepository.save(f);
+        return new FulfilableGoalDTO(goal, true);
     }
 
     @Override
     public List<FulfilableGoalDTO> getDailyFulfilments() {
-        List<Goal> goals = goalRepository.findAll();
+        List<Goal> goals = goalRepository.findByActiveAndUserId(true, SecurityUtils.getCurrentUserId());
         List<Long> goalIds = goals.stream().map(Goal::getId).collect(Collectors.toList());
         List<FulfilableGoalDTO> dailyGoals = goals.stream().map(FulfilableGoalDTO::new).collect(Collectors.toList());
 

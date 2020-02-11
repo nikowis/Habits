@@ -1,5 +1,6 @@
 package pl.nikowis.selfcare.service.impl;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,12 @@ class GoalServiceImpl implements GoalService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MapperFacade mapperFacade;
+
     @Override
     public List<GoalDTO> getGoals() {
-        return goalRepository.findAll().stream().map(GoalDTO::new).collect(Collectors.toList());
+        return goalRepository.findByUserId(SecurityUtils.getCurrentUserId()).stream().map(GoalDTO::new).collect(Collectors.toList());
     }
 
     @Override
@@ -40,5 +44,22 @@ class GoalServiceImpl implements GoalService {
         goal = goalRepository.save(goal);
 
         return new GoalDTO(goal);
+    }
+
+    @Override
+    public GoalDTO updateGoal(Long goalId, GoalDTO goalDTO) {
+        Goal goal = goalRepository.findByIdAndUserId(goalId, SecurityUtils.getCurrentUserId());
+        goal.setDescription(goalDTO.getDescription());
+        goal.setTitle(goalDTO.getTitle());
+        Goal saved = goalRepository.save(goal);
+        return mapperFacade.map(saved, GoalDTO.class);
+    }
+
+    @Override
+    public GoalDTO deleteGoal(Long goalId) {
+        Goal goal = goalRepository.findByIdAndUserId(goalId, SecurityUtils.getCurrentUserId());
+        goal.setActive(false);
+        Goal saved = goalRepository.save(goal);
+        return mapperFacade.map(saved, GoalDTO.class);
     }
 }
