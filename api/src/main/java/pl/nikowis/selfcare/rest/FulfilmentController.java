@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class FulfilmentController {
     private FulfilmentService fulfilmentService;
 
     @PostMapping
-    public FulfilableGoalDTO fulfill(@RequestBody FulfillGoalRequestDTO fulfilDTO) {
+    public FulfilableGoalDTO fulfill(@Validated @RequestBody FulfillGoalRequestDTO fulfilDTO) {
         return fulfilmentService.fulfilGoal(fulfilDTO);
     }
 

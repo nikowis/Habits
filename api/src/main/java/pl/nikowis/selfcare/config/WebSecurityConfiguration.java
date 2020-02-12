@@ -15,7 +15,7 @@ import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private DatabaseUserDetailsService userDetailsService;
 
@@ -57,7 +57,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
-
 
 
 }

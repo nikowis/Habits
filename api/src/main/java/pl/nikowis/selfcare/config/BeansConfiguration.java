@@ -9,7 +9,7 @@ public class BeansConfiguration {
 
     @Bean
     public MapperFacade mapperFacade() {
-       return MapperConfiguration.mapperFactory().getMapperFacade();
+        return MapperConfiguration.mapperFactory().getMapperFacade();
     }
 
 }

@@ -40,11 +40,11 @@ class FulfilmentServiceImpl implements FulfilmentService {
     @Override
     public FulfilableGoalDTO fulfilGoal(FulfillGoalRequestDTO fulfilDTO) {
         Goal goal = goalRepository.findByIdAndUserId(fulfilDTO.getGoalId(), SecurityUtils.getCurrentUserId());
-        if(goal == null) {
+        if (goal == null) {
             throw new GoalDoesntExistException();
         }
 
-        if(!goal.getActive()) {
+        if (!goal.getActive()) {
             throw new CannotFulfilInactiveGoal();
         }
 

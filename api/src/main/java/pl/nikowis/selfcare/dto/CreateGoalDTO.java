@@ -1,17 +1,19 @@
 package pl.nikowis.selfcare.dto;
 
 import lombok.Data;
-import pl.nikowis.selfcare.model.Goal;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.Date;
+import javax.validation.constraints.Size;
 
 @Data
 public class CreateGoalDTO {
 
-    @NotEmpty
+    @NotBlank
+    @Size(min = 2)
     protected String title;
-    @NotEmpty
+    @NotBlank
+    @Size(min = 2)
     protected String description;
 
 }

@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,13 +11,13 @@ import pl.nikowis.selfcare.dto.UserDTO;
 import pl.nikowis.selfcare.service.UserService;
 
 @RestController
-public class MainController {
+public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("/registration")
-    public UserDTO register(@RequestBody RegisterUserDTO userDTO) {
+    public UserDTO register(@Validated @RequestBody RegisterUserDTO userDTO) {
         UserDTO registered = userService.register(userDTO);
         return registered;
     }

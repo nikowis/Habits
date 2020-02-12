@@ -1,4 +1,4 @@
-package pl.nikowis.selfcare.rest;
+package pl.nikowis.selfcare.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.postgresql.util.PSQLException;
@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,9 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import pl.nikowis.selfcare.exception.BusinessException;
 import pl.nikowis.selfcare.model.ApiError;
 
@@ -30,7 +27,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements AuthenticationFailureHandler {
+public class GlobalExceptionHandler implements AuthenticationFailureHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -51,17 +48,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     @ExceptionHandler({AuthenticationException.class})
     public final ResponseEntity handleBusinessException(AuthenticationException ex, WebRequest request) {
         return getResponse(ex, HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler({Exception.class})
-    public final ResponseEntity<ApiError> handleUnexpectedException(Exception ex, WebRequest request) {
-        LOGGER.error("UNCAUGHT EXCEPTION", ex);
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return getResponse(ex, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     private ResponseEntity<Object> getResponse(Exception ex, HttpStatus status) {
