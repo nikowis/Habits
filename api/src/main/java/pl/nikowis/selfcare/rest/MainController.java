@@ -11,7 +11,7 @@ import pl.nikowis.selfcare.dto.UserDTO;
 import pl.nikowis.selfcare.service.UserService;
 
 @RestController
-public class UserController {
+public class MainController {
 
     @Autowired
     private UserService userService;
