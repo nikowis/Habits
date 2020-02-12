@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.dto.RegisterUserDTO;
 import pl.nikowis.selfcare.dto.UserDTO;
+import pl.nikowis.selfcare.exception.UsernameAlreadyExistsException;
 import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.repository.impl.UserRepository;
@@ -39,6 +40,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO register(RegisterUserDTO userDTO) {
+        if(userRepository.findByLogin(userDTO.getLogin()) != null){
+            throw new UsernameAlreadyExistsException(new Object[] {userDTO.getLogin()});
+        }
+
         User u = new User();
         u.setLogin(userDTO.getLogin());
         u.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));

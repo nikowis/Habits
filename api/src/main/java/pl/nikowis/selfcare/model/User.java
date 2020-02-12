@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +19,12 @@ import java.util.List;
 @Data
 public class User extends BaseEntity {
 
-    @NotNull
-    @Email
+    @NotBlank
+    @Size(min = 2, max = 128)
     private String login;
 
-    @NotNull
-    @Length(min = 1)
+    @NotBlank
+    @Size(min = 2)
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

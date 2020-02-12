@@ -18,8 +18,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public UserDTO register(@Validated @RequestBody RegisterUserDTO userDTO) {
-        UserDTO registered = userService.register(userDTO);
-        return registered;
+        return userService.register(userDTO);
     }
 
     @GetMapping("/me")

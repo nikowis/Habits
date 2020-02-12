@@ -1,7 +1,6 @@
 package pl.nikowis.selfcare.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -22,7 +20,6 @@ import pl.nikowis.selfcare.model.ApiError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -34,10 +31,16 @@ public class GlobalExceptionHandler implements AuthenticationFailureHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler({BusinessException.class, JpaSystemException.class, DataIntegrityViolationException.class, PSQLException.class, ConstraintViolationException.class})
-    public final ResponseEntity handleBusinessException(BusinessException ex, WebRequest request) {
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public final ResponseEntity handleDatabaseException(Exception ex, WebRequest request) {
         return getResponse(ex, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({BusinessException.class})
+    public final ResponseEntity handleBusinessException(BusinessException ex, WebRequest request) {
+        return getResponse(ex, ex.getArgs(), HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler({AccessDeniedException.class})
     public final ResponseEntity handleBusinessException(AccessDeniedException ex, WebRequest request) {
@@ -50,12 +53,16 @@ public class GlobalExceptionHandler implements AuthenticationFailureHandler {
         return getResponse(ex, HttpStatus.UNAUTHORIZED);
     }
 
-    private ResponseEntity<Object> getResponse(Exception ex, HttpStatus status) {
+    private ResponseEntity getResponse(Exception ex, HttpStatus status) {
+        return getResponse(ex, null, status);
+    }
+
+    private ResponseEntity getResponse(Exception ex, Object[] args, HttpStatus status) {
         LOGGER.warn("Exception handled ", ex);
         ApiError apiError = new ApiError();
         String exceptionName = ex.getClass().getSimpleName();
         apiError.setError(exceptionName);
-        apiError.setMessage(messageSource.getMessage(exceptionName, null, Locale.getDefault()));
+        apiError.setMessage(messageSource.getMessage(exceptionName, args, Locale.getDefault()));
         return new ResponseEntity<>(apiError, status);
     }
 
