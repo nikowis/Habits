@@ -15,6 +15,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import pl.nikowis.selfcare.config.CustomAuthSuccessHandler;
+import pl.nikowis.selfcare.config.JWTAuthenticationFilter;
 import pl.nikowis.selfcare.rest.MainController;
 import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 
@@ -33,6 +34,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Bean
     public BCryptPasswordEncoder encoder() {
@@ -59,13 +63,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/authenticate").permitAll()
                 .antMatchers(MainController.REGISTRATION_ENDPOINT).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilter(new JwtAuthenticationFilter(authenticationManagerBean(), jwtTokenUtil));
+
     }
 
     @Override
