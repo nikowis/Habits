@@ -53,7 +53,7 @@ class MainControllerTest {
         user.setLogin(LOGIN);
         user.setPassword(LOGIN);
 
-        mockMvc.perform(post("/registration").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post(MainController.REGISTRATION_ENDPOINT).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(user)))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -71,7 +71,7 @@ class MainControllerTest {
         user.setLogin(LOGIN);
         user.setPassword(LOGIN);
 
-        mockMvc.perform(post("/registration").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post(MainController.REGISTRATION_ENDPOINT).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(registerUserDTO)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());

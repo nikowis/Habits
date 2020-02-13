@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import pl.nikowis.selfcare.rest.MainController;
 import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 
 @Configuration
@@ -40,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
+                .antMatchers(MainController.REGISTRATION_ENDPOINT).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

@@ -14,9 +14,10 @@ import pl.nikowis.selfcare.service.FulfilmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/fulfilments")
+@RequestMapping(path = FulfilmentController.FULFILMENTS_ENDPOINT)
 public class FulfilmentController {
 
+    public static final String FULFILMENTS_ENDPOINT = "/fulfilments";
     @Autowired
     private FulfilmentService fulfilmentService;
 

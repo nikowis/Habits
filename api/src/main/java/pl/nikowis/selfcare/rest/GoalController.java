@@ -17,8 +17,13 @@ import pl.nikowis.selfcare.service.GoalService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/goals")
+@RequestMapping(path = GoalController.GOALS_ENDPOINT)
 public class GoalController {
+
+    public static final String GOALS_ENDPOINT = "/goals";
+    public static final String GOAL_ID_VARIABLE = "goalId";
+    public static final String GOAL_PATH = "/{"+ GOAL_ID_VARIABLE +"}";
+    public static final String GOAL_ENDPOINT = GOALS_ENDPOINT + GOAL_PATH;
 
     @Autowired
     private GoalService goalService;
@@ -33,13 +38,13 @@ public class GoalController {
         return goalService.createGoal(goal);
     }
 
-    @PutMapping(path = "/{goalId}")
-    public GoalDTO updateGoal(@PathVariable("goalId") Long goalId, @Validated @RequestBody CreateGoalDTO goal) {
+    @PutMapping(path = GOAL_PATH)
+    public GoalDTO updateGoal(@PathVariable(GOAL_ID_VARIABLE) Long goalId, @Validated @RequestBody CreateGoalDTO goal) {
         return goalService.updateGoal(goalId, goal);
     }
 
-    @DeleteMapping(path = "/{goalId}")
-    public GoalDTO deleteGoal(@PathVariable("goalId") Long goalId) {
+    @DeleteMapping(path = GOAL_PATH)
+    public GoalDTO deleteGoal(@PathVariable(GOAL_ID_VARIABLE) Long goalId) {
         return goalService.deleteGoal(goalId);
     }
 
