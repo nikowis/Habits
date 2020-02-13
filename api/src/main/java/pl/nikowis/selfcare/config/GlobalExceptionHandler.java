@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,13 +19,14 @@ import org.springframework.web.context.request.WebRequest;
 import pl.nikowis.selfcare.exception.BusinessException;
 import pl.nikowis.selfcare.model.ApiError;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
 @ControllerAdvice
-public class GlobalExceptionHandler implements AuthenticationFailureHandler {
+public class GlobalExceptionHandler implements AuthenticationFailureHandler, AuthenticationEntryPoint {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -68,6 +70,17 @@ public class GlobalExceptionHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex) throws IOException {
+        ApiError apiError = new ApiError();
+        String exceptionName = ex.getClass().getSimpleName();
+        apiError.setError(exceptionName);
+        apiError.setMessage(messageSource.getMessage(exceptionName, null, Locale.getDefault()));
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType(MediaType.APPLICATION_JSON.toString());
+        response.getWriter().write(new ObjectMapper().writeValueAsString(apiError));
+    }
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex) throws IOException, ServletException {
         ApiError apiError = new ApiError();
         String exceptionName = ex.getClass().getSimpleName();
         apiError.setError(exceptionName);
