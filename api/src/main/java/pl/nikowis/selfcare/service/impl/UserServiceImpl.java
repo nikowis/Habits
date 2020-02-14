@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         UserDetailsImpl currentUser = SecurityUtils.getCurrentUser();
         UserDTO currentDto = new UserDTO();
         currentDto.setId(currentUser.getId());
-        currentDto.setLogin(currentUser.getUsername());
+        currentDto.setLogin(currentUser.getLogin());
         return currentDto;
     }
 

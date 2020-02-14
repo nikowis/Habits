@@ -24,7 +24,7 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         UserDetailsImpl currentUser = (UserDetailsImpl) authentication.getPrincipal();
         UserDTO dto = new UserDTO();
         dto.setId(currentUser.getId());
-        dto.setLogin(currentUser.getUsername());
+        dto.setLogin(currentUser.getLogin());
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString());
         response.getWriter().append(new ObjectMapper().writeValueAsString(dto));
         response.setStatus(HttpServletResponse.SC_OK);

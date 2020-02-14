@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,9 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.nikowis.selfcare.config.CustomAuthSuccessHandler;
-import pl.nikowis.selfcare.config.JWTAuthenticationFilter;
 import pl.nikowis.selfcare.rest.MainController;
 import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 
@@ -32,11 +30,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    @Value("${jwt.secret}")
+    private String secret;
 
     @Bean
     public BCryptPasswordEncoder encoder() {
@@ -69,8 +64,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new JwtAuthenticationFilter(authenticationManagerBean(), jwtTokenUtil));
+                .addFilter(new JwtAuthenticationFilter(authenticationManagerBean(), secret))
+                .addFilter(new JWTAuthorizationFilter(authenticationManagerBean(), secret));
+
 
     }
 
