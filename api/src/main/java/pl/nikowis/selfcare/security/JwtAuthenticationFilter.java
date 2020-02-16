@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
                                             FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
+                                            Authentication auth) throws IOException {
         UserDetailsImpl user = (UserDetailsImpl) auth.getPrincipal();
 
         Map<String, Object> claims = new HashMap<>();

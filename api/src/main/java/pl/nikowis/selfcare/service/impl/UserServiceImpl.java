@@ -11,6 +11,7 @@ import pl.nikowis.selfcare.exception.UsernameAlreadyExistsException;
 import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.repository.impl.UserRepository;
+import pl.nikowis.selfcare.security.SecurityConstants;
 import pl.nikowis.selfcare.service.UserService;
 import pl.nikowis.selfcare.util.SecurityUtils;
 
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
         User u = new User();
         u.setLogin(userDTO.getLogin());
         u.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        u.setRole(SecurityConstants.ROLE_USER);
         User saved = userRepository.save(u);
         return mapperFacade.map(saved, UserDTO.class);
     }
@@ -54,10 +56,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getCurrentUser() {
         UserDetailsImpl currentUser = SecurityUtils.getCurrentUser();
-        UserDTO currentDto = new UserDTO();
-        currentDto.setId(currentUser.getId());
-        currentDto.setLogin(currentUser.getLogin());
-        return currentDto;
+        return mapperFacade.map(currentUser, UserDTO.class);
     }
 
 }
