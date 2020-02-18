@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nikowis.selfcare.dto.RegisterUserDTO;
 import pl.nikowis.selfcare.dto.UserDTO;
+import pl.nikowis.selfcare.security.SecurityConstants;
 import pl.nikowis.selfcare.service.UserService;
 
 @RestController
@@ -25,6 +27,7 @@ public class MainController {
     }
 
     @GetMapping(ME_ENDPOINT)
+    @Secured(SecurityConstants.ROLE_USER)
     public UserDTO getMe() {
         return userService.getCurrentUser();
     }

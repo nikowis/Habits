@@ -1,15 +1,12 @@
 package pl.nikowis.selfcare.model;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +30,7 @@ public class User extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Goal> goals = new ArrayList<>();
 
+    @NotBlank
+    private String role;
 
 }

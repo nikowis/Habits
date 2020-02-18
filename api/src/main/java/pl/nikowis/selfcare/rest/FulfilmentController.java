@@ -1,6 +1,7 @@
 package pl.nikowis.selfcare.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nikowis.selfcare.dto.FulfilableGoalDTO;
 import pl.nikowis.selfcare.dto.FulfillGoalRequestDTO;
+import pl.nikowis.selfcare.security.SecurityConstants;
 import pl.nikowis.selfcare.service.FulfilmentService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(path = FulfilmentController.FULFILMENTS_ENDPOINT)
+@Secured(SecurityConstants.ROLE_USER)
 public class FulfilmentController {
 
     public static final String FULFILMENTS_ENDPOINT = "/fulfilments";

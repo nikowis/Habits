@@ -1,33 +1,25 @@
 package pl.nikowis.selfcare.model;
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
-    private String username;
+    private String login;
     private String password;
     private Boolean active;
-
-    public UserDetailsImpl() {
-    }
-
-    public UserDetailsImpl(User user) {
-        this.id = user.getId();
-        this.username = user.getLogin();
-        this.password = user.getPassword();
-        this.active = user.getActive();
-    }
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return Lists.newArrayList(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -37,7 +29,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return login;
     }
 
     @Override

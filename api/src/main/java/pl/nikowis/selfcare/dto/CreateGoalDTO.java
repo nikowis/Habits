@@ -3,7 +3,6 @@ package pl.nikowis.selfcare.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
