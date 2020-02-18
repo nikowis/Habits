@@ -11,12 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import pl.nikowis.selfcare.rest.MainController;
-import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -24,13 +24,10 @@ import pl.nikowis.selfcare.service.impl.DatabaseUserDetailsService;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DatabaseUserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
-
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -38,6 +35,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults("");
     }
 
     @Override
@@ -63,11 +65,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(MainController.REGISTRATION_ENDPOINT).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManagerBean(), secret))
-                .addFilter(new JWTAuthorizationFilter(authenticationManagerBean(), secret));
+                .addFilter(new JwtAuthenticationFilter(authenticationManagerBean(), secret, authenticationFailureHandler))
+                .addFilter(new JwtAuthorizationFilter(authenticationManagerBean(), secret));
 
 
     }

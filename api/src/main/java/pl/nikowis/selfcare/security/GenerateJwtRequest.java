@@ -2,16 +2,16 @@ package pl.nikowis.selfcare.security;
 
 import java.io.Serializable;
 
-public class GenerateJWTRequest implements Serializable {
+public class GenerateJwtRequest implements Serializable {
     private static final long serialVersionUID = 5926468583005150707L;
     private String username;
     private String password;
 
     //need default constructor for JSON Parsing
-    public GenerateJWTRequest() {
+    public GenerateJwtRequest() {
     }
 
-    public GenerateJWTRequest(String username, String password) {
+    public GenerateJwtRequest(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
     }

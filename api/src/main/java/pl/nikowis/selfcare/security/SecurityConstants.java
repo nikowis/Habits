@@ -7,7 +7,7 @@ public class SecurityConstants {
     public static final String TOKEN_ACTIVE_KEY = "act";
     public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60;
 
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
-    public static final String ROLE_MOD = "ROLE_MOD";
+    public static final String ROLE_USER = "USER";
+    public static final String ROLE_ADMIN = "ADMIN";
+    public static final String ROLE_MOD = "MOD";
 }

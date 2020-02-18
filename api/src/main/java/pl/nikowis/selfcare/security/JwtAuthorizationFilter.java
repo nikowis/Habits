@@ -24,13 +24,13 @@ import java.io.IOException;
 import java.util.Date;
 
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JWTAuthorizationFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 
     private String secret;
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager, String secret) {
+    public JwtAuthorizationFilter(AuthenticationManager authManager, String secret) {
         super(authManager);
         this.secret = secret;
     }

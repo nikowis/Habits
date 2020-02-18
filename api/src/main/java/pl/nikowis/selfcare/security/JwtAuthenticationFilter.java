@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 
@@ -16,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,27 +27,32 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private String secret;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, String secret) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, String secret, AuthenticationFailureHandler authenticationFailureHandler) {
         this.authenticationManager = authenticationManager;
         this.secret = secret;
+        this.setAuthenticationFailureHandler(authenticationFailureHandler);
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            JwtRequest creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), JwtRequest.class);
+            GenerateJwtRequest creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), GenerateJwtRequest.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
+                            creds.getPassword())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        super.unsuccessfulAuthentication(request, response, failed);
     }
 
     @Override
@@ -66,6 +71,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
 
         res.setContentType(MediaType.APPLICATION_JSON.toString());
-        res.getWriter().write(new ObjectMapper().writeValueAsString(new JwtResponse(token)));
+        res.getWriter().write(new ObjectMapper().writeValueAsString(new GenerateJwtResponse(token)));
     }
 }
