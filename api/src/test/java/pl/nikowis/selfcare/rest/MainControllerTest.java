@@ -41,7 +41,7 @@ class MainControllerTest {
     @Autowired
     private UserRepository userRepository;
 
-    private final static String LOGIN="testuser2";
+    private final static String LOGIN = "testuser2";
 
     @BeforeEach
     void setUp() {

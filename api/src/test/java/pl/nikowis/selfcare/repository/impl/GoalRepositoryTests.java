@@ -1,7 +1,6 @@
 package pl.nikowis.selfcare.repository.impl;
 
 
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.config.Profiles;
-import pl.nikowis.selfcare.model.Fulfilment;
 import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.model.User;
 
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest

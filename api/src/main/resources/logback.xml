@@ -2,7 +2,8 @@
 <configuration>
     <appender name="console-appender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
+            </pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
@@ -44,9 +45,9 @@
     </appender>
 
     <root>
-        <appender-ref ref="console-appender" />
-        <appender-ref ref="info-file-appender" />
-        <appender-ref ref="error-file-appender" />
+        <appender-ref ref="console-appender"/>
+        <appender-ref ref="info-file-appender"/>
+        <appender-ref ref="error-file-appender"/>
     </root>
 
 </configuration>

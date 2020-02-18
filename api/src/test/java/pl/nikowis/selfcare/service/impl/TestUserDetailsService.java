@@ -12,7 +12,6 @@ import pl.nikowis.selfcare.config.Profiles;
 import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.security.SecurityConstants;
-import pl.nikowis.selfcare.service.UserService;
 
 @Service
 @Transactional
