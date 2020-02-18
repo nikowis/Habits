@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO register(RegisterUserDTO userDTO) {
-        if(userRepository.findByLogin(userDTO.getLogin()) != null){
-            throw new UsernameAlreadyExistsException(new Object[] {userDTO.getLogin()});
+        if (userRepository.findByLogin(userDTO.getLogin()) != null) {
+            throw new UsernameAlreadyExistsException(new Object[]{userDTO.getLogin()});
         }
 
         User u = new User();

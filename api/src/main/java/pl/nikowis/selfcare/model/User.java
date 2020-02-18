@@ -1,7 +1,6 @@
 package pl.nikowis.selfcare.model;
 
 import lombok.Data;
-import pl.nikowis.selfcare.security.SecurityConstants;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

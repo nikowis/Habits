@@ -25,7 +25,7 @@ public class GoalController {
 
     public static final String GOALS_ENDPOINT = "/goals";
     public static final String GOAL_ID_VARIABLE = "goalId";
-    public static final String GOAL_PATH = "/{"+ GOAL_ID_VARIABLE +"}";
+    public static final String GOAL_PATH = "/{" + GOAL_ID_VARIABLE + "}";
     public static final String GOAL_ENDPOINT = GOALS_ENDPOINT + GOAL_PATH;
 
     @Autowired

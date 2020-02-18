@@ -11,25 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.config.Profiles;
 import pl.nikowis.selfcare.model.User;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
+import pl.nikowis.selfcare.security.SecurityConstants;
 import pl.nikowis.selfcare.service.UserService;
 
 @Service
 @Transactional
-@Profile("!" + Profiles.TEST)
-public class DatabaseUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private UserService userService;
+@Profile(Profiles.TEST)
+public class TestUserDetailsService implements UserDetailsService {
 
     @Autowired
     private MapperFacade mapperFacade;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userByLogin = userService.findUserByLogin(username);
-        if (userByLogin == null) {
-            throw new UsernameNotFoundException("Username no found - " + username);
-        }
+        User userByLogin = new User();
+        userByLogin.setLogin(username);
+        userByLogin.setPassword(username);
+        userByLogin.setRole(SecurityConstants.ROLE_USER);
+        userByLogin.setId(1L);
         return mapperFacade.map(userByLogin, UserDetailsImpl.class);
     }
 }

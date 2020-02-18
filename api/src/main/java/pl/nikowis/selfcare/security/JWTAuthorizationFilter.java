@@ -55,13 +55,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String tokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         String jwtToken;
-        String role,username;
+        String role, username;
         Long id;
         Boolean active;
         if (tokenHeader != null && tokenHeader.startsWith(SecurityConstants.BEARER_PREFIX)) {
             jwtToken = tokenHeader.replace(SecurityConstants.BEARER_PREFIX, "");
 
-            if(isTokenExpired(jwtToken)) {
+            if (isTokenExpired(jwtToken)) {
                 return null;
             }
 

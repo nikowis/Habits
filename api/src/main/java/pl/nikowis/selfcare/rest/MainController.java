@@ -13,7 +13,6 @@ import pl.nikowis.selfcare.security.SecurityConstants;
 import pl.nikowis.selfcare.service.UserService;
 
 @RestController
-@Secured(SecurityConstants.ROLE_USER)
 public class MainController {
 
     public static final String REGISTRATION_ENDPOINT = "/register";
@@ -28,6 +27,7 @@ public class MainController {
     }
 
     @GetMapping(ME_ENDPOINT)
+    @Secured(SecurityConstants.ROLE_USER)
     public UserDTO getMe() {
         return userService.getCurrentUser();
     }
