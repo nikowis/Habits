@@ -5,13 +5,13 @@ import CreateGoal from "./components/CreateGoal";
 import {Redirect, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
-import CreatedGoal from "./components/CreatedGoal";
 import {connect} from "react-redux";
 import Api from "./common/api-communication";
 import ActionType from "./actions/actions";
 import Logout from "./components/Logout";
 import Fulfilments from "./components/Fulfilments";
 import Goals from "./components/Goals";
+import Paths from "./common/paths";
 
 class App extends Component {
 
@@ -33,37 +33,30 @@ class App extends Component {
         return (
             <div className="app">
                 <header className="app-header">
-                    <link rel="stylesheet"
-                          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-                          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-                          crossOrigin="anonymous"/>
                 </header>
                 <TopMenu/>
                 <Switch>
-                    <Route path="/home">
+                    <Route path={Paths.HOME}>
                         <Home/>
                     </Route>
-                    <Route path="/login">
+                    <Route path={Paths.LOGIN}>
                         <Login/>
                     </Route>
-                    <Route path="/logout">
+                    <Route path={Paths.LOGOUT}>
                         <Logout/>
                     </Route>
-                    <Route path="/create">
+                    <Route path={Paths.CREATE}>
                         <CreateGoal/>
                     </Route>
-                    <Route path="/created">
-                        <CreatedGoal/>
-                    </Route>
-                    <Route path="/fulfilments">
+                    <Route path={Paths.FULFILMENTS}>
                         <Fulfilments/>
                     </Route>
-                    <Route path="/goals">
+                    <Route path={Paths.GOALS}>
                         <Goals/>
                     </Route>
                 </Switch>
-                {!this.props.user.login && window.location.pathname !== '/login' ? <Redirect to='/login'/> : null}
-                {this.props.user.login && window.location.pathname === '/' ? <Redirect to='/home'/> : null}
+                {!this.props.user.login && window.location.pathname !== '/login' ? <Redirect to={Paths.LOGIN}/> : null}
+                {this.props.user.login && window.location.pathname === '/' ? <Redirect to={Paths.HOME}/> : null}
             </div>
         );
 

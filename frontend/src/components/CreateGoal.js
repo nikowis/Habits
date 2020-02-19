@@ -3,6 +3,7 @@ import '../App.scss';
 import Input from "./Input";
 import Api from "./../common/api-communication"
 import { withRouter } from 'react-router-dom';
+import Paths from "../common/paths";
 
 class CreateGoal extends React.Component {
 
@@ -23,7 +24,7 @@ class CreateGoal extends React.Component {
         event.preventDefault();
         const goal = await Api.createGoal({...this.state});
         console.log(goal);
-        this.props.history.push('/created')
+        this.props.history.push(Paths.GOALS)
     };
 
     render() {

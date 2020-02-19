@@ -3,6 +3,7 @@ import '../App.scss';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import ErrorContainer from "./ErrorContainer";
+import Paths from "./../common/paths";
 
 class TopMenu extends React.Component {
 
@@ -18,12 +19,12 @@ class TopMenu extends React.Component {
     headerContent() {
         return (<div>
                 <nav className="navigation">
-                    { this.props.authenticated ? null : <Link to="/login">Login</Link>}
-                    { this.props.authenticated ? <Link to="/home">Home</Link> : null}
-                    { this.props.authenticated ? <Link to="/create">Create</Link> : null}
-                    { this.props.authenticated ? <Link to="/fulfilments">Fulfilments</Link> : null}
-                    { this.props.authenticated ? <Link to="/goals">Goals</Link> : null}
-                    { this.props.authenticated ? <Link to="/logout">Logout</Link> : null}
+                    { this.props.authenticated ? null : <Link to={Paths.LOGIN}>Login</Link>}
+                    { this.props.authenticated ? <Link to={Paths.HOME}>Home</Link> : null}
+                    { this.props.authenticated ? <Link to={Paths.CREATE}>Create</Link> : null}
+                    { this.props.authenticated ? <Link to={Paths.FULFILMENTS}>Fulfilments</Link> : null}
+                    { this.props.authenticated ? <Link to={Paths.GOALS}>Goals</Link> : null}
+                    { this.props.authenticated ? <Link to={Paths.LOGOUT}>Logout</Link> : null}
                 </nav>
                 <div className="welcome-message">
                     Habits

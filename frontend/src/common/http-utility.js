@@ -38,7 +38,7 @@ class HttpUtility {
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_AUTH_ERROR})
             }, ERROR_NOTIFICATION_DURATION)
-        } else if(response.status === 404 || response.status === 500){
+        } else if(response.status === 400 || response.status === 500){
             store.dispatch({
                 type: ActionType.API_ERROR
                 // , payload: response.json()

@@ -5,6 +5,7 @@ import Input from "./Input";
 import ActionType from "../actions/actions";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
+import Paths from "../common/paths";
 
 
 class Login extends React.Component {
@@ -38,7 +39,7 @@ class Login extends React.Component {
 
     render() {
         if(this.props.user.login) {
-            return <Redirect to='/home' push={true} />
+            return <Redirect to={Paths.HOME} push={true} />
         }
         return (
             <div className="login">
