@@ -101,7 +101,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         return null;
     }
 
-    //check if the token has expired
     private Boolean isTokenExpired(String token) {
         final Date expiration = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration();
         return expiration.before(new Date());

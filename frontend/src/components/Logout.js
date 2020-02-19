@@ -11,7 +11,6 @@ class Logout extends React.Component {
     logout = () => {
         const {dispatch} = this.props;
         localStorage.clear();
-        document.cookie = "JSESSIONID=; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
         Api.logout();
         dispatch({
             type: ActionType.LOGOUT_ACTION

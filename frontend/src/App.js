@@ -17,8 +17,9 @@ class App extends Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
+
         if (!this.props.user.login) {
-            Api.getMe().then(user => {
+            Api.getMe().then((user) => {
                 dispatch({
                     type: ActionType.LOGIN_ACTION
                     , id: user.id

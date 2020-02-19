@@ -3,6 +3,7 @@ package pl.nikowis.selfcare.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,8 +37,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            GenerateJwtRequest creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), GenerateJwtRequest.class);
+            JwtLoginRequest creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), JwtLoginRequest.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -69,5 +70,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         tokenCookie.setHttpOnly(true);
         res.addCookie(tokenCookie);
 
+        res.setContentType(MediaType.APPLICATION_JSON.toString());
+        res.getWriter().write(new ObjectMapper().writeValueAsString(new JwtLoginResponse(user.getId(), user.getLogin())));
     }
 }

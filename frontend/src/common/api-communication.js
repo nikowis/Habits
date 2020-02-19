@@ -18,18 +18,12 @@ class Api {
 
     postLogin(login, password) {
         let url = this.API_URL + ApiEndpoint.API_LOGIN;
-
-        const data = new URLSearchParams();
-        data.append('username', login);
-        data.append('password', password);
-
         return HttpUtility.post({
             url: url,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            payload: data,
-            json: false
+            payload: {
+                username: login,
+                password: password
+            }
         });
     };
 

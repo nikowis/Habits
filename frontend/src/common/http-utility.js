@@ -23,22 +23,31 @@ class HttpUtility {
                 return response.json();
             } else {
                 this.handleError(response);
+                return Promise.reject();
             }
         }).finally(() => store.dispatch({type: endAction}));
     }
 
     handleError(response) {
         let ERROR_NOTIFICATION_DURATION = 5000;
-        if (response.status === 401) {
-            store.dispatch({type: ActionType.AUTH_ERROR});
+        if (response.status === 401 || response.status === 403) {
+            store.dispatch({
+                type: ActionType.AUTH_ERROR
+                // , payload: response.json()
+            });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_AUTH_ERROR})
             }, ERROR_NOTIFICATION_DURATION)
-        } else {
-            store.dispatch({type: ActionType.API_ERROR});
+        } else if(response.status === 404 || response.status === 500){
+            store.dispatch({
+                type: ActionType.API_ERROR
+                // , payload: response.json()
+            });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_API_ERROR})
             }, ERROR_NOTIFICATION_DURATION)
+        } else {
+            throw new Error(response.json());
         }
     }
 
