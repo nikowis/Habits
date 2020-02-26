@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Input from "./Input";
-import ActionType from "../actions/actions";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
 import Paths from "../common/paths";
@@ -25,15 +24,7 @@ class Login extends React.Component {
 
     handleSubmit = (event) => {
         const {dispatch} = this.props;
-        Api.postLogin(this.state.login, this.state.password).then(res => {
-            if(res) {
-                dispatch({
-                    type: ActionType.LOGIN_ACTION
-                    , id: res.id
-                    , login: res.login
-                });
-            }
-        });
+        dispatch(Api.postLogin(this.state.login, this.state.password));
         event.preventDefault();
     };
 

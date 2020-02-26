@@ -1,5 +1,6 @@
 import ApiEndpoint from './endpoints'
 import HttpUtility from './http-utility'
+import ActionType from './../redux/actions'
 
 class Api {
 
@@ -12,7 +13,7 @@ class Api {
 
         return HttpUtility.post({
             url: url,
-            payload: goal
+            payload: goal,
         });
     };
 
@@ -23,7 +24,8 @@ class Api {
             payload: {
                 username: login,
                 password: password
-            }
+            },
+            action: ActionType.LOGIN_ACTION
         });
     };
 
@@ -31,14 +33,15 @@ class Api {
         let url = this.API_URL + ApiEndpoint.API_LOGOUT;
 
         return HttpUtility.post({
-            url: url
+            url: url,
+            action: ActionType.LOGOUT_ACTION
         });
     };
 
     getGoals() {
         const url = new URL(this.API_URL + ApiEndpoint.API_GOALS);
         return HttpUtility.get({
-            url: url
+            url: url,
         });
     };
 
@@ -52,7 +55,8 @@ class Api {
     getMe() {
         const url = new URL(this.API_URL + ApiEndpoint.API_ME);
         return HttpUtility.get({
-            url: url
+            url: url,
+            action: ActionType.LOGIN_ACTION
         });
     };
 

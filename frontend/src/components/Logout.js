@@ -1,20 +1,15 @@
 import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
-import ActionType from "../actions/actions";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
-
 
 class Logout extends React.Component {
 
     logout = () => {
         const {dispatch} = this.props;
         localStorage.clear();
-        Api.logout();
-        dispatch({
-            type: ActionType.LOGOUT_ACTION
-        });
+        dispatch(Api.logout());
         window.location.reload();
     };
 
@@ -28,5 +23,5 @@ class Logout extends React.Component {
 }
 
 export default connect(state => ({
-    authenticated: state.app.authenticated
+    authenticated: state.user.authenticated
 }))(Logout);

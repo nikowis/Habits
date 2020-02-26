@@ -7,6 +7,9 @@ export default class ActionType {
     static CLEAR_API_ERROR = 'CLEAR_API_ERROR';
     static HTTP_REQUEST_FINISH = 'HTTP_REQUEST_FINISH';
     static HTTP_REQUEST_START = 'HTTP_REQUEST_START';
+    static PENDING = '_PENDING';
+    static REJECTED = '_REJECTED';
+    static FULFILLED = '_FULFILLED';
 }
 
 

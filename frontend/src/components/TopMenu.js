@@ -29,6 +29,8 @@ class TopMenu extends React.Component {
                 <div className="welcome-message">
                     Habits
                 </div>
+            {/*todo show spiiner w pendingRequests*/}
+
             </div>
         );
     }
@@ -36,6 +38,7 @@ class TopMenu extends React.Component {
 
 export default connect( state => ({
     login: state.user.login,
-    authenticated: state.app.authenticated,
-    authError: state.app.authError
+    authenticated: state.user.authenticated,
+    authError: state.app.authError,
+    pendingRequests: state.app.pendingRequests
 }))(TopMenu);

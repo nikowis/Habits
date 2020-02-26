@@ -11,7 +11,7 @@ class Goals extends React.Component {
     }
 
     componentDidMount() {
-        Api.getGoals().then((response) => {
+        Api.getGoals().payload.then((response) => {
             this.setState({goals: response})
         });
     }

@@ -1,5 +1,5 @@
-import store from '../reducers/store';
-import ActionType from '../actions/actions';
+import store from '../redux/store';
+import ActionType from '../redux/actions';
 
 class HttpUtility {
 
@@ -8,12 +8,13 @@ class HttpUtility {
     }
 
     call(params, startAction, endAction) {
-        const {url, method, payload, headers, json = true} = params;
+        const {url, method, payload, headers, action, json = true} = params;
         if (startAction) {
             store.dispatch({type: startAction});
         }
 
-        return fetch(url, {
+        return { type:action,
+            payload:fetch(url, {
             method,
             body: payload ? (json ? JSON.stringify(payload) : payload) : undefined,
             headers: headers ? headers : {Accept: 'application/json', 'Content-Type': 'application/json'},
@@ -25,7 +26,8 @@ class HttpUtility {
                 this.handleError(response);
                 return Promise.reject();
             }
-        }).finally(() => store.dispatch({type: endAction}));
+        }).finally(() => store.dispatch({type: endAction}))
+    }
     }
 
     handleError(response) {

@@ -12,7 +12,7 @@ class Fulfilments extends React.Component {
     }
 
     componentDidMount() {
-        Api.getFulfilments().then((response) => {
+        Api.getFulfilments().payload.then((response) => {
             this.setState({fulfilments: response})
         });
     }

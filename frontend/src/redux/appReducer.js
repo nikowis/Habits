@@ -1,17 +1,26 @@
-import ActionType from "../actions/actions";
+import ActionType from "./actions";
 
 const initialState = {
     apiError: false,
     authError: false,
-    authenticated: false
+    pendingRequests:0
 };
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
-            case ActionType.AUTH_ERROR:
+        case ActionType.HTTP_REQUEST_START:
             return {
                 ...state,
-                authenticated: false,
+                pendingRequests: state.pendingRequests + 1
+            };
+        case ActionType.HTTP_REQUEST_FINISH:
+            return {
+                ...state,
+                pendingRequests: state.pendingRequests - 1
+            };
+        case ActionType.AUTH_ERROR:
+            return {
+                ...state,
                 authError: true
             };
         case ActionType.API_ERROR:
@@ -19,16 +28,14 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 apiError: true
             };
-        case ActionType.LOGIN_ACTION:
+        case ActionType.LOGIN_ACTION + ActionType.FULFILLED:
             return {
                 ...state,
-                authenticated: true,
                 authError: false
             };
-        case ActionType.LOGOUT_ACTION:
+        case ActionType.LOGOUT_ACTION + ActionType.FULFILLED:
             return {
                 ...state,
-                authenticated: false,
                 authError: false
             };
         case ActionType.CLEAR_AUTH_ERROR:

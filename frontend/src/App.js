@@ -6,12 +6,11 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import {connect} from "react-redux";
-import Api from "./common/api-communication";
-import ActionType from "./actions/actions";
 import Logout from "./components/Logout";
 import Fulfilments from "./components/Fulfilments";
 import Goals from "./components/Goals";
 import Paths from "./common/paths";
+import Api from "./common/api-communication";
 
 class App extends Component {
 
@@ -19,13 +18,7 @@ class App extends Component {
         const {dispatch} = this.props;
 
         if (!this.props.user.login) {
-            Api.getMe().then((user) => {
-                dispatch({
-                    type: ActionType.LOGIN_ACTION
-                    , id: user.id
-                    , login: user.login
-                });
-            });
+            dispatch(Api.getMe());
         }
     }
 
