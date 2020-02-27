@@ -10,17 +10,8 @@ import Logout from "./components/Logout";
 import Fulfilments from "./components/Fulfilments";
 import Goals from "./components/Goals";
 import Paths from "./common/paths";
-import Api from "./common/api-communication";
 
 class App extends Component {
-
-    componentDidMount() {
-        const {dispatch} = this.props;
-
-        if (!this.props.user.login) {
-            dispatch(Api.getMe());
-        }
-    }
 
     render() {
         return (
