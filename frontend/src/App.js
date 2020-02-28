@@ -40,7 +40,6 @@ class App extends Component {
                     </Route>
                 </Switch>
                 {!this.props.user.login && window.location.pathname !== '/login' ? <Redirect to={Paths.LOGIN}/> : null}
-                {this.props.user.login && window.location.pathname === '/' ? <Redirect to={Paths.HOME}/> : null}
             </div>
         );
 
