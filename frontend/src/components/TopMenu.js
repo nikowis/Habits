@@ -1,42 +1,39 @@
 import React from 'react';
 import '../App.scss';
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import ErrorContainer from "./ErrorContainer";
 import Paths from "./../common/paths";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 class TopMenu extends React.Component {
 
     render() {
         return (
-            <div className="top-menu">
-                {this.headerContent()}
+            <span className="top-menu">
+                <Navbar bg="dark" variant="dark" className="top-menu">
+                    <Navbar.Brand href="#home">Habits</Navbar.Brand>
+                    {this.props.authenticated ?
+                        <Nav className="mr-auto">
+                            <Nav.Link href={Paths.HOME}>Home</Nav.Link>
+                            <Nav.Link href={Paths.CREATE}>Create</Nav.Link>
+                            <Nav.Link href={Paths.FULFILMENTS}>Fulfilments</Nav.Link>
+                            <Nav.Link href={Paths.GOALS}>Goals</Nav.Link>
+                            <Nav.Link href={Paths.LOGOUT}>Logout</Nav.Link>
+                        </Nav>
+                        : <Nav className="mr-auto">
+                            <Nav.Link href={Paths.LOGIN}>Login</Nav.Link>
+                        </Nav>
+                    }
+                </Navbar>
                 <ErrorContainer/>
-            </div>
+            </span>
         );
     }
 
-    headerContent() {
-        return (<div>
-                <nav className="navigation">
-                    { this.props.authenticated ? null : <Link to={Paths.LOGIN}>Login</Link>}
-                    { this.props.authenticated ? <Link to={Paths.HOME}>Home</Link> : null}
-                    { this.props.authenticated ? <Link to={Paths.CREATE}>Create</Link> : null}
-                    { this.props.authenticated ? <Link to={Paths.FULFILMENTS}>Fulfilments</Link> : null}
-                    { this.props.authenticated ? <Link to={Paths.GOALS}>Goals</Link> : null}
-                    { this.props.authenticated ? <Link to={Paths.LOGOUT}>Logout</Link> : null}
-                </nav>
-                <div className="welcome-message">
-                    Habits
-                </div>
-            {/*todo show spiiner w pendingRequests*/}
-
-            </div>
-        );
-    }
 }
 
-export default connect( state => ({
+export default connect(state => ({
     login: state.user.login,
     authenticated: state.user.authenticated,
     authError: state.app.authError,
