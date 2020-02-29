@@ -1,10 +1,12 @@
 import React from 'react';
 import '../App.scss';
 import {Redirect} from "react-router-dom";
-import Input from "./Input";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
 import Paths from "../common/paths";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormLabel from "react-bootstrap/FormLabel";
 
 
 class Login extends React.Component {
@@ -29,21 +31,28 @@ class Login extends React.Component {
     };
 
     render() {
-        if(this.props.user.login) {
-            return <Redirect to={Paths.HOME} push={true} />
+        if (this.props.user.login) {
+            return <Redirect to={Paths.HOME} push={true}/>
         }
         return (
             <div className="login">
-                <form onSubmit={this.handleSubmit}>
-                    <Input id='login' label='Login:' type="text" onChange={this.handleLoginChange} value={this.state.login}/>
-                    <Input id='password' label='Password:' type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <Form onSubmit={this.handleSubmit}>
+                    <FormLabel>Please login</FormLabel>
+                    <Form.Group controlId="login">
+                        <Form.Control type="email" placeholder="Login" value={this.state.login} onChange={this.handleLoginChange}/>
+                    </Form.Group>
+                    <Form.Group controlId="password">
+                        <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
             </div>
         );
     }
 }
 
-export default connect( state => ({
+export default connect(state => ({
     user: state.user,
 }))(Login);
