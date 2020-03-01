@@ -5,9 +5,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: black;
+}
+
+.app-content {
+    margin-top: 2rem;
+    min-height: inherit;
+    display: inherit;
 }
 
 .app-logo {
@@ -15,18 +18,10 @@
 }
 
 .top-menu {
-    background-color: #212121;
-    color: white;
-    top: 0px;
+    //top: 0px;
     width: 100%;
-    height: 2.5rem;
-    position: fixed;
-    a {
-        padding: 10px;
-    }
-    nav {
-        position: absolute;
-    }
+    //height: 2.5rem;
+    //position: fixed;
 
     .error-container {
         color: red;
@@ -52,10 +47,3 @@
     }
 }
 
-.app-header {
-
-}
-
-.app-link {
-    color: #09d3ac;
-}

@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.scss';
 import Api from "./../common/api-communication"
 import {connect} from "react-redux";
+import Table from "react-bootstrap/Table";
 
 class Goals extends React.Component {
 
@@ -28,18 +29,19 @@ class Goals extends React.Component {
 
     render() {
         return (
-            <div className='home'>
-                <table className='goals-table'>
-                    <tr>
-                        <td>Id</td>
-                        <td>Title</td>
-                        <td>Description</td>
-                    </tr>
-                    {this.goalRows()}
-                </table>
-            </div>
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                {this.goalRows()}
+                </tbody>
+            </Table>
         );
-
     }
 }
 

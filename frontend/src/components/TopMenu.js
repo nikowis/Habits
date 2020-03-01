@@ -10,9 +10,9 @@ class TopMenu extends React.Component {
 
     render() {
         return (
-            <span className="top-menu">
-                <Navbar bg="dark" variant="dark" className="top-menu">
-                    <Navbar.Brand href="#home">Habits</Navbar.Brand>
+            <div className="top-menu">
+                <Navbar bg="dark" variant="dark">
+                    <Navbar.Brand href={Paths.HOME}>Habits</Navbar.Brand>
                     {this.props.authenticated ?
                         <Nav className="mr-auto">
                             <Nav.Link href={Paths.HOME}>Home</Nav.Link>
@@ -27,7 +27,7 @@ class TopMenu extends React.Component {
                     }
                 </Navbar>
                 <ErrorContainer/>
-            </span>
+            </div>
         );
     }
 
