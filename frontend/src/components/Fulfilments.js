@@ -1,8 +1,9 @@
 import React from 'react';
 import '../App.scss';
 import Api from "./../common/api-communication"
-import Input from "./Input";
 import {connect} from "react-redux";
+import Form from "react-bootstrap/Form";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class Fulfilments extends React.Component {
 
@@ -23,7 +24,7 @@ class Fulfilments extends React.Component {
                 goal.id.toString() === event.target.id
             )[0];
 
-            Api.fulfilGoal(selectedGoal)
+            Api.fulfilGoal(selectedGoal).payload
                 .then(res => {
                     const curFulfilments = this.state.fulfilments;
                     curFulfilments.forEach(g => g.fulfilled = g.id === res.id ? res.fulfilled : g.fulfilled);
@@ -33,22 +34,27 @@ class Fulfilments extends React.Component {
         }
     };
 
-    goalRows = () => {
+    fulfilmentRows = () => {
         return this.state.fulfilments.map((goal) => {
-            return <Input label={goal.title + ': ' + goal.description} type='checkbox'
-                          onChange={this.handleCheckboxChange} checked={goal.fulfilled} id={goal.id} key={goal.id}/>
+            return (
+                <ListGroup.Item key={goal.id}>
+                    <Form.Check
+                        type='checkbox' checked={goal.fulfilled}
+                        id={goal.id}
+                        key={goal.id}
+                        onChange={this.handleCheckboxChange}
+                        label={goal.title + ': ' + goal.description}
+                    />
+                </ListGroup.Item>
+            );
         });
     };
 
     render() {
         return (
-            <div className='home'>
-                <div className='fulfilments-list'>
-                    <ul>
-                        {this.goalRows()}
-                    </ul>
-                </div>
-            </div>
+            <ListGroup>
+                {this.fulfilmentRows()}
+            </ListGroup>
         );
 
     }

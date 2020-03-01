@@ -64,7 +64,7 @@ class FulfilmentServiceImpl implements FulfilmentService {
         List<Goal> goals = goalRepository.findByActiveAndUserId(true, SecurityUtils.getCurrentUserId());
         List<Long> goalIds = goals.stream().map(Goal::getId).collect(Collectors.toList());
         List<FulfilableGoalDTO> dailyGoals = goals.stream().map(g -> {
-            FulfilableGoalDTO fulfilableGoalDTO = new FulfilableGoalDTO(true);
+            FulfilableGoalDTO fulfilableGoalDTO = new FulfilableGoalDTO(false);
             mapperFacade.map(g, fulfilableGoalDTO);
             return fulfilableGoalDTO;
         }).collect(Collectors.toList());
