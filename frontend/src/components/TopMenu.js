@@ -5,6 +5,7 @@ import ErrorContainer from "./ErrorContainer";
 import Paths from "./../common/paths";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Spinner from "react-bootstrap/Spinner";
 
 class TopMenu extends React.Component {
 
@@ -28,6 +29,8 @@ class TopMenu extends React.Component {
                         </Nav>
                     }
                     </Navbar.Collapse>
+
+                    {this.props.pendingRequests > 0 ? <Spinner animation="border" variant="primary" /> : null}
                 </Navbar>
                 <ErrorContainer/>
             </div>
