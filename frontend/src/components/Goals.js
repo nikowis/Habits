@@ -29,7 +29,7 @@ class Goals extends React.Component {
 
     render() {
         return (
-            <Table striped bordered hover>
+            <Table striped bordered hover variant="dark">
                 <thead>
                 <tr>
                     <th>Id</th>

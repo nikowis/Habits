@@ -11,8 +11,10 @@ class TopMenu extends React.Component {
     render() {
         return (
             <div className="top-menu">
-                <Navbar bg="dark" variant="dark">
+                <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
                     <Navbar.Brand href={Paths.HOME}>Habits</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
                     {this.props.authenticated ?
                         <Nav className="mr-auto">
                             <Nav.Link href={Paths.HOME}>Home</Nav.Link>
@@ -25,6 +27,7 @@ class TopMenu extends React.Component {
                             <Nav.Link href={Paths.LOGIN}>Login</Nav.Link>
                         </Nav>
                     }
+                    </Navbar.Collapse>
                 </Navbar>
                 <ErrorContainer/>
             </div>
