@@ -1,9 +1,11 @@
 import React from 'react';
 import '../App.scss';
-import Input from "./Input";
 import Api from "./../common/api-communication"
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import Paths from "../common/paths";
+import Form from "react-bootstrap/Form";
+import FormLabel from "react-bootstrap/FormLabel";
+import Button from "react-bootstrap/Button";
 
 class CreateGoal extends React.Component {
 
@@ -29,15 +31,20 @@ class CreateGoal extends React.Component {
 
     render() {
         return (
-            <div className="create-goal-form">
-                Create goal
-                <form onSubmit={this.handleCreateGoal}>
-                    <Input label="Title" onChange={this.titleChangeHandler} value={this.state.title}/>
-                    <Input label="Description" onChange={this.descriptionChangeHandler} value={this.state.description}/>
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-
+            <Form onSubmit={this.handleCreateGoal}>
+                <FormLabel>Create goal</FormLabel>
+                <Form.Group controlId="title">
+                    <Form.Control type="text" placeholder="Title" value={this.state.title}
+                                  onChange={this.titleChangeHandler}/>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Control type="text" placeholder="Description" value={this.state.description}
+                                  onChange={this.descriptionChangeHandler}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         );
 
     }

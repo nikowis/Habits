@@ -35,20 +35,20 @@ class Login extends React.Component {
             return <Redirect to={Paths.HOME} push={true}/>
         }
         return (
-            <div className="login">
-                <Form onSubmit={this.handleSubmit}>
-                    <FormLabel>Please login</FormLabel>
-                    <Form.Group controlId="login">
-                        <Form.Control type="email" placeholder="Login" value={this.state.login} onChange={this.handleLoginChange}/>
-                    </Form.Group>
-                    <Form.Group controlId="password">
-                        <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}/>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </div>
+            <Form onSubmit={this.handleSubmit}>
+                <FormLabel>Please login</FormLabel>
+                <Form.Group controlId="login">
+                    <Form.Control type="email" placeholder="Login" value={this.state.login}
+                                  onChange={this.handleLoginChange}/>
+                </Form.Group>
+                <Form.Group controlId="password">
+                    <Form.Control type="password" placeholder="Password" value={this.state.password}
+                                  onChange={this.handlePasswordChange}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         );
     }
 }

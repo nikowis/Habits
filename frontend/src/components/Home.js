@@ -6,9 +6,9 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className='home'>
+            <h3 className='home'>
                 Hello {this.props.login}
-            </div>
+            </h3>
         );
 
     }
