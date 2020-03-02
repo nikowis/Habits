@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.config.Profiles;
 import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.model.User;
+import pl.nikowis.selfcare.security.SecurityConstants;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class GoalRepositoryTests {
         u1.setLogin(USER_LOGIN);
         u1.setPassword(USER_LOGIN);
         u1.setId(1L);
+        u1.setRole(SecurityConstants.ROLE_USER);
         u1 = userRepository.save(u1);
 
         g1 = new Goal();

@@ -7,7 +7,7 @@ class Home extends React.Component {
     render() {
         return (
             <h3 className='home'>
-                Hello {this.props.login}
+                {this.props.login? `Hello ${this.props.login}`: "Hello stranger!"}
             </h3>
         );
 

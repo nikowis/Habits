@@ -66,7 +66,6 @@ class MainControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
     public void usernameNotAvailableTest() throws Exception {
         User user = new User();
         user.setLogin(LOGIN);
@@ -75,8 +74,8 @@ class MainControllerTest {
         userRepository.save(user);
 
         RegisterUserDTO registerUserDTO = new RegisterUserDTO();
-        user.setLogin(LOGIN);
-        user.setPassword(LOGIN);
+        registerUserDTO.setLogin(LOGIN);
+        registerUserDTO.setPassword(LOGIN);
 
         mockMvc.perform(post(MainController.REGISTRATION_ENDPOINT).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(registerUserDTO)))

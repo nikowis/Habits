@@ -25,6 +25,7 @@ class TopMenu extends React.Component {
                             <Nav.Link href={Paths.LOGOUT}>Logout</Nav.Link>
                         </Nav>
                         : <Nav className="mr-auto">
+                            <Nav.Link href={Paths.HOME}>Home</Nav.Link>
                             <Nav.Link href={Paths.LOGIN}>Login</Nav.Link>
                         </Nav>
                     }
