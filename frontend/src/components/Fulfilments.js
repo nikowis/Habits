@@ -52,9 +52,12 @@ class Fulfilments extends React.Component {
 
     render() {
         return (
-            <ListGroup>
-                {this.fulfilmentRows()}
-            </ListGroup>
+            <div>
+                <h5>Fulfill goal</h5>
+                <ListGroup className="fulfilment-list">
+                    {this.fulfilmentRows()}
+                </ListGroup>
+            </div>
         );
 
     }

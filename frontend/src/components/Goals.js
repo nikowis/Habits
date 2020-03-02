@@ -29,18 +29,21 @@ class Goals extends React.Component {
 
     render() {
         return (
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.goalRows()}
-                </tbody>
-            </Table>
+            <div>
+                <h5>Goal list</h5>
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.goalRows()}
+                    </tbody>
+                </Table>
+            </div>
         );
     }
 }
