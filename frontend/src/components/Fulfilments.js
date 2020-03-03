@@ -50,14 +50,20 @@ class Fulfilments extends React.Component {
         });
     };
 
+    fulfilmentList = () => {
+        return (
+            <ListGroup className="fulfilment-list">
+                {this.fulfilmentRows()}
+            </ListGroup>
+        );
+    }
+
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <h5>Fulfill goal</h5>
-                <ListGroup className="fulfilment-list">
-                    {this.fulfilmentRows()}
-                </ListGroup>
-            </div>
+                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : "Create your first goal"}
+            </React.Fragment>
         );
 
     }

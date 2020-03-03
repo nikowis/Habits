@@ -36,7 +36,7 @@ class Login extends React.Component {
         }
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormLabel>Please login</FormLabel>
+                <h5>Please login</h5>
                 <Form.Group controlId="login">
                     <Form.Control type="email" placeholder="Login" value={this.state.login}
                                   onChange={this.handleLoginChange}/>

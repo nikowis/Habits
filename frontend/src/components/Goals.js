@@ -27,23 +27,30 @@ class Goals extends React.Component {
         });
     };
 
+    goalTable = () => {
+        return (
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                {this.goalRows()}
+                </tbody>
+            </Table>
+        );
+    };
+
+
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <h5>Goal list</h5>
-                <Table striped bordered hover>
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.goalRows()}
-                    </tbody>
-                </Table>
-            </div>
+                {this.state.goals.length > 0 ? this.goalTable() : "Create your first goal"}
+            </React.Fragment>
         );
     }
 }
