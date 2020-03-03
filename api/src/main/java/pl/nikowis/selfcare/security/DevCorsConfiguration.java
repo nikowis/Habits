@@ -1,13 +1,14 @@
-package pl.nikowis.selfcare.config;
+package pl.nikowis.selfcare.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.nikowis.selfcare.config.Profiles;
 
 @Configuration
-@Profile("dev")
+@Profile(Profiles.DEV)
 public class DevCorsConfiguration {
 
     @Bean
