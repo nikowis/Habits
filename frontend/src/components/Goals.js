@@ -19,7 +19,7 @@ class Goals extends React.Component {
 
     goalRows = () => {
         return this.state.goals.map((goal) => {
-            return (<tr>
+            return (<tr key={goal.id}>
                 <td>{goal.id}</td>
                 <td>{goal.title}</td>
                 <td>{goal.description}</td>
