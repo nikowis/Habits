@@ -38,7 +38,7 @@ class CreateGoal extends React.Component {
                                       onChange={this.titleChangeHandler}/>
                     </Form.Group>
                     <Form.Group controlId="description">
-                        <Form.Control type="text" placeholder="Description" value={this.state.description}
+                        <Form.Control as="textarea" rows="3" placeholder="Description" value={this.state.description}
                                       onChange={this.descriptionChangeHandler}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">

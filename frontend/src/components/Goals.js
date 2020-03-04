@@ -29,7 +29,7 @@ class Goals extends React.Component {
 
     goalTable = () => {
         return (
-            <Table striped bordered hover>
+            <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
                     <th>Id</th>

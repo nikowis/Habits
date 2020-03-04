@@ -5,7 +5,7 @@ pipeline {
 	
 		stage('Stop tomcat') {
 			steps {
-				sh '/home/pi/apache-tomcat-9.0.30/bin/shutdown.sh'
+				sh '/home/pi/apache-tomcat-9.0.30/bin/shutdown.sh &'
 			}
 		}
 	
@@ -49,7 +49,7 @@ pipeline {
 		
 		stage('Start tomcat') {
 			steps {
-				sh '/home/pi/apache-tomcat-9.0.30/bin/startup.sh'
+				sh '/home/pi/apache-tomcat-9.0.30/bin/startup.sh &'
 			}
 		}
     }

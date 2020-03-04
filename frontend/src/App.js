@@ -19,27 +19,29 @@ class App extends Component {
                 <header className="app-header">
                 </header>
                 <TopMenu/>
-                <div className="app-content">
-                    <Switch>
-                        <Route path={Paths.HOME}>
-                            <Home/>
-                        </Route>
-                        <Route path={Paths.LOGIN}>
-                            <Login/>
-                        </Route>
-                        <Route path={Paths.LOGOUT}>
-                            <Logout/>
-                        </Route>
-                        <Route path={Paths.CREATE}>
-                            <CreateGoal/>
-                        </Route>
-                        <Route path={Paths.FULFILMENTS}>
-                            <Fulfilments/>
-                        </Route>
-                        <Route path={Paths.GOALS}>
-                            <Goals/>
-                        </Route>
-                    </Switch>
+                <div className="app-card">
+                    <div className="app-content">
+                        <Switch>
+                            <Route path={Paths.HOME}>
+                                <Home/>
+                            </Route>
+                            <Route path={Paths.LOGIN}>
+                                <Login/>
+                            </Route>
+                            <Route path={Paths.LOGOUT}>
+                                <Logout/>
+                            </Route>
+                            <Route path={Paths.CREATE}>
+                                <CreateGoal/>
+                            </Route>
+                            <Route path={Paths.FULFILMENTS}>
+                                <Fulfilments/>
+                            </Route>
+                            <Route path={Paths.GOALS}>
+                                <Goals/>
+                            </Route>
+                        </Switch>
+                    </div>
                 </div>
                 {!this.props.user.login && window.location.pathname !== '/login' && window.location.pathname !== '/home' ? <Redirect to={Paths.LOGIN}/> : null}
             </div>

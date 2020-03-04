@@ -6,8 +6,6 @@ import {connect} from "react-redux";
 import Paths from "../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import FormLabel from "react-bootstrap/FormLabel";
-
 
 class Login extends React.Component {
 
