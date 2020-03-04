@@ -6,9 +6,9 @@ class Home extends React.Component {
 
     render() {
         return (
-            <h3 className='home'>
+            <h5 className='home'>
                 {this.props.login? `Hello ${this.props.login}`: "Hello stranger!"}
-            </h3>
+            </h5>
         );
 
     }

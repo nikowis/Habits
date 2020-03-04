@@ -3,12 +3,16 @@ pipeline {
 
     stages {
 	
-		stage('Stop tomcat') {
-			steps {
-				sh '/home/pi/apache-tomcat-9.0.30/bin/shutdown.sh &'
-			}
-		}
-	
+        stage('Remove deployment') {
+            steps {
+                sh 'cp -r /home/pi/apache-tomcat-9.0.30/webapps/. /home/pi/deployment-backup/'
+                sh 'cp -r /home/pi/nginx-http-selfcare/. /home/pi/deployment-backup/'
+                sh 'rm -rf /home/pi/nginx-http-selfcare/*'
+                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi.war'
+                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi'
+            }
+        }
+		
         stage('Build frontend') {
             steps {
                 
@@ -25,15 +29,7 @@ pipeline {
             }
         }
 		
-        stage('Remove deployment') {
-            steps {
-                sh 'cp -r /home/pi/apache-tomcat-9.0.30/webapps/. /home/pi/deployment-backup/'
-                sh 'cp -r /home/pi/nginx-http-selfcare/. /home/pi/deployment-backup/'
-                sh 'rm -rf /home/pi/nginx-http-selfcare/*'
-                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi.war'
-                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi'
-            }
-        }
+
 
         stage('Deploy frontend') {
             steps {
@@ -47,10 +43,5 @@ pipeline {
             }
         }
 		
-		stage('Start tomcat') {
-			steps {
-				sh '/home/pi/apache-tomcat-9.0.30/bin/startup.sh &'
-			}
-		}
     }
 }
