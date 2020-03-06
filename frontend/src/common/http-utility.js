@@ -21,7 +21,12 @@ class HttpUtility {
             credentials: 'include'
         }).then(response => {
             if (response.status >= 200 && response.status < 300) {
-                return response.json();
+                const contentType = response.headers.get('Content-Type');
+                if(contentType && contentType.indexOf('application/json') !== -1) {
+                    return response.json();
+                } else {
+                    return response;
+                }
             } else {
                 this.handleError(response);
                 return Promise.reject();

@@ -10,15 +10,13 @@ class Logout extends React.Component {
         const {dispatch} = this.props;
         localStorage.clear();
         dispatch(Api.logout());
-        window.location.reload();
     };
 
     render() {
         if (this.props.authenticated) {
             this.logout();
-        } else {
-            return <Redirect to='/' push={true}/>;
         }
+        return <Redirect to='/' push={true}/>;
     }
 }
 

@@ -6,6 +6,7 @@ import Paths from "./../common/paths";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Spinner from "react-bootstrap/Spinner";
+import {LinkContainer} from "react-router-bootstrap"
 
 class TopMenu extends React.Component {
 
@@ -18,15 +19,29 @@ class TopMenu extends React.Component {
                     <Navbar.Collapse id="responsive-navbar-nav">
                     {this.props.authenticated ?
                         <Nav className="mr-auto">
-                            <Nav.Link href={Paths.HOME}>Home</Nav.Link>
-                            <Nav.Link href={Paths.CREATE}>Create</Nav.Link>
-                            <Nav.Link href={Paths.FULFILMENTS}>Fulfilments</Nav.Link>
-                            <Nav.Link href={Paths.GOALS}>Goals</Nav.Link>
-                            <Nav.Link href={Paths.LOGOUT}>Logout</Nav.Link>
+                            <LinkContainer to={Paths.HOME}>
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to={Paths.CREATE}>
+                                <Nav.Link>Create</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to={Paths.FULFILMENTS}>
+                                <Nav.Link>Fulfilments</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to={Paths.GOALS}>
+                                <Nav.Link>Goals</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to={Paths.LOGOUT}>
+                                <Nav.Link>Logout</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                         : <Nav className="mr-auto">
-                            <Nav.Link href={Paths.HOME}>Home</Nav.Link>
-                            <Nav.Link href={Paths.LOGIN}>Login</Nav.Link>
+                            <LinkContainer to={Paths.HOME}>
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to={Paths.LOGIN}>
+                                <Nav.Link>Login</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                     }
                     </Navbar.Collapse>
