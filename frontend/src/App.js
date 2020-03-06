@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import Login from "./components/Login";
 import CreateGoal from "./components/CreateGoal";
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import {connect} from "react-redux";
@@ -10,10 +10,12 @@ import Logout from "./components/Logout";
 import Fulfilments from "./components/Fulfilments";
 import Goals from "./components/Goals";
 import Paths from "./common/paths";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 class App extends Component {
 
     render() {
+        const authenticated = this.props.authenticated;
         return (
             <div className="app">
                 <header className="app-header">
@@ -22,34 +24,35 @@ class App extends Component {
                 <div className="app-card">
                     <div className="app-content">
                         <Switch>
+                            <Route path={Paths.ROOT} exact={true}>
+                                <Home/>
+                            </Route>
                             <Route path={Paths.HOME}>
                                 <Home/>
                             </Route>
                             <Route path={Paths.LOGIN}>
                                 <Login/>
                             </Route>
-                            <Route path={Paths.LOGOUT}>
+                            <AuthenticatedRoute path={Paths.LOGOUT} authenticated={authenticated}>
                                 <Logout/>
-                            </Route>
-                            <Route path={Paths.CREATE}>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={Paths.CREATE} authenticated={authenticated}>
                                 <CreateGoal/>
-                            </Route>
-                            <Route path={Paths.FULFILMENTS}>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={Paths.FULFILMENTS} authenticated={authenticated}>
                                 <Fulfilments/>
-                            </Route>
-                            <Route path={Paths.GOALS}>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={Paths.GOALS} authenticated={authenticated}>
                                 <Goals/>
-                            </Route>
+                            </AuthenticatedRoute>
                         </Switch>
                     </div>
                 </div>
-                {!this.props.user.login && window.location.pathname !== '/login' && window.location.pathname !== '/home' ? <Redirect to={Paths.LOGIN}/> : null}
             </div>
         );
-
     }
 }
 
 export default connect(state => ({
-    user: state.user,
+    authenticated: state.user.authenticated,
 }))(App);

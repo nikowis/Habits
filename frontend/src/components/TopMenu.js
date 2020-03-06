@@ -14,7 +14,7 @@ class TopMenu extends React.Component {
         return (
             <div className="top-menu">
                 <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-                    <Navbar.Brand href={Paths.HOME}>Habits</Navbar.Brand>
+                    <Navbar.Brand href={Paths.ROOT}>Habits</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                     {this.props.authenticated ?

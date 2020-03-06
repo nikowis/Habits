@@ -1,4 +1,5 @@
 export default class Paths {
+    static ROOT = '/';
     static HOME = '/home';
     static LOGIN = '/login';
     static LOGOUT = '/logout';
