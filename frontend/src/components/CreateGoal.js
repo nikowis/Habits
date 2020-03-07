@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import Paths from "../common/paths";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {withTranslation} from "react-i18next";
 
 class CreateGoal extends React.Component {
 
@@ -29,20 +30,22 @@ class CreateGoal extends React.Component {
     };
 
     render() {
+        const {t} = this.props;
+
         return (
             <div>
-                <h5>Create goal</h5>
+                <h5>{t('goal.create.title')}</h5>
                 <Form onSubmit={this.handleCreateGoal}>
                     <Form.Group controlId="title">
-                        <Form.Control type="text" placeholder="Title" value={this.state.title}
+                        <Form.Control type="text" placeholder={t('goal.create.titlePlaceholder')} value={this.state.title}
                                       onChange={this.titleChangeHandler}/>
                     </Form.Group>
                     <Form.Group controlId="description">
-                        <Form.Control as="textarea" rows="3" placeholder="Description" value={this.state.description}
+                        <Form.Control as="textarea" rows="3" placeholder={t('goal.create.descriptionPlaceholder')} value={this.state.description}
                                       onChange={this.descriptionChangeHandler}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        {t('goal.create.submit')}
                     </Button>
                 </Form>
             </div>
@@ -51,4 +54,4 @@ class CreateGoal extends React.Component {
     }
 }
 
-export default withRouter(CreateGoal);
+export default withRouter(withTranslation()(CreateGoal));

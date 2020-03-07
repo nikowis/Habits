@@ -3,6 +3,7 @@ import '../App.scss';
 import Api from "./../common/api-communication"
 import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
+import {withTranslation} from "react-i18next";
 
 class Goals extends React.Component {
 
@@ -28,13 +29,15 @@ class Goals extends React.Component {
     };
 
     goalTable = () => {
+        const { t } = this.props;
+
         return (
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
+                    <th>{t('goal.list.idCol')}</th>
+                    <th>{t('goal.list.titleCol')}</th>
+                    <th>{t('goal.list.descCol')}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,13 +49,15 @@ class Goals extends React.Component {
 
 
     render() {
+        const { t } = this.props;
+
         return (
             <React.Fragment>
-                <h5>Goal list</h5>
-                {this.state.goals.length > 0 ? this.goalTable() : "Create your first goal"}
+                <h5>{t('goal.list.title')}</h5>
+                {this.state.goals.length > 0 ? this.goalTable() :  t('goal.list.empty')}
             </React.Fragment>
         );
     }
 }
 
-export default connect()(Goals);
+export default connect()(withTranslation()(Goals));

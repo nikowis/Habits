@@ -4,6 +4,7 @@ import Api from "./../common/api-communication"
 import {connect} from "react-redux";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
+import {withTranslation} from "react-i18next";
 
 class Fulfilments extends React.Component {
 
@@ -59,14 +60,16 @@ class Fulfilments extends React.Component {
     }
 
     render() {
+        const {t} = this.props;
+
         return (
             <React.Fragment>
-                <h5>Fulfill goal</h5>
-                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : "Create your first goal"}
+                <h5>{t('goal.fulfill.title')}</h5>
+                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('goal.fulfill.empty')}
             </React.Fragment>
         );
 
     }
 }
 
-export default connect()(Fulfilments);
+export default connect()(withTranslation()(Fulfilments));

@@ -1,0 +1,38 @@
+{
+  "brand": "Habits",
+  "home": {
+    "page": "Home",
+    "title": "Welcome {{name}}"
+  },
+  "fulfilments": "Fulfill",
+  "goal": {
+    "list" : {
+      "page": "Goals",
+      "title": "Goal list",
+      "idCol": "Id",
+      "titleCol": "Title",
+      "descCol": "Description"
+    },
+    "create" : {
+      "page": "Create",
+      "title": "Create goal",
+      "submit": "Create",
+      "titlePlaceholder" : "Title",
+      "descriptionPlaceholder" : "Description"
+    },
+    "fulfill" : {
+      "page": "Fulfilments",
+      "title": "Fulfill goal",
+      "empty" : "Create a new goal first"
+    }
+  },
+  "logout": "Logout",
+  "login": {
+    "page": "Login",
+    "title": "Please login",
+    "placeholder": "Login",
+    "submit": "Login"
+  },
+  "password": "Password",
+  "submit": "Submit"
+}
