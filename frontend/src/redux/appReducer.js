@@ -3,7 +3,8 @@ import ActionType from "./actions";
 const initialState = {
     apiError: false,
     authError: false,
-    pendingRequests:0
+    pendingRequests:0,
+    lang: 'en'
 };
 
 const appReducer = (state = initialState, action) => {
@@ -47,6 +48,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 apiError: false
+            };
+        case ActionType.CHANGE_LANG:
+            return {
+                ...state,
+                lang: action.payload
             };
         default:
             return state

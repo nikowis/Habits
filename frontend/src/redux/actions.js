@@ -10,6 +10,7 @@ export default class ActionType {
     static PENDING = '_PENDING';
     static REJECTED = '_REJECTED';
     static FULFILLED = '_FULFILLED';
+    static CHANGE_LANG = 'CHANGE_LANG';
 }
 
 

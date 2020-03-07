@@ -10,7 +10,7 @@ class Home extends React.Component {
 
         return (
             <h5 className='home'>
-                {this.props.login? t('home.title', {'name': this.props.login}): t('home.title', {'name': 'stranger'})}
+                {this.props.login? t('home.title', {'name': this.props.login}): t('home.title', {'name': t('home.stranger')})}
             </h5>
         );
 

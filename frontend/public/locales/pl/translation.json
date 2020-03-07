@@ -1,0 +1,37 @@
+{
+  "brand": "Nawyki",
+  "home": {
+    "page": "Start",
+    "title": "Witaj {{name}}",
+    "stranger": "nieznajomy"
+  },
+  "goal": {
+    "list" : {
+      "page": "Cele",
+      "title": "Lista celów",
+      "idCol": "Id",
+      "titleCol": "Tytuł",
+      "descCol": "Opis"
+    },
+    "create" : {
+      "page": "Utwórz",
+      "title": "Utwórz cel",
+      "submit": "Utwórz",
+      "titlePlaceholder" : "Tytuł",
+      "descriptionPlaceholder" : "Opis"
+    },
+    "fulfill" : {
+      "page": "Wypełniaj",
+      "title": "Wypełnij cele",
+      "empty" : "Najpierw utwórz cel"
+    }
+  },
+  "logout": "Wylogowanie",
+  "login": {
+    "page": "Logowanie",
+    "title": "Zaloguj się",
+    "placeholder": "Login",
+    "submit": "Zaloguj się"
+  },
+  "password": "Hasło"
+}

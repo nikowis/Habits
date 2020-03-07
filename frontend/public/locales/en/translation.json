@@ -2,7 +2,8 @@
   "brand": "Habits",
   "home": {
     "page": "Home",
-    "title": "Welcome {{name}}"
+    "title": "Welcome {{name}}",
+    "stranger": "stranger"
   },
   "fulfilments": "Fulfill",
   "goal": {

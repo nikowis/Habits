@@ -8,9 +8,16 @@ import Nav from "react-bootstrap/Nav";
 import Spinner from "react-bootstrap/Spinner";
 import {LinkContainer} from "react-router-bootstrap"
 import { withTranslation } from 'react-i18next';
-
+import {Button} from "react-bootstrap";
+import ActionType from '../redux/actions'
 
 class TopMenu extends React.Component {
+
+    changeLang = (lang) => {
+        const {i18n, dispatch} = this.props;
+        i18n.changeLanguage(lang);
+        dispatch({type: ActionType.CHANGE_LANG, payload: lang});
+    };
 
     render() {
         const { t } = this.props;
@@ -50,7 +57,11 @@ class TopMenu extends React.Component {
                     }
                     </Navbar.Collapse>
 
-                    {this.props.pendingRequests > 0 ? <Spinner animation="border" variant="primary" /> : null}
+                    {this.props.pendingRequests > 0 ? <Spinner animation="border" variant="primary"/> : null}
+
+                    {this.props.lang !== 'pl' ? <Button variant="outline-info" onClick={() => this.changeLang('pl')}>PL</Button> : null}
+                    {this.props.lang !== 'en' ? <Button variant="outline-info" onClick={() => this.changeLang('en')}>EN</Button> : null}
+
                 </Navbar>
                 <ErrorContainer/>
             </div>
@@ -64,5 +75,6 @@ export default connect(state => ({
     login: state.user.login,
     authenticated: state.user.authenticated,
     authError: state.app.authError,
-    pendingRequests: state.app.pendingRequests
+    pendingRequests: state.app.pendingRequests,
+    lang: state.app.lang
 }))(withTranslation()(TopMenu));
