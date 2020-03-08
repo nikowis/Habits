@@ -3,6 +3,8 @@ import ActionType from "./actions";
 const initialState = {
     apiError: false,
     authError: false,
+    error: '',
+    errorMessage: '',
     pendingRequests:0,
     lang: 'en'
 };
@@ -19,12 +21,14 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 pendingRequests: state.pendingRequests - 1
             };
-        case ActionType.AUTH_ERROR:
+        case ActionType.AUTH_ERROR + ActionType.FULFILLED:
             return {
                 ...state,
+                errorMessage: action.payload.message,
+                error: action.payload.error,
                 authError: true
             };
-        case ActionType.API_ERROR:
+        case ActionType.API_ERROR + ActionType.FULFILLED:
             return {
                 ...state,
                 apiError: true

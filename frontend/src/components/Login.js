@@ -12,7 +12,7 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {login: '', password: ''};
+        this.state = {login: '', password: '', validated: false};
     }
 
     handleLoginChange = (event) => {
@@ -24,9 +24,16 @@ class Login extends React.Component {
     };
 
     handleSubmit = (event) => {
-        const {dispatch} = this.props;
-        dispatch(Api.postLogin(this.state.login, this.state.password));
-        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            const {dispatch} = this.props;
+            dispatch(Api.postLogin(this.state.login, this.state.password));
+            event.preventDefault();
+        }
+        this.setState({validated: true});
     };
 
     render() {
@@ -36,14 +43,26 @@ class Login extends React.Component {
             return <Redirect to={Paths.HOME} push={true}/>
         }
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                 <Form.Group controlId="login">
-                    <Form.Control type="email" placeholder={t('login.placeholder')} value={this.state.login}
-                                  onChange={this.handleLoginChange}/>
+                    <Form.Label>
+                        {t('login.loginPlaceholder')}
+                    </Form.Label>
+                    <Form.Control type="email" placeholder={t('login.loginPlaceholder')} value={this.state.login}
+                                  onChange={this.handleLoginChange} required/>
+                    <Form.Control.Feedback type="invalid">
+                        {t('login.invalidLogin')}
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group controlId="password">
-                    <Form.Control type="password" placeholder={t('password')} value={this.state.password}
-                                  onChange={this.handlePasswordChange}/>
+                    <Form.Label>
+                        {t('login.passwordPlaceholder')}
+                    </Form.Label>
+                    <Form.Control type="password" placeholder={t('login.passwordPlaceholder')} value={this.state.password}
+                                  onChange={this.handlePasswordChange} required/>
+                    <Form.Control.Feedback type="invalid">
+                        {t('login.invalidPassword')}
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     {t('login.submit')}

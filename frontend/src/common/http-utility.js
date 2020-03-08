@@ -36,23 +36,22 @@ class HttpUtility {
     }
 
     handleError(response) {
-        let ERROR_NOTIFICATION_DURATION = 5000;
         if (response.status === 401 || response.status === 403) {
             store.dispatch({
                 type: ActionType.AUTH_ERROR
-                // , payload: response.json()
+                , payload: response.json()
             });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_AUTH_ERROR})
-            }, ERROR_NOTIFICATION_DURATION)
+            }, process.env.REACT_APP_ERROR_NOTIFICATION_DURATION)
         } else if(response.status === 400 || response.status === 500){
             store.dispatch({
                 type: ActionType.API_ERROR
-                // , payload: response.json()
+                , payload: response.json()
             });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_API_ERROR})
-            }, ERROR_NOTIFICATION_DURATION)
+            }, process.env.REACT_APP_ERROR_NOTIFICATION_DURATION)
         } else {
             throw new Error(response.json());
         }

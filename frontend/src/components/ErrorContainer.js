@@ -16,8 +16,8 @@ class ErrorContainer extends React.Component {
     render() {
         return (
             <div className='error-container'>
-                {this.props.authError ? this.errorContainer("Authentication error") : null}
-                {this.props.apiError ? this.errorContainer("Api error") : null}
+                {this.props.authError ? this.errorContainer(this.props.errorMessage) : null}
+                {this.props.apiError ? this.errorContainer(this.props.errorMessage) : null}
             </div>
         );
     }
@@ -25,5 +25,6 @@ class ErrorContainer extends React.Component {
 
 export default connect(state => ({
     authError: state.app.authError,
-    apiError: state.app.apiError
+    apiError: state.app.apiError,
+    errorMessage: state.app.errorMessage
 }))(ErrorContainer);

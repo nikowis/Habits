@@ -51,7 +51,7 @@ class TopMenu extends React.Component {
                                 <Nav.Link>{t('home.page')}</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to={Paths.LOGIN}>
-                                <Nav.Link>{t('login.placeholder')}</Nav.Link>
+                                <Nav.Link>{t('login.page')}</Nav.Link>
                             </LinkContainer>
                         </Nav>
                     }

@@ -11,7 +11,7 @@ class CreateGoal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {title: '', description: '', createdBy: this.props.login}
+        this.state = {title: '', description: '', createdBy: this.props.login, validated: false}
     }
 
     titleChangeHandler = (event) => {
@@ -22,11 +22,17 @@ class CreateGoal extends React.Component {
         this.setState({description: event.target.value});
     };
 
-    handleCreateGoal = async (event) => {
-        event.preventDefault();
-        const goal = await Api.createGoal({...this.state});
-        console.log(goal);
-        this.props.history.push(Paths.GOALS)
+    handleSubmit = async (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.preventDefault();
+            Api.createGoal({...this.state});
+            this.props.history.push(Paths.GOALS)
+        }
+        this.setState({validated: true});
     };
 
     render() {
@@ -34,14 +40,26 @@ class CreateGoal extends React.Component {
 
         return (
             <div>
-                <Form onSubmit={this.handleCreateGoal}>
+                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="title">
+                        <Form.Label>
+                            {t('goals.create.titlePlaceholder')}
+                        </Form.Label>
                         <Form.Control type="text" placeholder={t('goals.create.titlePlaceholder')} value={this.state.title}
-                                      onChange={this.titleChangeHandler}/>
+                                      onChange={this.titleChangeHandler} required/>
+                        <Form.Control.Feedback type="invalid">
+                            {t('goals.create.invalidTitle')}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="description">
+                        <Form.Label>
+                            {t('goals.create.descriptionPlaceholder')}
+                        </Form.Label>
                         <Form.Control as="textarea" rows="3" placeholder={t('goals.create.descriptionPlaceholder')} value={this.state.description}
-                                      onChange={this.descriptionChangeHandler}/>
+                                      onChange={this.descriptionChangeHandler} required/>
+                        <Form.Control.Feedback type="invalid">
+                            {t('goals.create.invalidDescription')}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         {t('goals.create.submit')}

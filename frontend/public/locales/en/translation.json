@@ -5,20 +5,20 @@
     "title": "Welcome {{name}}",
     "stranger": "stranger"
   },
-  "fulfilments": "Fulfill",
   "goals": {
     "page": "Goals",
     "title": "Goal list",
     "idCol": "Id",
     "titleCol": "Title",
     "descCol": "Description",
-
     "create" : {
       "page": "Create",
       "title": "Create goal",
       "submit": "Create",
       "titlePlaceholder" : "Title",
-      "descriptionPlaceholder" : "Description"
+      "descriptionPlaceholder" : "Description",
+      "invalidTitle" : "Empty title",
+      "invalidDescription" : "Empty description"
     },
     "fulfill" : {
       "page": "Fulfilments",
@@ -26,13 +26,14 @@
       "empty" : "Create a new goal first"
     }
   },
-  "logout": "Logout",
   "login": {
     "page": "Login",
     "title": "Please login",
-    "placeholder": "Login",
-    "submit": "Login"
+    "loginPlaceholder": "Email",
+    "submit": "Login",
+    "passwordPlaceholder": "Password",
+    "invalidLogin": "Incorrect email",
+    "invalidPassword": "Incorrect password"
   },
-  "password": "Password",
-  "submit": "Submit"
+  "logout": "Logout"
 }

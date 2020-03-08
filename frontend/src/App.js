@@ -26,7 +26,6 @@ class App extends Component {
                 <div className="app-card">
                     <div className="app-content">
                         <Switch>
-
                             <Route path={Paths.ROOT} exact={true}>
                                 <Home/>
                             </Route>

@@ -16,7 +16,9 @@
       "title": "Utwórz cel",
       "submit": "Utwórz",
       "titlePlaceholder" : "Tytuł",
-      "descriptionPlaceholder" : "Opis"
+      "descriptionPlaceholder" : "Opis",
+      "invalidTitle" : "Pusty tytuł",
+      "invalidDescription" : "Pusty opis"
     },
     "fulfill" : {
       "page": "Wypełniaj",
@@ -24,12 +26,14 @@
       "empty" : "Najpierw utwórz cel"
     }
   },
-  "logout": "Wylogowanie",
   "login": {
     "page": "Logowanie",
     "title": "Zaloguj się",
-    "placeholder": "Login",
-    "submit": "Zaloguj się"
+    "loginPlaceholder": "Email",
+    "submit": "Zaloguj",
+    "passwordPlaceholder": "Hasło",
+    "invalidLogin": "Niepoprawny email",
+    "invalidPassword": "Niepoprawne hasło"
   },
-  "password": "Hasło"
+  "logout": "Wylogowanie"
 }
