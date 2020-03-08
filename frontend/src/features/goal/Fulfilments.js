@@ -1,6 +1,6 @@
 import React from 'react';
-import '../App.scss';
-import Api from "./../common/api-communication"
+import '../../App.scss';
+import Api from "./../../common/api-communication"
 import {connect} from "react-redux";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -64,8 +64,7 @@ class Fulfilments extends React.Component {
 
         return (
             <React.Fragment>
-                <h5>{t('goal.fulfill.title')}</h5>
-                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('goal.fulfill.empty')}
+                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('goals.fulfill.empty')}
             </React.Fragment>
         );
 

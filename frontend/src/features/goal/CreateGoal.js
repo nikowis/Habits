@@ -1,8 +1,8 @@
 import React from 'react';
-import '../App.scss';
-import Api from "./../common/api-communication"
+import '../../App.scss';
+import Api from "./../../common/api-communication"
 import {withRouter} from 'react-router-dom';
-import Paths from "../common/paths";
+import Paths from "../../common/paths";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {withTranslation} from "react-i18next";
@@ -34,18 +34,17 @@ class CreateGoal extends React.Component {
 
         return (
             <div>
-                <h5>{t('goal.create.title')}</h5>
                 <Form onSubmit={this.handleCreateGoal}>
                     <Form.Group controlId="title">
-                        <Form.Control type="text" placeholder={t('goal.create.titlePlaceholder')} value={this.state.title}
+                        <Form.Control type="text" placeholder={t('goals.create.titlePlaceholder')} value={this.state.title}
                                       onChange={this.titleChangeHandler}/>
                     </Form.Group>
                     <Form.Group controlId="description">
-                        <Form.Control as="textarea" rows="3" placeholder={t('goal.create.descriptionPlaceholder')} value={this.state.description}
+                        <Form.Control as="textarea" rows="3" placeholder={t('goals.create.descriptionPlaceholder')} value={this.state.description}
                                       onChange={this.descriptionChangeHandler}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        {t('goal.create.submit')}
+                        {t('goals.create.submit')}
                     </Button>
                 </Form>
             </div>

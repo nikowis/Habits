@@ -1,6 +1,6 @@
 import React from 'react';
-import '../App.scss';
-import Api from "./../common/api-communication"
+import '../../App.scss';
+import Api from "./../../common/api-communication"
 import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
 import {withTranslation} from "react-i18next";
@@ -35,9 +35,9 @@ class Goals extends React.Component {
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>{t('goal.list.idCol')}</th>
-                    <th>{t('goal.list.titleCol')}</th>
-                    <th>{t('goal.list.descCol')}</th>
+                    <th>{t('goals.idCol')}</th>
+                    <th>{t('goals.titleCol')}</th>
+                    <th>{t('goals.descCol')}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,8 +53,7 @@ class Goals extends React.Component {
 
         return (
             <React.Fragment>
-                <h5>{t('goal.list.title')}</h5>
-                {this.state.goals.length > 0 ? this.goalTable() :  t('goal.list.empty')}
+                {this.state.goals.length > 0 ? this.goalTable() :  t('goals.empty')}
             </React.Fragment>
         );
     }

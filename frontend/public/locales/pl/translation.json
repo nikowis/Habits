@@ -5,14 +5,12 @@
     "title": "Witaj {{name}}",
     "stranger": "nieznajomy"
   },
-  "goal": {
-    "list" : {
-      "page": "Cele",
-      "title": "Lista celów",
-      "idCol": "Id",
-      "titleCol": "Tytuł",
-      "descCol": "Opis"
-    },
+  "goals": {
+    "page": "Cele",
+    "title": "Lista celów",
+    "idCol": "Id",
+    "titleCol": "Tytuł",
+    "descCol": "Opis",
     "create" : {
       "page": "Utwórz",
       "title": "Utwórz cel",

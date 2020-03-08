@@ -6,14 +6,13 @@
     "stranger": "stranger"
   },
   "fulfilments": "Fulfill",
-  "goal": {
-    "list" : {
-      "page": "Goals",
-      "title": "Goal list",
-      "idCol": "Id",
-      "titleCol": "Title",
-      "descCol": "Description"
-    },
+  "goals": {
+    "page": "Goals",
+    "title": "Goal list",
+    "idCol": "Id",
+    "titleCol": "Title",
+    "descCol": "Description",
+
     "create" : {
       "page": "Create",
       "title": "Create goal",

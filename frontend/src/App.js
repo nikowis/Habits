@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import './App.scss';
 import Login from "./components/Login";
-import CreateGoal from "./components/CreateGoal";
+import CreateGoal from "./features/goal/CreateGoal";
 import {Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import {connect} from "react-redux";
 import Logout from "./components/Logout";
-import Fulfilments from "./components/Fulfilments";
-import Goals from "./components/Goals";
+import Fulfilments from "./features/goal/Fulfilments";
+import Goals from "./features/goal/Goals";
 import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import TitleHeader from "./components/TitleHeader";
 
 class App extends Component {
 
@@ -21,9 +22,11 @@ class App extends Component {
                 <header className="app-header">
                 </header>
                 <TopMenu/>
+                <TitleHeader/>
                 <div className="app-card">
                     <div className="app-content">
                         <Switch>
+
                             <Route path={Paths.ROOT} exact={true}>
                                 <Home/>
                             </Route>

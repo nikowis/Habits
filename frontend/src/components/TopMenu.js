@@ -34,13 +34,13 @@ class TopMenu extends React.Component {
                                 <Nav.Link>{t('home.page')}</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to={Paths.CREATE}>
-                                <Nav.Link>{t('goal.create.page')}</Nav.Link>
+                                <Nav.Link>{t('goals.create.page')}</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to={Paths.FULFILMENTS}>
-                                <Nav.Link>{t('goal.fulfill.page')}</Nav.Link>
+                                <Nav.Link>{t('goals.fulfill.page')}</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to={Paths.GOALS}>
-                                <Nav.Link>{t('goal.list.page')}</Nav.Link>
+                            <LinkContainer to={Paths.GOALS} exact={true}>
+                                <Nav.Link>{t('goals.page')}</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to={Paths.LOGOUT}>
                                 <Nav.Link>{t('logout')}</Nav.Link>
