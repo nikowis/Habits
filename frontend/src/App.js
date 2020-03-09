@@ -12,6 +12,7 @@ import Goals from "./features/goal/Goals";
 import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TitleHeader from "./components/TitleHeader";
+import Register from "./features/user/Register";
 
 class App extends Component {
 
@@ -34,6 +35,9 @@ class App extends Component {
                             </Route>
                             <Route path={Paths.LOGIN}>
                                 <Login/>
+                            </Route>
+                            <Route path={Paths.REGISTER}>
+                                <Register/>
                             </Route>
                             <AuthenticatedRoute path={Paths.LOGOUT} authenticated={authenticated}>
                                 <Logout/>

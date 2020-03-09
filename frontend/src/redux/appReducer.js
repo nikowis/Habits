@@ -31,6 +31,8 @@ const appReducer = (state = initialState, action) => {
         case ActionType.API_ERROR + ActionType.FULFILLED:
             return {
                 ...state,
+                errorMessage: JSON.stringify(action.payload),
+                error: action.payload.error,
                 apiError: true
             };
         case ActionType.LOGIN_ACTION + ActionType.FULFILLED:

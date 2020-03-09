@@ -53,6 +53,9 @@ class TopMenu extends React.Component {
                             <LinkContainer to={Paths.LOGIN}>
                                 <Nav.Link>{t('login.page')}</Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to={Paths.REGISTER}>
+                                <Nav.Link>{t('register.page')}</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                     }
                     </Navbar.Collapse>

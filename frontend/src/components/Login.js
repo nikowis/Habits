@@ -39,7 +39,7 @@ class Login extends React.Component {
     render() {
         const {t} = this.props;
 
-        if (this.props.user.login) {
+        if (this.props.authenticated) {
             return <Redirect to={Paths.HOME} push={true}/>
         }
         return (
@@ -73,5 +73,5 @@ class Login extends React.Component {
 }
 
 export default connect(state => ({
-    user: state.user,
+    authenticated: state.user.authenticated,
 }))(withTranslation()(Login));

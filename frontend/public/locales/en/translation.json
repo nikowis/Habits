@@ -35,5 +35,18 @@
     "invalidLogin": "Incorrect email",
     "invalidPassword": "Incorrect password"
   },
+  "register": {
+    "page": "Register",
+    "title": "Register",
+    "loginPlaceholder": "Email",
+    "submit": "Register",
+    "passwordPlaceholder": "Password",
+    "repeatPasswordPlaceholder": "Repeat password"
+  },
+  "validations" : {
+    "required": "Field required",
+    "email": "Incorrect email",
+    "passwordMatch" : "Passwords don't match"
+  },
   "logout": "Logout"
 }

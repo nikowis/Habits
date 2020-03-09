@@ -67,6 +67,19 @@ class Api {
             payload: {goalId: goal.id}
         });
     }
+
+
+    postRegister(login, password) {
+        let url = this.API_URL + ApiEndpoint.API_REGISTER;
+        return HttpUtility.post({
+            url: url,
+            payload: {
+                username: login,
+                password: password
+            },
+            action: ActionType.REGISTER_ACTION
+        });
+    }
 }
 
 export default Api = new Api();

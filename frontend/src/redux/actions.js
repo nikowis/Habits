@@ -11,6 +11,7 @@ export default class ActionType {
     static REJECTED = '_REJECTED';
     static FULFILLED = '_FULFILLED';
     static CHANGE_LANG = 'CHANGE_LANG';
+    static REGISTER_ACTION = 'REGISTER_ACTION';
 }
 
 

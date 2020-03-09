@@ -1,5 +1,6 @@
 import {store} from '../redux/store';
 import ActionType from '../redux/actions';
+import Const from './app-constants'
 
 class HttpUtility {
 
@@ -43,7 +44,7 @@ class HttpUtility {
             });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_AUTH_ERROR})
-            }, process.env.REACT_APP_ERROR_NOTIFICATION_DURATION)
+            }, Const.API_ERROR_NOTIFICATION_DURATION)
         } else if(response.status === 400 || response.status === 500){
             store.dispatch({
                 type: ActionType.API_ERROR
@@ -51,7 +52,7 @@ class HttpUtility {
             });
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_API_ERROR})
-            }, process.env.REACT_APP_ERROR_NOTIFICATION_DURATION)
+            }, Const.AUTH_ERROR_NOTIFICATION_DURATION)
         } else {
             throw new Error(response.json());
         }
