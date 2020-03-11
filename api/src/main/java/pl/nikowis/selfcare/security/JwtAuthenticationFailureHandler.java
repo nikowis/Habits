@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -33,7 +34,7 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
         LOGGER.warn("Authentication failure ", ex);
         HttpStatus responseStatus = HttpStatus.UNAUTHORIZED;
         String exceptionName = ex.getClass().getSimpleName();
-        ApiError err = new ApiError(UsernameAlreadyExistsException.LOGIN_FIELD, messageSource.getMessage(exceptionName, null, Locale.getDefault()));
+        ApiError err = new ApiError(UsernameAlreadyExistsException.LOGIN_FIELD, messageSource.getMessage(exceptionName, null, LocaleContextHolder.getLocale()));
         ApiErrorResponse apiError = new ApiErrorResponse(responseStatus, Collections.singletonList(err));
         response.setStatus(responseStatus.value());
         response.setContentType(MediaType.APPLICATION_JSON.toString());

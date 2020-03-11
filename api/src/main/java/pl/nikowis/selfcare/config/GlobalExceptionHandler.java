@@ -4,8 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -57,9 +60,11 @@ public class GlobalExceptionHandler {
     private ResponseEntity getResponse(Exception ex, Object[] args, HttpStatus status, String field) {
         LOGGER.warn("Exception handled ", ex);
         String exceptionName = ex.getClass().getSimpleName();
-        ApiError apiError = new ApiError(field, messageSource.getMessage(exceptionName, args, Locale.getDefault()));
+        ApiError apiError = new ApiError(field, messageSource.getMessage(exceptionName, args, LocaleContextHolder.getLocale()));
         ApiErrorResponse apiErrorResponse = new ApiErrorResponse(status, Collections.singletonList(apiError));
-        return new ResponseEntity<>(apiErrorResponse, status);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        return new ResponseEntity<>(apiErrorResponse, httpHeaders, status);
     }
 
 }
