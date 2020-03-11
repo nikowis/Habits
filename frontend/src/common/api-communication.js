@@ -22,7 +22,7 @@ class Api {
         return HttpUtility.post({
             url: url,
             payload: {
-                username: login,
+                login: login,
                 password: password
             },
             action: ActionType.LOGIN_ACTION
@@ -74,7 +74,7 @@ class Api {
         return HttpUtility.post({
             url: url,
             payload: {
-                username: login,
+                login: login,
                 password: password
             },
             action: ActionType.REGISTER_ACTION

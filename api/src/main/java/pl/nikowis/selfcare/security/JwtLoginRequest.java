@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class JwtLoginRequest implements Serializable {
     private static final long serialVersionUID = 5926468583005150707L;
-    private String username;
+    private String login;
     private String password;
 
     public JwtLoginRequest() {
     }
 
-    public JwtLoginRequest(String username, String password) {
-        this.setUsername(username);
+    public JwtLoginRequest(String login, String password) {
+        this.setLogin(login);
         this.setPassword(password);
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getLogin() {
+        return this.login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

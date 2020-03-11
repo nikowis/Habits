@@ -12,6 +12,7 @@ export default class ActionType {
     static FULFILLED = '_FULFILLED';
     static CHANGE_LANG = 'CHANGE_LANG';
     static REGISTER_ACTION = 'REGISTER_ACTION';
+    static CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 }
 
 

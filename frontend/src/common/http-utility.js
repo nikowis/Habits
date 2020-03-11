@@ -14,26 +14,30 @@ class HttpUtility {
             store.dispatch({type: startAction});
         }
 
-        return { type:action,
-            payload:fetch(url, {
-            method,
-            body: payload ? (json ? JSON.stringify(payload) : payload) : undefined,
-            headers: headers ? headers : {Accept: 'application/json', 'Content-Type': 'application/json'},
-            credentials: 'include'
-        }).then(response => {
-            if (response.status >= 200 && response.status < 300) {
-                const contentType = response.headers.get('Content-Type');
-                if(contentType && contentType.indexOf('application/json') !== -1) {
-                    return response.json();
+        return {
+            type: action,
+            payload: fetch(url, {
+                method,
+                body: payload ? (json ? JSON.stringify(payload) : payload) : undefined,
+                headers: headers ? headers : {Accept: 'application/json', 'Content-Type': 'application/json'},
+                credentials: 'include'
+            }).then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    const contentType = response.headers.get('Content-Type');
+                    if (contentType && contentType.indexOf('application/json') !== -1) {
+                        return response.json();
+                    } else {
+                        return response;
+                    }
+                } else if (response.status === 400) {
+                    return response.json()
                 } else {
+                    this.handleError(response);
                     return response;
+                    return Promise.reject();
                 }
-            } else {
-                this.handleError(response);
-                return Promise.reject();
-            }
-        }).finally(() => store.dispatch({type: endAction}))
-    }
+            }).finally(() => store.dispatch({type: endAction}))
+        }
     }
 
     handleError(response) {
@@ -45,7 +49,7 @@ class HttpUtility {
             setTimeout(() => {
                 store.dispatch({type: ActionType.CLEAR_AUTH_ERROR})
             }, Const.API_ERROR_NOTIFICATION_DURATION)
-        } else if(response.status === 400 || response.status === 500){
+        } else if (response.status === 400 || response.status === 500) {
             store.dispatch({
                 type: ActionType.API_ERROR
                 , payload: response.json()

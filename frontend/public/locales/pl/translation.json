@@ -11,6 +11,7 @@
     "idCol": "Id",
     "titleCol": "Tytuł",
     "descCol": "Opis",
+    "empty": "Najpierw utwórz cel",
     "create" : {
       "page": "Utwórz",
       "title": "Utwórz cel",

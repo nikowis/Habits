@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import pl.nikowis.selfcare.exception.BusinessException;
 import pl.nikowis.selfcare.model.ApiError;
+import pl.nikowis.selfcare.model.ApiErrorResponse;
 
+import java.util.Collections;
 import java.util.Locale;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    public static final String GENERAL_FIELD = "general";
 
     @Autowired
     private MessageSource messageSource;
@@ -32,32 +35,31 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({BusinessException.class})
     public final ResponseEntity handleBusinessException(BusinessException ex, WebRequest request) {
-        return getResponse(ex, ex.getArgs(), HttpStatus.BAD_REQUEST);
+        return getResponse(ex, ex.getArgs(), HttpStatus.BAD_REQUEST, ex.getFieldName());
     }
 
 
     @ExceptionHandler({AccessDeniedException.class})
-    public final ResponseEntity handleBusinessException(AccessDeniedException ex, WebRequest request) {
+    public final ResponseEntity handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
         return getResponse(ex, HttpStatus.FORBIDDEN);
     }
 
 
     @ExceptionHandler({AuthenticationException.class})
-    public final ResponseEntity handleBusinessException(AuthenticationException ex, WebRequest request) {
+    public final ResponseEntity handleAuthenticationException(AuthenticationException ex, WebRequest request) {
         return getResponse(ex, HttpStatus.UNAUTHORIZED);
     }
 
     private ResponseEntity getResponse(Exception ex, HttpStatus status) {
-        return getResponse(ex, null, status);
+        return getResponse(ex, null, status, GENERAL_FIELD);
     }
 
-    private ResponseEntity getResponse(Exception ex, Object[] args, HttpStatus status) {
+    private ResponseEntity getResponse(Exception ex, Object[] args, HttpStatus status, String field) {
         LOGGER.warn("Exception handled ", ex);
-        ApiError apiError = new ApiError();
         String exceptionName = ex.getClass().getSimpleName();
-        apiError.setError(exceptionName);
-        apiError.setMessage(messageSource.getMessage(exceptionName, args, Locale.getDefault()));
-        return new ResponseEntity<>(apiError, status);
+        ApiError apiError = new ApiError(field, messageSource.getMessage(exceptionName, args, Locale.getDefault()));
+        ApiErrorResponse apiErrorResponse = new ApiErrorResponse(status, Collections.singletonList(apiError));
+        return new ResponseEntity<>(apiErrorResponse, status);
     }
 
 }

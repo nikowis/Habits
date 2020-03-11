@@ -3,6 +3,9 @@ package pl.nikowis.selfcare.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.nikowis.selfcare.config.GlobalExceptionHandler;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 
 import javax.servlet.FilterChain;
@@ -22,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     private AuthenticationManager authenticationManager;
 
@@ -42,11 +48,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
+                            creds.getLogin(),
                             creds.getPassword())
             );
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            res.setContentType(MediaType.APPLICATION_JSON.toString());
+            res.setStatus(HttpStatus.BAD_REQUEST.value());
+            LOGGER.warn("Incorrect authentication attempt", e);
+            return null;
         }
     }
 

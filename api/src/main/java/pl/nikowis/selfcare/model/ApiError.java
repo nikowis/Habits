@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class ApiError {
+    private String defaultMessage;
+    private String field;
 
-    private String error;
-    private String message;
-
+    public ApiError(String field, String defaultMessage) {
+        this.field = field;
+        this.defaultMessage = defaultMessage;
+    }
 }

@@ -13,4 +13,6 @@ public abstract class BusinessException extends RuntimeException {
     public BusinessException(Object[] args) {
         this.args = args;
     }
+
+    public abstract String getFieldName();
 }

@@ -11,6 +11,7 @@
     "idCol": "Id",
     "titleCol": "Title",
     "descCol": "Description",
+    "empty": "Create a new goal first",
     "create" : {
       "page": "Create",
       "title": "Create goal",
