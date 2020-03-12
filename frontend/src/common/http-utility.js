@@ -6,6 +6,7 @@ class HttpUtility {
 
     constructor() {
         this.token = '';
+        window.lang = 'en';
     }
 
     call(params, startAction, endAction) {
@@ -14,12 +15,14 @@ class HttpUtility {
             store.dispatch({type: startAction});
         }
 
+        let resolvedHeaders = headers ? headers : {Accept: 'application/json', 'Content-Type': 'application/json'};
+        resolvedHeaders['Accept-Language'] = window.lang;
         return {
             type: action,
             payload: fetch(url, {
                 method,
                 body: payload ? (json ? JSON.stringify(payload) : payload) : undefined,
-                headers: headers ? headers : {Accept: 'application/json', 'Content-Type': 'application/json'},
+                headers: resolvedHeaders,
                 credentials: 'include'
             }).then(response => {
                 if (response.status >= 200 && response.status < 300) {

@@ -56,6 +56,7 @@ const appReducer = (state = initialState, action) => {
                 apiError: false
             };
         case ActionType.CHANGE_LANG:
+            window.lang = action.payload;
             return {
                 ...state,
                 lang: action.payload

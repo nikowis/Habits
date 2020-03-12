@@ -1,19 +1,15 @@
 import React from 'react';
 import '../../App.scss';
-import {Redirect} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Paths from "../../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Api from "../../common/api-communication";
-import ActionType from './../../redux/actions'
 
 import {withTranslation} from 'react-i18next';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
-import {store} from "../../redux/store";
-import Const from "../../common/app-constants";
-import {withRouter} from 'react-router-dom';
 
 class Register extends React.Component {
 
@@ -22,7 +18,6 @@ class Register extends React.Component {
     }
 
     handleSubmit = (data, actions) => {
-        const {dispatch} = this.props;
         Api.postRegister(data.login, data.password).payload.then((response) => {
             console.log(JSON.stringify(response));
             if(!response.status) {
