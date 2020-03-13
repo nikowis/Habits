@@ -13,10 +13,6 @@ import {Formik} from 'formik';
 
 class Register extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     handleSubmit = (data, actions) => {
         Api.postRegister(data.login, data.password).payload.then((response) => {
             console.log(JSON.stringify(response));
@@ -39,13 +35,13 @@ class Register extends React.Component {
 
         const schema = Yup.object().shape({
             login: Yup.string()
-                .email('validations.email')
-                .required('validations.required'),
+                .email()
+                .required(),
             password: Yup.string()
-                .min(1, 'validations.min')
-                .required('validations.required'),
+                .min(1)
+                .required(),
             repeatPassword: Yup.string()
-                .required('validations.required')
+                .required()
                 .oneOf([Yup.ref('password')], 'validations.passwordMatch')
         });
 

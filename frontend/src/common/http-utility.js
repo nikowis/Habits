@@ -36,7 +36,6 @@ class HttpUtility {
                     return response.json()
                 } else {
                     this.handleError(response);
-                    return response;
                     return Promise.reject();
                 }
             }).finally(() => store.dispatch({type: endAction}))

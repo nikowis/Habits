@@ -45,6 +45,7 @@
     "repeatPasswordPlaceholder": "Repeat password"
   },
   "validations" : {
+    "default": "Invalid field",
     "required": "Field required",
     "email": "Incorrect email",
     "passwordMatch" : "Passwords don't match"
