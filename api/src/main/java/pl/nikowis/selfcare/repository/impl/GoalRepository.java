@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface GoalRepository extends JpaRepository<Goal, Long> {
 
-    List<Goal> findByTitle(String title);
+    boolean existsByUserIdAndTitle(Long userId, String title);
 
     List<Goal> findByUserId(Long id);
 

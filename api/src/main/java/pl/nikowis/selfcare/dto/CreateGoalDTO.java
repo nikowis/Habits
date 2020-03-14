@@ -11,8 +11,7 @@ public class CreateGoalDTO {
     @NotBlank
     @Size(min = 2)
     protected String title;
-    @NotBlank
-    @Size(min = 2)
+
     protected String description;
 
 }

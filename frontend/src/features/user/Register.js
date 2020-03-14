@@ -14,8 +14,7 @@ class Register extends React.Component {
 
     handleSubmit = (data, actions) => {
         Api.postRegister(data.login, data.password).payload.then((response) => {
-            console.log(JSON.stringify(response));
-            if(!response.status) {
+            if (!response.status) {
                 this.props.history.push(Paths.LOGIN)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
@@ -33,22 +32,14 @@ class Register extends React.Component {
         }
 
         return (
-            <Formik
-                validationSchema={registerSchema}
-                onSubmit={this.handleSubmit}
-                initialValues={{
-                    login: '',
-                    password: '',
-                    repeatPassword: ''
-                }}
+            <Formik validationSchema={registerSchema} onSubmit={this.handleSubmit}
+                    initialValues={{
+                        login: '',
+                        password: '',
+                        repeatPassword: ''
+                    }}
             >
-                {({
-                      touched,
-                      errors,
-                      handleSubmit,
-                      handleChange,
-                      values
-                  }) => (
+                {({touched, errors, handleSubmit, handleChange, values}) => (
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="login">
                             <Form.Label>

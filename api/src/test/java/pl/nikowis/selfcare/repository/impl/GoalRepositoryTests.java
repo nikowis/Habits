@@ -45,15 +45,4 @@ public class GoalRepositoryTests {
         g1.setUser(u1);
     }
 
-    @Test
-    public void testSave() {
-        goalRepository.save(g1);
-
-        List<Goal> all = goalRepository.findByTitle(TITLE1);
-
-        Assertions.assertNotNull(all);
-        Assertions.assertEquals(1, all.size());
-    }
-
-
 }

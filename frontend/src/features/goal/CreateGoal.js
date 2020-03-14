@@ -6,68 +6,65 @@ import Paths from "../../common/paths";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {withTranslation} from "react-i18next";
+import {Formik} from 'formik';
+import {createGoalSchema} from "../../common/validation-schemas";
+
 
 class CreateGoal extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {title: '', description: '', createdBy: this.props.login, validated: false}
-    }
-
-    titleChangeHandler = (event) => {
-        this.setState({title: event.target.value});
-    };
-
-    descriptionChangeHandler = (event) => {
-        this.setState({description: event.target.value});
-    };
-
-    handleSubmit = async (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            event.preventDefault();
-            Api.createGoal({...this.state});
-            this.props.history.push(Paths.GOALS)
-        }
-        this.setState({validated: true});
+    handleSubmit = (data, actions) => {
+        Api.createGoal(data).payload.then((response) => {
+            if (!response.status) {
+                this.props.history.push(Paths.LOGIN)
+            } else if (response.status && response.status === 400) {
+                response.errors.forEach(err => {
+                    actions.setFieldError(err.field, err.defaultMessage);
+                });
+            }
+        });
     };
 
     render() {
         const {t} = this.props;
 
         return (
-            <div>
-                <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="title">
-                        <Form.Label>
-                            {t('goals.create.titlePlaceholder')}
-                        </Form.Label>
-                        <Form.Control type="text" placeholder={t('goals.create.titlePlaceholder')} value={this.state.title}
-                                      onChange={this.titleChangeHandler} required/>
-                        <Form.Control.Feedback type="invalid">
-                            {t('goals.create.invalidTitle')}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="description">
-                        <Form.Label>
-                            {t('goals.create.descriptionPlaceholder')}
-                        </Form.Label>
-                        <Form.Control as="textarea" rows="3" placeholder={t('goals.create.descriptionPlaceholder')} value={this.state.description}
-                                      onChange={this.descriptionChangeHandler} required/>
-                        <Form.Control.Feedback type="invalid">
-                            {t('goals.create.invalidDescription')}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        {t('goals.create.submit')}
-                    </Button>
-                </Form>
-            </div>
+            <Formik validationSchema={createGoalSchema} onSubmit={this.handleSubmit}
+                    initialValues={{
+                        title: '',
+                        description: ''
+                    }}
+            >
+                {({touched, errors, handleSubmit, handleChange, values}) => (
+                    <Form noValidate onSubmit={handleSubmit}>
+                        <Form.Group controlId="title">
+                            <Form.Label>
+                                {t('goals.create.titlePlaceholder')}
+                            </Form.Label>
+                            <Form.Control name="title" value={values.title} onChange={handleChange} type="text"
+                                          placeholder={t('goals.create.titlePlaceholder')}
+                                          isInvalid={touched.title && !!errors.title}/>
+                            <Form.Control.Feedback type="invalid">
+                                {t(errors.title)}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="description">
+                            <Form.Label>
+                                {t('goals.create.descriptionPlaceholder')}
+                            </Form.Label>
+                            <Form.Control name="description" value={values.description} onChange={handleChange}
+                                          as="textarea" rows="3" placeholder={t('goals.create.descriptionPlaceholder')}
+                                          isInvalid={touched.description && !!errors.description}/>
+                            <Form.Control.Feedback type="invalid">
+                                {t(errors.description)}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            {t('goals.create.submit')}
+                        </Button>
+                    </Form>
+                )}
+            </Formik>
         );
-
     }
 }
 

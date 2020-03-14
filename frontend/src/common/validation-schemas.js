@@ -32,3 +32,10 @@ export const loginSchema = Yup.object().shape({
     password: Yup.string()
         .required()
 });
+
+export const createGoalSchema = Yup.object().shape({
+    title: Yup.string()
+        .required(),
+    description: Yup.string()
+});
+

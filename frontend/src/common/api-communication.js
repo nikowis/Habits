@@ -81,7 +81,6 @@ class Api {
         });
     }
 
-    mapResponse
 }
 
 export default Api = new Api();

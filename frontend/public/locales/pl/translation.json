@@ -17,9 +17,7 @@
       "title": "Utwórz cel",
       "submit": "Utwórz",
       "titlePlaceholder" : "Tytuł",
-      "descriptionPlaceholder" : "Opis",
-      "invalidTitle" : "Pusty tytuł",
-      "invalidDescription" : "Pusty opis"
+      "descriptionPlaceholder" : "Opis"
     },
     "fulfill" : {
       "page": "Wypełniaj",
@@ -32,9 +30,7 @@
     "title": "Zaloguj się",
     "loginPlaceholder": "Email",
     "submit": "Zaloguj",
-    "passwordPlaceholder": "Hasło",
-    "invalidLogin": "Niepoprawny email",
-    "invalidPassword": "Niepoprawne hasło"
+    "passwordPlaceholder": "Hasło"
   },
   "register": {
     "page": "Rejestracja",

@@ -25,21 +25,13 @@ class Login extends React.Component {
         }
 
         return (
-            <Formik
-                validationSchema={loginSchema}
-                onSubmit={this.handleSubmit}
-                initialValues={{
-                    login: '',
-                    password: ''
-                }}
+            <Formik validationSchema={loginSchema} onSubmit={this.handleSubmit}
+                    initialValues={{
+                        login: '',
+                        password: ''
+                    }}
             >
-                {({
-                      touched,
-                      errors,
-                      handleSubmit,
-                      handleChange,
-                      values
-                  }) => (
+                {({touched, errors, handleSubmit, handleChange, values}) => (
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="login">
                             <Form.Label>

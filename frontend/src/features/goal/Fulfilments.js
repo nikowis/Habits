@@ -37,6 +37,8 @@ class Fulfilments extends React.Component {
 
     fulfilmentRows = () => {
         return this.state.fulfilments.map((goal) => {
+            const label = goal.title + (goal.description ? ': ' + goal.description : '');
+
             return (
                 <ListGroup.Item key={goal.id}>
                     <Form.Check
@@ -44,7 +46,7 @@ class Fulfilments extends React.Component {
                         id={goal.id}
                         key={goal.id}
                         onChange={this.handleCheckboxChange}
-                        label={goal.title + ': ' + goal.description}
+                        label={label}
                     />
                 </ListGroup.Item>
             );
@@ -57,7 +59,7 @@ class Fulfilments extends React.Component {
                 {this.fulfilmentRows()}
             </ListGroup>
         );
-    }
+    };
 
     render() {
         const {t} = this.props;

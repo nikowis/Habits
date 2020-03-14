@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.selfcare.dto.CreateGoalDTO;
 import pl.nikowis.selfcare.dto.GoalDTO;
+import pl.nikowis.selfcare.exception.GoalAlreadyExistsException;
 import pl.nikowis.selfcare.model.Goal;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 import pl.nikowis.selfcare.repository.impl.GoalRepository;
@@ -36,6 +37,10 @@ class GoalServiceImpl implements GoalService {
 
     @Override
     public GoalDTO createGoal(CreateGoalDTO dto) {
+        if(goalRepository.existsByUserIdAndTitle(SecurityUtils.getCurrentUserId(), dto.getTitle())) {
+            throw new GoalAlreadyExistsException();
+        }
+
         UserDetailsImpl currentUserDetails = SecurityUtils.getCurrentUser();
 
         Goal goal = new Goal();

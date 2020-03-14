@@ -17,9 +17,7 @@
       "title": "Create goal",
       "submit": "Create",
       "titlePlaceholder" : "Title",
-      "descriptionPlaceholder" : "Description",
-      "invalidTitle" : "Empty title",
-      "invalidDescription" : "Empty description"
+      "descriptionPlaceholder" : "Description"
     },
     "fulfill" : {
       "page": "Fulfilments",
@@ -32,9 +30,7 @@
     "title": "Please login",
     "loginPlaceholder": "Email",
     "submit": "Login",
-    "passwordPlaceholder": "Password",
-    "invalidLogin": "Incorrect email",
-    "invalidPassword": "Incorrect password"
+    "passwordPlaceholder": "Password"
   },
   "register": {
     "page": "Register",
