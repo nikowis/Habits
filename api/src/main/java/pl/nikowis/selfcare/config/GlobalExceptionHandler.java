@@ -20,7 +20,6 @@ import pl.nikowis.selfcare.model.ApiError;
 import pl.nikowis.selfcare.model.ApiErrorResponse;
 
 import java.util.Collections;
-import java.util.Locale;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

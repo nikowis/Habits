@@ -6,9 +6,8 @@ import Paths from "../../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Api from "../../common/api-communication";
-
+import {registerSchema} from "../../common/validation-schemas";
 import {withTranslation} from 'react-i18next';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
 
 class Register extends React.Component {
@@ -33,21 +32,9 @@ class Register extends React.Component {
             return <Redirect to={Paths.HOME} push={true}/>
         }
 
-        const schema = Yup.object().shape({
-            login: Yup.string()
-                .email()
-                .required(),
-            password: Yup.string()
-                .min(1)
-                .required(),
-            repeatPassword: Yup.string()
-                .required()
-                .oneOf([Yup.ref('password')], 'validations.passwordMatch')
-        });
-
         return (
             <Formik
-                validationSchema={schema}
+                validationSchema={registerSchema}
                 onSubmit={this.handleSubmit}
                 initialValues={{
                     login: '',
@@ -60,8 +47,7 @@ class Register extends React.Component {
                       errors,
                       handleSubmit,
                       handleChange,
-                      values,
-                      isValid
+                      values
                   }) => (
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="login">

@@ -9,7 +9,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {PersistGate} from 'redux-persist/integration/react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
-import { setLocale } from 'yup';
+import './common/validation-schemas'
 
 // return fallback gui when translations are not yet loaded
 function AppWithSuspense() {
@@ -19,19 +19,6 @@ function AppWithSuspense() {
         </Suspense>
     );
 }
-
-setLocale({
-    // use constant translation keys for messages without values
-    mixed: {
-        default: 'validations.default',
-        required: 'validations.required',
-    },
-    // use functions to generate an error object that includes the value from the schema
-    string: {
-        min: ({ min }) => ({ key: 'validations.min', values: { min } }),
-        email: 'validations.email',
-    }
-});
 
 ReactDOM.render(
     <Router>

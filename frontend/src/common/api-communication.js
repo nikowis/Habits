@@ -80,6 +80,8 @@ class Api {
             action: ActionType.REGISTER_ACTION
         });
     }
+
+    mapResponse
 }
 
 export default Api = new Api();
