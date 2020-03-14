@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
         ApiError apiError = new ApiError(field, messageSource.getMessage(exceptionName, args, LocaleContextHolder.getLocale()));
         ApiErrorResponse apiErrorResponse = new ApiErrorResponse(status, Collections.singletonList(apiError));
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return new ResponseEntity<>(apiErrorResponse, httpHeaders, status);
     }
 

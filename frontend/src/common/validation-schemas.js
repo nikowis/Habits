@@ -24,3 +24,11 @@ export const registerSchema = Yup.object().shape({
         .required()
         .oneOf([Yup.ref('password')], 'validations.passwordMatch')
 });
+
+export const loginSchema = Yup.object().shape({
+    login: Yup.string()
+        .email()
+        .required(),
+    password: Yup.string()
+        .required()
+});

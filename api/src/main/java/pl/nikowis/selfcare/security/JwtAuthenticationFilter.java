@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.nikowis.selfcare.config.GlobalExceptionHandler;
 import pl.nikowis.selfcare.model.UserDetailsImpl;
 
 import javax.servlet.FilterChain;
@@ -52,7 +51,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                             creds.getPassword())
             );
         } catch (IOException e) {
-            res.setContentType(MediaType.APPLICATION_JSON.toString());
+            res.setContentType(MediaType.APPLICATION_JSON_VALUE);
             res.setStatus(HttpStatus.BAD_REQUEST.value());
             LOGGER.warn("Incorrect authentication attempt", e);
             return null;
@@ -79,7 +78,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         tokenCookie.setHttpOnly(true);
         res.addCookie(tokenCookie);
 
-        res.setContentType(MediaType.APPLICATION_JSON.toString());
+        res.setContentType(MediaType.APPLICATION_JSON_VALUE);
         res.getWriter().write(new ObjectMapper().writeValueAsString(new JwtLoginResponse(user.getId(), user.getLogin())));
     }
 }
