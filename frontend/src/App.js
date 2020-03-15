@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import './App.scss';
 import Login from "./components/Login";
-import CreateGoal from "./features/goal/CreateGoal";
+import CreateHabit from "./features/habit/CreateHabit";
 import {Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
 import Home from "./components/Home";
 import {connect} from "react-redux";
 import Logout from "./components/Logout";
-import Fulfilments from "./features/goal/Fulfilments";
-import Goals from "./features/goal/Goals";
+import Fulfilments from "./features/habit/Fulfilments";
+import Habits from "./features/habit/Habits";
 import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TitleHeader from "./components/TitleHeader";
@@ -43,13 +43,13 @@ class App extends Component {
                                 <Logout/>
                             </AuthenticatedRoute>
                             <AuthenticatedRoute path={Paths.CREATE} authenticated={authenticated}>
-                                <CreateGoal/>
+                                <CreateHabit/>
                             </AuthenticatedRoute>
                             <AuthenticatedRoute path={Paths.FULFILMENTS} authenticated={authenticated}>
                                 <Fulfilments/>
                             </AuthenticatedRoute>
-                            <AuthenticatedRoute path={Paths.GOALS} authenticated={authenticated}>
-                                <Goals/>
+                            <AuthenticatedRoute path={Paths.HABITS} authenticated={authenticated}>
+                                <Habits/>
                             </AuthenticatedRoute>
                         </Switch>
                     </div>

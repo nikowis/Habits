@@ -7,13 +7,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {withTranslation} from "react-i18next";
 import {Formik} from 'formik';
-import {createGoalSchema} from "../../common/validation-schemas";
+import {createHabitSchema} from "../../common/validation-schemas";
 
 
-class CreateGoal extends React.Component {
+class CreateHabit extends React.Component {
 
     handleSubmit = (data, actions) => {
-        Api.createGoal(data).payload.then((response) => {
+        Api.createHabit(data).payload.then((response) => {
             if (!response.status) {
                 this.props.history.push(Paths.LOGIN)
             } else if (response.status && response.status === 400) {
@@ -28,7 +28,7 @@ class CreateGoal extends React.Component {
         const {t} = this.props;
 
         return (
-            <Formik validationSchema={createGoalSchema} onSubmit={this.handleSubmit}
+            <Formik validationSchema={createHabitSchema} onSubmit={this.handleSubmit}
                     initialValues={{
                         title: '',
                         description: ''
@@ -38,10 +38,10 @@ class CreateGoal extends React.Component {
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="title">
                             <Form.Label>
-                                {t('goals.create.titlePlaceholder')}
+                                {t('habits.create.titlePlaceholder')}
                             </Form.Label>
                             <Form.Control name="title" value={values.title} onChange={handleChange} type="text"
-                                          placeholder={t('goals.create.titlePlaceholder')}
+                                          placeholder={t('habits.create.titlePlaceholder')}
                                           isInvalid={touched.title && !!errors.title}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.title)}
@@ -49,17 +49,17 @@ class CreateGoal extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="description">
                             <Form.Label>
-                                {t('goals.create.descriptionPlaceholder')}
+                                {t('habits.create.descriptionPlaceholder')}
                             </Form.Label>
                             <Form.Control name="description" value={values.description} onChange={handleChange}
-                                          as="textarea" rows="3" placeholder={t('goals.create.descriptionPlaceholder')}
+                                          as="textarea" rows="3" placeholder={t('habits.create.descriptionPlaceholder')}
                                           isInvalid={touched.description && !!errors.description}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.description)}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            {t('goals.create.submit')}
+                            {t('habits.create.submit')}
                         </Button>
                     </Form>
                 )}
@@ -68,4 +68,4 @@ class CreateGoal extends React.Component {
     }
 }
 
-export default withRouter(withTranslation()(CreateGoal));
+export default withRouter(withTranslation()(CreateHabit));

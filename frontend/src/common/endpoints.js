@@ -1,5 +1,5 @@
 export default class ApiEndpoint {
-    static API_GOALS = '/goals';
+    static API_HABITS = '/habits';
     static API_FULFILMENTS = '/fulfilments';
     static API_LOGIN = '/login';
     static API_ME = '/me';

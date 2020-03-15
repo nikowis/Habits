@@ -5,43 +5,43 @@ import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
 import {withTranslation} from "react-i18next";
 
-class Goals extends React.Component {
+class Habits extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {goals: []};
+        this.state = {habits: []};
     }
 
     componentDidMount() {
-        Api.getGoals().payload.then((response) => {
-            this.setState({goals: response})
+        Api.getHabits().payload.then((response) => {
+            this.setState({habits: response})
         });
     }
 
-    goalRows = () => {
-        return this.state.goals.map((goal) => {
-            return (<tr key={goal.id}>
-                <td>{goal.id}</td>
-                <td>{goal.title}</td>
-                <td>{goal.description}</td>
+    habitRows = () => {
+        return this.state.habits.map((habit) => {
+            return (<tr key={habit.id}>
+                <td>{habit.id}</td>
+                <td>{habit.title}</td>
+                <td>{habit.description}</td>
             </tr>);
         });
     };
 
-    goalTable = () => {
+    habitTable = () => {
         const { t } = this.props;
 
         return (
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>{t('goals.idCol')}</th>
-                    <th>{t('goals.titleCol')}</th>
-                    <th>{t('goals.descCol')}</th>
+                    <th>{t('habits.idCol')}</th>
+                    <th>{t('habits.titleCol')}</th>
+                    <th>{t('habits.descCol')}</th>
                 </tr>
                 </thead>
                 <tbody>
-                {this.goalRows()}
+                {this.habitRows()}
                 </tbody>
             </Table>
         );
@@ -53,10 +53,10 @@ class Goals extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.goals.length > 0 ? this.goalTable() :  t('goals.empty')}
+                {this.state.habits.length > 0 ? this.habitTable() :  t('habits.empty')}
             </React.Fragment>
         );
     }
 }
 
-export default connect()(withTranslation()(Goals));
+export default connect()(withTranslation()(Habits));
