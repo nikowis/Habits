@@ -21,11 +21,11 @@ class Fulfilments extends React.Component {
 
     handleCheckboxChange = (event) => {
         if (event.target.checked) {
-            const selectedGoal = this.state.fulfilments.filter((goal) =>
-                goal.id.toString() === event.target.id
+            const selectedHabit = this.state.fulfilments.filter((habit) =>
+                habit.id.toString() === event.target.id
             )[0];
 
-            Api.fulfilGoal(selectedGoal).payload
+            Api.fulfilHabit(selectedHabit).payload
                 .then(res => {
                     const curFulfilments = this.state.fulfilments;
                     curFulfilments.forEach(g => g.fulfilled = g.id === res.id ? res.fulfilled : g.fulfilled);
@@ -36,15 +36,15 @@ class Fulfilments extends React.Component {
     };
 
     fulfilmentRows = () => {
-        return this.state.fulfilments.map((goal) => {
-            const label = goal.title + (goal.description ? ': ' + goal.description : '');
+        return this.state.fulfilments.map((habit) => {
+            const label = habit.title + (habit.description ? ': ' + habit.description : '');
 
             return (
-                <ListGroup.Item key={goal.id}>
+                <ListGroup.Item key={habit.id}>
                     <Form.Check
-                        type='checkbox' checked={goal.fulfilled}
-                        id={goal.id}
-                        key={goal.id}
+                        type='checkbox' checked={habit.fulfilled}
+                        id={habit.id}
+                        key={habit.id}
                         onChange={this.handleCheckboxChange}
                         label={label}
                     />
@@ -66,7 +66,7 @@ class Fulfilments extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('goals.fulfill.empty')}
+                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('habits.fulfill.empty')}
             </React.Fragment>
         );
 

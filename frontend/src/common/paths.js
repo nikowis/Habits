@@ -3,8 +3,8 @@ export default class Paths {
     static HOME = '/home';
     static LOGIN = '/login';
     static LOGOUT = '/logout';
-    static GOALS = '/goals';
-    static CREATE = this.GOALS + '/create';
-    static FULFILMENTS = this.GOALS + '/fulfill';
+    static HABITS = '/habits';
+    static CREATE = this.HABITS + '/create';
+    static FULFILMENTS = this.HABITS + '/fulfill';
     static REGISTER = '/register';
 }

@@ -33,7 +33,7 @@ export const loginSchema = Yup.object().shape({
         .required()
 });
 
-export const createGoalSchema = Yup.object().shape({
+export const createHabitSchema = Yup.object().shape({
     title: Yup.string()
         .required(),
     description: Yup.string()
