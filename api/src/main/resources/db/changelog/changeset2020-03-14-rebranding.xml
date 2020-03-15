@@ -7,6 +7,8 @@
 
     <changeSet id="changeset2020-03-14-rebranding.xml" author="nikowis">
         <sql>
+            ALTER TABLE goal ADD CONSTRAINT goal_title_user_id_unique UNIQUE (title, user_id);
+
             ALTER TABLE fulfilment RENAME COLUMN goal_id TO habit_id;
             ALTER TABLE goal RENAME TO habit;
             ALTER TABLE fulfilment RENAME CONSTRAINT fulfilment_goal_id_fkey TO fulfilment_habit_id_fkey;

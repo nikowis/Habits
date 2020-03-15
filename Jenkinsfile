@@ -6,10 +6,10 @@ pipeline {
         stage('Remove deployment') {
             steps {
                 sh 'cp -r /home/pi/apache-tomcat-9.0.30/webapps/. /home/pi/deployment-backup/'
-                sh 'cp -r /home/pi/nginx-http-selfcare/. /home/pi/deployment-backup/'
-                sh 'rm -rf /home/pi/nginx-http-selfcare/*'
-                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi.war'
-                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/selfcareapi'
+                sh 'cp -r /home/pi/nginx-http-habits/. /home/pi/deployment-backup/'
+                sh 'rm -rf /home/pi/nginx-http-habits/*'
+                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/habits.war'
+                sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/habits'
             }
         }
 		
@@ -33,13 +33,13 @@ pipeline {
 
         stage('Deploy frontend') {
             steps {
-                sh 'cp -r ./frontend/build/. /home/pi/nginx-http-selfcare/'
+                sh 'cp -r ./frontend/build/. /home/pi/nginx-http-habits/'
             }
         }
 
         stage('Deploy backend') {
             steps {
-                sh 'cp ./api/target/selfcareapi.war /home/pi/apache-tomcat-9.0.30/webapps'
+                sh 'cp ./api/target/habits.war /home/pi/apache-tomcat-9.0.30/webapps'
             }
         }
 		
