@@ -6,7 +6,6 @@ setLocale({
         default: 'validations.default',
         required: 'validations.required',
     },
-    // use functions to generate an error object that includes the value from the schema
     string: {
         min: ({min}) => ({key: 'validations.min', values: {min}}),
         email: 'validations.email'

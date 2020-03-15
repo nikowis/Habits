@@ -10,9 +10,9 @@ import pl.nikowis.habits.exception.CannotFulfilInactiveHabitException;
 import pl.nikowis.habits.exception.HabitDoesntExistException;
 import pl.nikowis.habits.model.Fulfilment;
 import pl.nikowis.habits.model.Habit;
-import pl.nikowis.habits.repository.impl.FulfilmentRepository;
-import pl.nikowis.habits.repository.impl.HabitRepository;
-import pl.nikowis.habits.repository.impl.UserRepository;
+import pl.nikowis.habits.repository.FulfilmentRepository;
+import pl.nikowis.habits.repository.HabitRepository;
+import pl.nikowis.habits.repository.UserRepository;
 import pl.nikowis.habits.service.FulfilmentService;
 import pl.nikowis.habits.util.DateUtils;
 import pl.nikowis.habits.util.SecurityUtils;
@@ -53,7 +53,8 @@ class FulfilmentServiceImpl implements FulfilmentService {
         f.setUser(userRepository.findById(SecurityUtils.getCurrentUserId()).get());
         f.setFulfilled(true);
         fulfilmentRepository.save(f);
-
+        habit.setStreak(habit.getStreak() + 1);
+        habitRepository.save(habit);
         FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(true);
         mapperFacade.map(habit, fulfilableHabitDTO);
         return fulfilableHabitDTO;

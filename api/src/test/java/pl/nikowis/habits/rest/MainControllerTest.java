@@ -17,7 +17,7 @@ import pl.nikowis.habits.config.GlobalExceptionHandler;
 import pl.nikowis.habits.config.Profiles;
 import pl.nikowis.habits.dto.RegisterUserDTO;
 import pl.nikowis.habits.model.User;
-import pl.nikowis.habits.repository.impl.UserRepository;
+import pl.nikowis.habits.repository.UserRepository;
 import pl.nikowis.habits.security.SecurityConstants;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -83,11 +83,4 @@ class MainControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Test
-    @WithUserDetails(LOGIN)
-    public void getMe() throws Exception {
-        mockMvc.perform(get(MainController.ME_ENDPOINT))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
 }

@@ -13,6 +13,7 @@ public class HabitDTO {
     protected String title;
     @NotEmpty
     protected String description;
+    private int streak;
     protected Date createdAt;
     protected Boolean active;
 

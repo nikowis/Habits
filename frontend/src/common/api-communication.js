@@ -52,14 +52,6 @@ class Api {
         });
     };
 
-    getMe() {
-        const url = new URL(this.API_URL + ApiEndpoint.API_ME);
-        return HttpUtility.get({
-            url: url,
-            action: ActionType.LOGIN_ACTION
-        });
-    };
-
     fulfilHabit(habit) {
         const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
         return HttpUtility.post({

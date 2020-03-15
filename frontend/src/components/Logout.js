@@ -3,6 +3,7 @@ import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
+import Paths from './../common/paths'
 
 class Logout extends React.Component {
 
@@ -16,7 +17,7 @@ class Logout extends React.Component {
         if (this.props.authenticated) {
             this.logout();
         }
-        return <Redirect to='/' push={true}/>;
+        return <Redirect to={Paths.ROOT} push={true}/>;
     }
 }
 

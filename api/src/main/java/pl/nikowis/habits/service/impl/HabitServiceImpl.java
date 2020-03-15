@@ -9,8 +9,8 @@ import pl.nikowis.habits.dto.HabitDTO;
 import pl.nikowis.habits.exception.HabitAlreadyExistsException;
 import pl.nikowis.habits.model.Habit;
 import pl.nikowis.habits.model.UserDetailsImpl;
-import pl.nikowis.habits.repository.impl.HabitRepository;
-import pl.nikowis.habits.repository.impl.UserRepository;
+import pl.nikowis.habits.repository.HabitRepository;
+import pl.nikowis.habits.repository.UserRepository;
 import pl.nikowis.habits.service.HabitService;
 import pl.nikowis.habits.util.SecurityUtils;
 

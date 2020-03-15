@@ -17,6 +17,7 @@ public class Habit extends BaseEntity {
 
     private String title;
     private String description;
+    private int streak;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "habit", cascade = {CascadeType.PERSIST})
     private List<Fulfilment> fulfilments = new ArrayList<>();

@@ -9,5 +9,5 @@ public class UserDTO {
     protected String login;
     protected String role;
     protected Boolean active;
-
+    protected int streakGoal;
 }
