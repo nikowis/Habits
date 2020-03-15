@@ -1,5 +1,20 @@
 {
   "brand": "Nawyki",
+  "email": "Email",
+  "logout": "Wylogowanie",
+  "password": "Hasło",
+  "repeatPassword": "Powtórz hasło",
+  "id" : "Id",
+  "title" : "Tytuł",
+  "description" : "Opis",
+  "streakGoal" : "Cel dni pod rząd",
+  "submit" : "Zapisz",
+  "validations" : {
+    "default": "Niepoprawne dane",
+    "required": "Pole wymagane",
+    "email": "Niepoprawny adres email",
+    "passwordMatch" : "Hasła nie pasują"
+  },
   "home": {
     "page": "Start",
     "title": "Witaj {{name}}",
@@ -8,16 +23,11 @@
   "habits": {
     "page": "Nawyki",
     "title": "Lista nawyków",
-    "idCol": "Id",
-    "titleCol": "Tytuł",
-    "descCol": "Opis",
     "empty": "Najpierw utwórz nawyk",
     "create" : {
       "page": "Utwórz",
       "title": "Utwórz nawyk",
-      "submit": "Utwórz",
-      "titlePlaceholder" : "Tytuł",
-      "descriptionPlaceholder" : "Opis"
+      "submit": "Utwórz"
     },
     "fulfill" : {
       "page": "Wypełniaj",
@@ -28,23 +38,15 @@
   "login": {
     "page": "Logowanie",
     "title": "Zaloguj się",
-    "loginPlaceholder": "Email",
-    "submit": "Zaloguj",
-    "passwordPlaceholder": "Hasło"
+    "submit": "Zaloguj"
   },
   "register": {
     "page": "Rejestracja",
     "title": "Utwórz konto",
-    "loginPlaceholder": "Email",
-    "submit": "Utwórz",
-    "passwordPlaceholder": "Hasło",
-    "repeatPasswordPlaceholder": "Powtórz hasło"
+    "submit": "Utwórz"
   },
-  "validations" : {
-    "default": "Niepoprawne dane",
-    "required": "Pole wymagane",
-    "email": "Niepoprawny adres email",
-    "passwordMatch" : "Hasła nie pasują"
-  },
-  "logout": "Wylogowanie"
+  "profile": {
+    "page" : "Profil",
+    "title": "Mój profil"
+  }
 }

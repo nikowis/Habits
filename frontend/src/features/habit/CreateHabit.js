@@ -38,10 +38,10 @@ class CreateHabit extends React.Component {
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="title">
                             <Form.Label>
-                                {t('habits.create.titlePlaceholder')}
+                                {t('title')}
                             </Form.Label>
                             <Form.Control name="title" value={values.title} onChange={handleChange} type="text"
-                                          placeholder={t('habits.create.titlePlaceholder')}
+                                          placeholder={t('title')}
                                           isInvalid={touched.title && !!errors.title}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.title)}
@@ -49,10 +49,10 @@ class CreateHabit extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="description">
                             <Form.Label>
-                                {t('habits.create.descriptionPlaceholder')}
+                                {t('description')}
                             </Form.Label>
                             <Form.Control name="description" value={values.description} onChange={handleChange}
-                                          as="textarea" rows="3" placeholder={t('habits.create.descriptionPlaceholder')}
+                                          as="textarea" rows="3" placeholder={t('description')}
                                           isInvalid={touched.description && !!errors.description}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.description)}

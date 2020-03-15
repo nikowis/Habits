@@ -1,5 +1,20 @@
 {
   "brand": "Habits",
+  "email": "Email",
+  "logout": "Logout",
+  "password": "Password",
+  "repeatPassword": "Repeat password",
+  "id" : "Id",
+  "title" : "Title",
+  "description" : "Description",
+  "streakGoal" : "Day streak goal",
+  "submit" : "Save",
+  "validations" : {
+    "default": "Invalid field",
+    "required": "Field required",
+    "email": "Incorrect email",
+    "passwordMatch" : "Passwords don't match"
+  },
   "home": {
     "page": "Home",
     "title": "Welcome {{name}}",
@@ -8,16 +23,11 @@
   "habits": {
     "page": "Habits",
     "title": "Habit list",
-    "idCol": "Id",
-    "titleCol": "Title",
-    "descCol": "Description",
     "empty": "Create a new habit first",
     "create" : {
       "page": "Create",
       "title": "Create habit",
-      "submit": "Create",
-      "titlePlaceholder" : "Title",
-      "descriptionPlaceholder" : "Description"
+      "submit": "Create"
     },
     "fulfill" : {
       "page": "Fulfilments",
@@ -28,23 +38,15 @@
   "login": {
     "page": "Login",
     "title": "Please login",
-    "loginPlaceholder": "Email",
-    "submit": "Login",
-    "passwordPlaceholder": "Password"
+    "submit": "Login"
   },
   "register": {
     "page": "Register",
     "title": "Register",
-    "loginPlaceholder": "Email",
-    "submit": "Register",
-    "passwordPlaceholder": "Password",
-    "repeatPasswordPlaceholder": "Repeat password"
+    "submit": "Register"
   },
-  "validations" : {
-    "default": "Invalid field",
-    "required": "Field required",
-    "email": "Incorrect email",
-    "passwordMatch" : "Passwords don't match"
-  },
-  "logout": "Logout"
+  "profile": {
+    "page" : "Profile",
+    "title": "My profile"
+  }
 }

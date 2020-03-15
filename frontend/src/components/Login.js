@@ -35,23 +35,23 @@ class Login extends React.Component {
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="login">
                             <Form.Label>
-                                {t('login.loginPlaceholder')}
+                                {t('email')}
                             </Form.Label>
                             <Form.Control name="login" value={values.login} onChange={handleChange} type="email"
                                           isInvalid={touched.login && !!errors.login}
-                                          placeholder={t('login.loginPlaceholder')}/>
+                                          placeholder={t('email')}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.login)}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="password">
                             <Form.Label>
-                                {t('login.passwordPlaceholder')}
+                                {t('password')}
                             </Form.Label>
                             <Form.Control name="password" value={values.password} onChange={handleChange}
                                           type="password"
                                           isInvalid={touched.password && !!errors.password}
-                                          placeholder={t('login.passwordPlaceholder')}/>
+                                          placeholder={t('password')}/>
                             <Form.Control.Feedback type="invalid">
                                 {t(errors.password)}
                             </Form.Control.Feedback>

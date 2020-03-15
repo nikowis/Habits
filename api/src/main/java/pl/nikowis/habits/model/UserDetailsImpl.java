@@ -16,6 +16,7 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private Boolean active;
     private String role;
+    private int streakGoal;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

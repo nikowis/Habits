@@ -13,6 +13,7 @@ import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TitleHeader from "./components/TitleHeader";
 import Register from "./features/user/Register";
+import Profile from "./features/user/Profile";
 
 class App extends Component {
 
@@ -50,6 +51,9 @@ class App extends Component {
                             </AuthenticatedRoute>
                             <AuthenticatedRoute path={Paths.HABITS} authenticated={authenticated}>
                                 <Habits/>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={Paths.PROFILE} authenticated={authenticated}>
+                                <Profile/>
                             </AuthenticatedRoute>
                         </Switch>
                     </div>

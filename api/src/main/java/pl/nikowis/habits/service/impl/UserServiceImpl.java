@@ -1,6 +1,7 @@
 package pl.nikowis.habits.service.impl;
 
 import ma.glasnost.orika.MapperFacade;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getCurrentUser() {
-        UserDetailsImpl currentUser = SecurityUtils.getCurrentUser();
+        User currentUser = userRepository.findById(SecurityUtils.getCurrentUserId()).get();
         return mapperFacade.map(currentUser, UserDTO.class);
     }
 
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateUser(Long currentUserId, UpdateUserDTO dto) {
         User user = userRepository.findById(currentUserId).get();
         user.setStreakGoal(dto.getStreakGoal());
-        if(dto.getPassword() != null) {
+        if(Strings.isNotBlank(dto.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         }
         return mapperFacade.map(user, UserDTO.class);

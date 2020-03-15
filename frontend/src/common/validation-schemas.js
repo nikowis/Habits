@@ -38,3 +38,11 @@ export const createHabitSchema = Yup.object().shape({
     description: Yup.string()
 });
 
+export const profileSchema = Yup.object().shape({
+    streakGoal: Yup.number()
+        .min(1)
+        .required(),
+    password: Yup.string(),
+    repeatPassword: Yup.string()
+        .oneOf([Yup.ref('password')], 'validations.passwordMatch')
+});

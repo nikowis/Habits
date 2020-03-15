@@ -35,9 +35,9 @@ class Habits extends React.Component {
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>{t('habits.idCol')}</th>
-                    <th>{t('habits.titleCol')}</th>
-                    <th>{t('habits.descCol')}</th>
+                    <th>{t('id')}</th>
+                    <th>{t('title')}</th>
+                    <th>{t('description')}</th>
                 </tr>
                 </thead>
                 <tbody>

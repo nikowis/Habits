@@ -73,6 +73,25 @@ class Api {
         });
     }
 
+    getUser() {
+        const url = new URL(this.API_URL + ApiEndpoint.API_USER);
+        return HttpUtility.get({
+            url: url
+        });
+    };
+
+    updateUser(streakGoal, password) {
+        let url = this.API_URL + ApiEndpoint.API_USER;
+        return HttpUtility.put({
+            url: url,
+            payload: {
+                streakGoal: streakGoal,
+                password: password
+            },
+            action: ActionType.UPDATE_USER
+        });
+    }
+
 }
 
 export default Api = new Api();

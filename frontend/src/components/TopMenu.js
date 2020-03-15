@@ -42,6 +42,9 @@ class TopMenu extends React.Component {
                             <LinkContainer to={Paths.HABITS} exact={true}>
                                 <Nav.Link>{t('habits.page')}</Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to={Paths.PROFILE}>
+                                <Nav.Link>{t('profile.page')}</Nav.Link>
+                            </LinkContainer>
                             <LinkContainer to={Paths.LOGOUT}>
                                 <Nav.Link>{t('logout')}</Nav.Link>
                             </LinkContainer>

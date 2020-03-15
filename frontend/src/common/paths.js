@@ -7,4 +7,5 @@ export default class Paths {
     static CREATE = this.HABITS + '/create';
     static FULFILMENTS = this.HABITS + '/fulfill';
     static REGISTER = '/register';
+    static PROFILE = '/profile';
 }
