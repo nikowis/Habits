@@ -15,7 +15,7 @@ class CreateHabit extends React.Component {
     handleSubmit = (data, actions) => {
         Api.createHabit(data).payload.then((response) => {
             if (!response.status) {
-                this.props.history.push(Paths.LOGIN)
+                this.props.history.push(Paths.HABITS)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);

@@ -16,7 +16,7 @@ const userReducer = (state = initialState, action) => {
                 login: payload.login,
                 authenticated: true
             };
-        case ActionType.LOGOUT_ACTION + ActionType.FULFILLED:
+        case ActionType.LOGOUT_ACTION + ActionType.PENDING:
             return initialState;
         default:
             return state
