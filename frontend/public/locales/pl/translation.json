@@ -5,24 +5,24 @@
     "title": "Witaj {{name}}",
     "stranger": "nieznajomy"
   },
-  "goals": {
-    "page": "Cele",
-    "title": "Lista celów",
+  "habits": {
+    "page": "Nawyki",
+    "title": "Lista nawyków",
     "idCol": "Id",
     "titleCol": "Tytuł",
     "descCol": "Opis",
-    "empty": "Najpierw utwórz cel",
+    "empty": "Najpierw utwórz nawyk",
     "create" : {
       "page": "Utwórz",
-      "title": "Utwórz cel",
+      "title": "Utwórz nawyk",
       "submit": "Utwórz",
       "titlePlaceholder" : "Tytuł",
       "descriptionPlaceholder" : "Opis"
     },
     "fulfill" : {
       "page": "Wypełniaj",
-      "title": "Wypełnij cele",
-      "empty" : "Najpierw utwórz cel"
+      "title": "Wypełnij nawyk",
+      "empty" : "Najpierw utwórz nawyk"
     }
   },
   "login": {

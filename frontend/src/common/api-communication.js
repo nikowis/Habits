@@ -8,12 +8,12 @@ class Api {
         this.API_URL = process.env.REACT_APP_API_URL;
     }
 
-    createGoal(goal) {
-        let url = this.API_URL + ApiEndpoint.API_GOALS;
+    createHabit(habit) {
+        let url = this.API_URL + ApiEndpoint.API_HABITS;
 
         return HttpUtility.post({
             url: url,
-            payload: goal,
+            payload: habit,
         });
     };
 
@@ -38,8 +38,8 @@ class Api {
         });
     };
 
-    getGoals() {
-        const url = new URL(this.API_URL + ApiEndpoint.API_GOALS);
+    getHabits() {
+        const url = new URL(this.API_URL + ApiEndpoint.API_HABITS);
         return HttpUtility.get({
             url: url,
         });
@@ -60,11 +60,11 @@ class Api {
         });
     };
 
-    fulfilGoal(goal) {
+    fulfilHabit(habit) {
         const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
         return HttpUtility.post({
             url: url,
-            payload: {goalId: goal.id}
+            payload: {habitId: habit.id}
         });
     }
 

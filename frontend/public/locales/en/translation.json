@@ -5,24 +5,24 @@
     "title": "Welcome {{name}}",
     "stranger": "stranger"
   },
-  "goals": {
-    "page": "Goals",
-    "title": "Goal list",
+  "habits": {
+    "page": "Habits",
+    "title": "Habit list",
     "idCol": "Id",
     "titleCol": "Title",
     "descCol": "Description",
-    "empty": "Create a new goal first",
+    "empty": "Create a new habit first",
     "create" : {
       "page": "Create",
-      "title": "Create goal",
+      "title": "Create habit",
       "submit": "Create",
       "titlePlaceholder" : "Title",
       "descriptionPlaceholder" : "Description"
     },
     "fulfill" : {
       "page": "Fulfilments",
-      "title": "Fulfill goal",
-      "empty" : "Create a new goal first"
+      "title": "Fulfill habit",
+      "empty" : "Create a new habit first"
     }
   },
   "login": {
