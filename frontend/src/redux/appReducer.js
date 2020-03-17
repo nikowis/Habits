@@ -24,7 +24,7 @@ const appReducer = (state = initialState, action) => {
         case ActionType.AUTH_ERROR + ActionType.FULFILLED:
             return {
                 ...state,
-                errorMessage: action.payload.errors[0].defaultMessage,
+                errorMessage: (action.payload.message ? action.payload.message : action.payload.errors[0].defaultMessage),
                 error: action.payload,
                 authError: true
             };

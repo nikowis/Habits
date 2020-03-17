@@ -1,6 +1,7 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux'
 import userReducer from "./userReducer";
 import appReducer from "./appReducer";
+import dataReducer from "./dataReducer";
 import promise from 'redux-promise-middleware';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
@@ -8,7 +9,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 const rootReducer = combineReducers({
     user: userReducer,
-    app: appReducer
+    app: appReducer,
+    data: dataReducer,
+
 });
 
 const persistConfig = {

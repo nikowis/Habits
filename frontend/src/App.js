@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import {connect} from "react-redux";
 import Logout from "./components/Logout";
 import Fulfilments from "./features/habit/Fulfilments";
-import Habits from "./features/habit/Habits";
+import Habits from "./features/habit/HabitsList";
 import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TitleHeader from "./components/TitleHeader";

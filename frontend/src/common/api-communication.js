@@ -42,13 +42,15 @@ class Api {
         const url = new URL(this.API_URL + ApiEndpoint.API_HABITS);
         return HttpUtility.get({
             url: url,
+            action: ActionType.FETCH_HABITS
         });
     };
 
     getFulfilments() {
         const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
         return HttpUtility.get({
-            url: url
+            url: url,
+            action: ActionType.FETCH_FULFILMENTS
         });
     };
 
@@ -56,7 +58,8 @@ class Api {
         const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
         return HttpUtility.post({
             url: url,
-            payload: {habitId: habit.id}
+            payload: {habitId: habit.id},
+            action: ActionType.FULFIL_HABIT
         });
     }
 

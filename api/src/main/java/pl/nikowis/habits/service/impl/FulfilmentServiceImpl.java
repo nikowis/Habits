@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.habits.dto.FulfilableHabitDTO;
 import pl.nikowis.habits.dto.FulfillHabitRequestDTO;
 import pl.nikowis.habits.exception.CannotFulfilInactiveHabitException;
+import pl.nikowis.habits.exception.HabitAlreadyFulfiledException;
 import pl.nikowis.habits.exception.HabitDoesntExistException;
 import pl.nikowis.habits.model.Fulfilment;
 import pl.nikowis.habits.model.Habit;
@@ -17,6 +18,7 @@ import pl.nikowis.habits.service.FulfilmentService;
 import pl.nikowis.habits.util.DateUtils;
 import pl.nikowis.habits.util.SecurityUtils;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +48,11 @@ class FulfilmentServiceImpl implements FulfilmentService {
 
         if (!habit.getActive()) {
             throw new CannotFulfilInactiveHabitException();
+        }
+
+        List<Fulfilment> existingFulfilments = fulfilmentRepository.findByUserIdAndCreatedAtBetweenAndHabitIdIn(SecurityUtils.getCurrentUserId(), DateUtils.getTodayDayStart(), DateUtils.getTodayDayEnd(), Collections.singletonList(fulfilDTO.getHabitId()));
+        if(existingFulfilments.size()>0) {
+            throw new HabitAlreadyFulfiledException();
         }
 
         Fulfilment f = new Fulfilment();

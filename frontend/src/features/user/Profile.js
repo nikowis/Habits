@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.scss';
-import {Redirect, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Paths from "../../common/paths";
 import Button from 'react-bootstrap/Button';
@@ -12,14 +12,14 @@ import {Formik} from 'formik';
 
 class Profile extends React.Component {
 
-    componentWillMount(){
-        this.setState({id:'', login: '', streakGoal: 0});
+    componentWillMount() {
+        this.setState({id: '', login: '', streakGoal: 0});
         Api.getUser().payload.then((user) => {
-                this.setState({
-                    id: user.id,
-                    login: user.login,
-                    streakGoal: user.streakGoal
-                });
+            this.setState({
+                id: user.id,
+                login: user.login,
+                streakGoal: user.streakGoal
+            });
         });
     }
 
@@ -37,10 +37,6 @@ class Profile extends React.Component {
 
     render() {
         const {t} = this.props;
-
-        if (this.props.authenticated) {
-            return <Redirect to={Paths.HOME} push={true}/>
-        }
 
         return (
             <Formik validationSchema={profileSchema} onSubmit={this.handleSubmit} enableReinitialize={true}

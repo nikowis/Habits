@@ -2,52 +2,32 @@ import React from 'react';
 import '../../App.scss';
 import Api from "./../../common/api-communication"
 import {connect} from "react-redux";
-import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import {withTranslation} from "react-i18next";
+import FulfillableHabit from "./FulfilmentsRow";
 
 class Fulfilments extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {fulfilments: []};
-    }
-
     componentDidMount() {
-        Api.getFulfilments().payload.then((response) => {
-            this.setState({fulfilments: response})
-        });
+        const {dispatch} = this.props;
+        dispatch(Api.getFulfilments());
     }
 
     handleCheckboxChange = (event) => {
+        const {dispatch} = this.props;
         if (event.target.checked) {
-            const selectedHabit = this.state.fulfilments.filter((habit) =>
+            const selectedHabit = this.props.fulfilments.filter((habit) =>
                 habit.id.toString() === event.target.id
             )[0];
-
-            Api.fulfilHabit(selectedHabit).payload
-                .then(res => {
-                    const curFulfilments = this.state.fulfilments;
-                    curFulfilments.forEach(g => g.fulfilled = g.id === res.id ? res.fulfilled : g.fulfilled);
-                    this.setState({fulfilments: curFulfilments})
-
-                });
+            dispatch(Api.fulfilHabit(selectedHabit));
         }
     };
 
     fulfilmentRows = () => {
-        return this.state.fulfilments.map((habit) => {
-            const label = habit.title + (habit.description ? ': ' + habit.description : '');
-
+        return this.props.fulfilments.map((habit) => {
             return (
                 <ListGroup.Item key={habit.id}>
-                    <Form.Check
-                        type='checkbox' checked={habit.fulfilled}
-                        id={habit.id}
-                        key={habit.id}
-                        onChange={this.handleCheckboxChange}
-                        label={label}
-                    />
+                    <FulfillableHabit habit={habit} handleChange={this.handleCheckboxChange}/>
                 </ListGroup.Item>
             );
         });
@@ -66,11 +46,13 @@ class Fulfilments extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.fulfilments.length > 0 ? this.fulfilmentList() : t('habits.fulfill.empty')}
+                {this.props.fulfilments.length > 0 ? this.fulfilmentList() : t('habits.fulfill.empty')}
             </React.Fragment>
         );
 
     }
 }
 
-export default connect()(withTranslation()(Fulfilments));
+export default connect(state => ({
+    fulfilments: state.data.fulfilments,
+}))(withTranslation()(Fulfilments));

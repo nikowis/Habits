@@ -5,21 +5,15 @@ import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
 import {withTranslation} from "react-i18next";
 
-class Habits extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {habits: []};
-    }
+class HabitsList extends React.Component {
 
     componentDidMount() {
-        Api.getHabits().payload.then((response) => {
-            this.setState({habits: response})
-        });
+        const {dispatch} = this.props;
+        dispatch(Api.getHabits());
     }
 
     habitRows = () => {
-        return this.state.habits.map((habit) => {
+        return this.props.habits.map((habit) => {
             return (<tr key={habit.id}>
                 <td>{habit.id}</td>
                 <td>{habit.title}</td>
@@ -53,10 +47,12 @@ class Habits extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.habits.length > 0 ? this.habitTable() :  t('habits.empty')}
+                {this.props.habits.length > 0 ? this.habitTable() :  t('habits.empty')}
             </React.Fragment>
         );
     }
 }
 
-export default connect()(withTranslation()(Habits));
+export default connect(state => ({
+    habits: state.data.habits,
+}))(withTranslation()(HabitsList));

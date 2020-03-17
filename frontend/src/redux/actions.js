@@ -14,6 +14,9 @@ export default class ActionType {
     static REGISTER_ACTION = 'REGISTER_ACTION';
     static UPDATE_USER = 'UPDATE_USER';
     static CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
+    static FETCH_HABITS = 'FETCH_HABITS';
+    static FETCH_FULFILMENTS = 'FETCH_FULFILMENTS';
+    static FULFIL_HABIT = 'FULFIL_HABIT';
 }
 
 
