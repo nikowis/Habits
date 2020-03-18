@@ -9,6 +9,7 @@
   "description" : "Opis",
   "streakGoal" : "Cel dni pod rząd",
   "submit" : "Zapisz",
+  "servererror" : "Błąd serwera",
   "validations" : {
     "default": "Niepoprawne dane",
     "required": "Pole wymagane",

@@ -14,4 +14,6 @@ public interface HabitService {
     HabitDTO updateHabit(Long habitId, CreateHabitDTO habitDTO);
 
     HabitDTO deleteHabit(Long habitDTO);
+
+    void updateHabitStreaks();
 }

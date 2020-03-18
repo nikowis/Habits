@@ -1,6 +1,8 @@
 package pl.nikowis.habits.service.impl;
 
 import ma.glasnost.orika.MapperFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +14,19 @@ import pl.nikowis.habits.model.UserDetailsImpl;
 import pl.nikowis.habits.repository.HabitRepository;
 import pl.nikowis.habits.repository.UserRepository;
 import pl.nikowis.habits.service.HabitService;
+import pl.nikowis.habits.util.DateUtils;
 import pl.nikowis.habits.util.SecurityUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 class HabitServiceImpl implements HabitService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HabitServiceImpl.class);
+    public static final int RESET_STREAK_DAYS = 1;
 
     @Autowired
     private HabitRepository habitRepository;
@@ -64,5 +71,12 @@ class HabitServiceImpl implements HabitService {
         habit.setActive(false);
         Habit saved = habitRepository.save(habit);
         return mapperFacade.map(saved, HabitDTO.class);
+    }
+
+    @Override
+    public void updateHabitStreaks() {
+        LOGGER.info("UPDATING HABITS");
+        Date resetStreakDays = DateUtils.getNowMinusDays(RESET_STREAK_DAYS);
+        habitRepository.updateHabitStreaks(resetStreakDays);
     }
 }

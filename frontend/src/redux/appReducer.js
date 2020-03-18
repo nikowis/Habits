@@ -35,6 +35,13 @@ const appReducer = (state = initialState, action) => {
                 error: action.payload,
                 apiError: true
             };
+        case ActionType.SERVER_ERROR:
+            return {
+                ...state,
+                errorMessage: action.payload,
+                error: action.payload,
+                apiError: true
+            };
         case ActionType.LOGIN_ACTION + ActionType.FULFILLED:
             return {
                 ...state,
@@ -50,6 +57,7 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 authError: false
             };
+        case ActionType.CLEAR_SERVER_ERROR:
         case ActionType.CLEAR_API_ERROR:
             return {
                 ...state,

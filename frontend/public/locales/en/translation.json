@@ -9,6 +9,7 @@
   "description" : "Description",
   "streakGoal" : "Day streak goal",
   "submit" : "Save",
+  "servererror" : "Server error",
   "validations" : {
     "default": "Invalid field",
     "required": "Field required",

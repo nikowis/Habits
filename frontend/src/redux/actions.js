@@ -3,6 +3,7 @@ export default class ActionType {
     static LOGOUT_ACTION = 'LOGOUT_ACTION';
     static AUTH_ERROR = 'AUTH_ERROR';
     static API_ERROR = 'API_ERROR';
+    static SERVER_ERROR = 'SERVER_ERROR';
     static CLEAR_AUTH_ERROR = 'CLEAR_AUTH_ERROR';
     static CLEAR_API_ERROR = 'CLEAR_API_ERROR';
     static HTTP_REQUEST_FINISH = 'HTTP_REQUEST_FINISH';
@@ -17,6 +18,7 @@ export default class ActionType {
     static FETCH_HABITS = 'FETCH_HABITS';
     static FETCH_FULFILMENTS = 'FETCH_FULFILMENTS';
     static FULFIL_HABIT = 'FULFIL_HABIT';
+    static CLEAR_SERVER_ERROR='CLEAR_SERVER_ERROR';
 }
 
 

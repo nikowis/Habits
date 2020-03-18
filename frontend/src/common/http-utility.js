@@ -1,6 +1,8 @@
 import {store} from '../redux/store';
 import ActionType from '../redux/actions';
 import Const from './app-constants'
+import i18n from '../i18n';
+
 
 class HttpUtility {
 
@@ -38,6 +40,16 @@ class HttpUtility {
                     this.handleError(response);
                     return Promise.reject();
                 }
+            }).catch(response => {
+                console.log(response);
+                store.dispatch({
+                    type: ActionType.SERVER_ERROR
+                    , payload: i18n.t('servererror')
+                });
+                setTimeout(() => {
+                    store.dispatch({type: ActionType.CLEAR_SERVER_ERROR})
+                }, Const.API_ERROR_NOTIFICATION_DURATION)
+                return Promise.reject();
             }).finally(() => store.dispatch({type: endAction}))
         }
     }
