@@ -17,6 +17,7 @@ export default class ActionType {
     static CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
     static FETCH_HABITS = 'FETCH_HABITS';
     static FETCH_FULFILMENTS = 'FETCH_FULFILMENTS';
+    static FETCH_USER = 'FETCH_USER';
     static FULFIL_HABIT = 'FULFIL_HABIT';
     static CLEAR_SERVER_ERROR='CLEAR_SERVER_ERROR';
 }

@@ -12,15 +12,9 @@ import {Formik} from 'formik';
 
 class Profile extends React.Component {
 
-    componentWillMount() {
-        this.setState({id: '', login: '', streakGoal: 0});
-        Api.getUser().payload.then((user) => {
-            this.setState({
-                id: user.id,
-                login: user.login,
-                streakGoal: user.streakGoal
-            });
-        });
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(Api.getUser());
     }
 
     handleSubmit = (data, actions) => {
@@ -41,9 +35,9 @@ class Profile extends React.Component {
         return (
             <Formik validationSchema={profileSchema} onSubmit={this.handleSubmit} enableReinitialize={true}
                     initialValues={{
-                        id: this.state.id,
-                        login: this.state.login,
-                        streakGoal: this.state.streakGoal,
+                        id: this.props.id,
+                        login: this.props.login,
+                        streakGoal: this.props.streakGoal,
                         password: '',
                         repeatPassword: ''
                     }}
@@ -111,5 +105,7 @@ class Profile extends React.Component {
 
 
 export default connect(state => ({
-    user: state.user,
+    id: state.user.id,
+    login: state.user.login,
+    streakGoal: state.user.streakGoal
 }))(withRouter(withTranslation()(Profile)));

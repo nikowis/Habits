@@ -79,7 +79,8 @@ class Api {
     getUser() {
         const url = new URL(this.API_URL + ApiEndpoint.API_USER);
         return HttpUtility.get({
-            url: url
+            url: url,
+            action: ActionType.FETCH_USER
         });
     };
 
