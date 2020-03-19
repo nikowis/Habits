@@ -1,24 +1,19 @@
 import React from 'react';
 import '../../App.scss';
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Paths from "../../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Api from "../../common/api-communication";
-import {profileSchema} from "../../common/validation-schemas";
+import {registerSchema} from "../../common/validation-schemas";
 import {withTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 
-class Profile extends React.Component {
-
-    componentDidMount() {
-        const {dispatch} = this.props;
-        dispatch(Api.getUser());
-    }
+class RegisterView extends React.Component {
 
     handleSubmit = (data, actions) => {
-        Api.updateUser(data.streakGoal, data.password).payload.then((response) => {
+        Api.postRegister(data.login, data.password).payload.then((response) => {
             if (!response.status) {
                 this.props.history.push(Paths.LOGIN)
             } else if (response.status && response.status === 400) {
@@ -32,41 +27,29 @@ class Profile extends React.Component {
     render() {
         const {t} = this.props;
 
+        if (this.props.authenticated) {
+            return <Redirect to={Paths.HOME} push={true}/>
+        }
+
         return (
-            <Formik validationSchema={profileSchema} onSubmit={this.handleSubmit} enableReinitialize={true}
+            <Formik validationSchema={registerSchema} onSubmit={this.handleSubmit}
                     initialValues={{
-                        id: this.props.id,
-                        login: this.props.login,
-                        streakGoal: this.props.streakGoal,
+                        login: '',
                         password: '',
                         repeatPassword: ''
                     }}
             >
                 {({touched, errors, handleSubmit, handleChange, values}) => (
-
                     <Form noValidate onSubmit={handleSubmit}>
-                        <Form.Group controlId="id">
-                            <Form.Label>
-                                {t('id')}
-                            </Form.Label>
-                            <Form.Control name="id" value={values.id} disabled={true}/>
-                        </Form.Group>
                         <Form.Group controlId="login">
                             <Form.Label>
                                 {t('email')}
                             </Form.Label>
-                            <Form.Control name="login" value={values.login} disabled={true}/>
-                        </Form.Group>
-                        <Form.Group controlId="streakGoal">
-                            <Form.Label>
-                                {t('streakGoal')}
-                            </Form.Label>
-                            <Form.Control name="streakGoal" value={values.streakGoal} onChange={handleChange}
-                                          type="number"
-                                          isInvalid={touched.streakGoal && !!errors.streakGoal}
-                                          placeholder={t('streakGoal')}/>
+                            <Form.Control name="login" value={values.login} onChange={handleChange} type="email"
+                                          isInvalid={touched.login && !!errors.login}
+                                          placeholder={t('email')}/>
                             <Form.Control.Feedback type="invalid">
-                                {t(errors.streakGoal)}
+                                {t(errors.login)}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="password">
@@ -94,7 +77,7 @@ class Profile extends React.Component {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            {t('submit')}
+                            {t('register.submit')}
                         </Button>
                     </Form>
                 )}
@@ -105,7 +88,5 @@ class Profile extends React.Component {
 
 
 export default connect(state => ({
-    id: state.user.id,
-    login: state.user.login,
-    streakGoal: state.user.streakGoal
-}))(withRouter(withTranslation()(Profile)));
+    authenticated: state.user.authenticated,
+}))(withRouter(withTranslation()(RegisterView)));

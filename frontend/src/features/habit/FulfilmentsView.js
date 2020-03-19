@@ -5,12 +5,15 @@ import {connect} from "react-redux";
 import ListGroup from "react-bootstrap/ListGroup";
 import {withTranslation} from "react-i18next";
 import FulfillableHabit from "./FulfilmentsRow";
+import LoaderView from "../../components/LoaderView";
 
-class Fulfilments extends React.Component {
+class FulfilmentsView extends React.Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch(Api.getFulfilments());
+        if (this.props.fulfilments === null) {
+            dispatch(Api.getFulfilments());
+        }
     }
 
     handleCheckboxChange = (event) => {
@@ -42,17 +45,21 @@ class Fulfilments extends React.Component {
     };
 
     render() {
-        const {t} = this.props;
 
         return (
             <React.Fragment>
-                {this.props.fulfilments.length > 0 ? this.fulfilmentList() : t('habits.fulfill.empty')}
+                {this.props.fulfilments !== null ? this.getView() : <LoaderView/>}
             </React.Fragment>
         );
 
+    }
+
+    getView() {
+        const {t} = this.props;
+        return <>{this.props.fulfilments.length > 0 ? this.fulfilmentList() : t('habits.fulfill.empty')}</>;
     }
 }
 
 export default connect(state => ({
     fulfilments: state.data.fulfilments,
-}))(withTranslation()(Fulfilments));
+}))(withTranslation()(FulfilmentsView));

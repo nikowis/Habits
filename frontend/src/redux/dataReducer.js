@@ -1,8 +1,8 @@
 import ActionType from "./actions";
 
 const initialState = {
-    habits: [],
-    fulfilments: []
+    habits: null,
+    fulfilments: null
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -25,6 +25,11 @@ const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 fulfilments: newFulfilments
+            };
+        case ActionType.CREATE_HABIT:
+            return {
+                ...state,
+                habits: null
             };
         default:
             return state

@@ -3,7 +3,7 @@ import '../App.scss';
 import {connect} from "react-redux";
 import {withTranslation} from "react-i18next";
 
-class Home extends React.Component {
+class HomeView extends React.Component {
 
     render() {
         const {t} = this.props;
@@ -19,4 +19,4 @@ class Home extends React.Component {
 
 export default connect(state => ({
     login: state.user.login
-}))(withTranslation()(Home));
+}))(withTranslation()(HomeView));

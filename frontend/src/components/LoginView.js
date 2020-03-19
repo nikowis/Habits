@@ -10,7 +10,7 @@ import {withTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 import {loginSchema} from "../common/validation-schemas";
 
-class Login extends React.Component {
+class LoginView extends React.Component {
 
     handleSubmit = (data) => {
         const {dispatch} = this.props;
@@ -68,4 +68,4 @@ class Login extends React.Component {
 
 export default connect(state => ({
     authenticated: state.user.authenticated,
-}))(withTranslation()(Login));
+}))(withTranslation()(LoginView));

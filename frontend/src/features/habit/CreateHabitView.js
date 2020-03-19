@@ -8,13 +8,16 @@ import Button from "react-bootstrap/Button";
 import {withTranslation} from "react-i18next";
 import {Formik} from 'formik';
 import {createHabitSchema} from "../../common/validation-schemas";
+import {connect} from "react-redux";
+import ActioType from "./../../redux/actions";
 
 
-class CreateHabit extends React.Component {
+class CreateHabitView extends React.Component {
 
     handleSubmit = (data, actions) => {
         Api.createHabit(data).payload.then((response) => {
             if (!response.status) {
+                this.props.dispatch({type: ActioType.CREATE_HABIT});
                 this.props.history.push(Paths.HABITS)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
@@ -68,4 +71,4 @@ class CreateHabit extends React.Component {
     }
 }
 
-export default withRouter(withTranslation()(CreateHabit));
+export default connect()(withRouter(withTranslation()(CreateHabitView)));

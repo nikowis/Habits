@@ -4,13 +4,17 @@ import Api from "./../../common/api-communication"
 import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
 import {withTranslation} from "react-i18next";
+import LoaderView from "../../components/LoaderView";
 
-class HabitsList extends React.Component {
+class HabitsView extends React.Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch(Api.getHabits());
+        if (this.props.habits === null) {
+            dispatch(Api.getHabits());
+        }
     }
+
 
     habitRows = () => {
         return this.props.habits.map((habit) => {
@@ -43,16 +47,20 @@ class HabitsList extends React.Component {
 
 
     render() {
-        const { t } = this.props;
 
         return (
             <React.Fragment>
-                {this.props.habits.length > 0 ? this.habitTable() :  t('habits.empty')}
+                {this.props.habits !== null ? this.getView() : <LoaderView/> }
             </React.Fragment>
         );
+    }
+
+    getView() {
+        const { t } = this.props;
+        return <>{this.props.habits.length > 0 ? this.habitTable() : t('habits.empty')}</>;
     }
 }
 
 export default connect(state => ({
     habits: state.data.habits,
-}))(withTranslation()(HabitsList));
+}))(withTranslation()(HabitsView));

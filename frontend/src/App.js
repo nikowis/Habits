@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
 import './App.scss';
-import Login from "./components/Login";
-import CreateHabit from "./features/habit/CreateHabit";
+import Login from "./components/LoginView";
+import CreateHabit from "./features/habit/CreateHabitView";
 import {Route, Switch} from "react-router-dom";
 import TopMenu from "./components/TopMenu";
-import Home from "./components/Home";
+import Home from "./components/HomeView";
 import {connect} from "react-redux";
 import Logout from "./components/Logout";
-import Fulfilments from "./features/habit/Fulfilments";
-import Habits from "./features/habit/HabitsList";
+import Fulfilments from "./features/habit/FulfilmentsView";
+import Habits from "./features/habit/HabitsView";
 import Paths from "./common/paths";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TitleHeader from "./components/TitleHeader";
-import Register from "./features/user/Register";
-import Profile from "./features/user/Profile";
+import Register from "./features/user/RegisterView";
+import Profile from "./features/user/ProfileView";
+import Api from "./common/api-communication";
 
 class App extends Component {
+
+    componentDidMount() {
+        const {dispatch} = this.props;
+        if(this.props.authenticated) {
+            dispatch(Api.getUser());
+            dispatch(Api.getHabits());
+            dispatch(Api.getFulfilments());
+        }
+    }
 
     render() {
         const authenticated = this.props.authenticated;
