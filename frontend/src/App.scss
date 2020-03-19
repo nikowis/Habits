@@ -8,7 +8,7 @@
 }
 
 .app-card {
-  min-height: 25rem;
+  min-height: 10rem;
   display: block;
   width: 95%;
   max-width: 60rem;
@@ -61,11 +61,20 @@
 
   .list-group-item {
     padding: 0;
+    display: flex;
+    align-items: center;
+
+    .progress {
+      width: 30%;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
 
     .form-check {
       display: flex;
       text-align: left;
       padding: 0;
+      width: 70%;
       
       input[type="checkbox"] {
         position: relative;
@@ -80,9 +89,6 @@
     }
   }
 
-  .progress {
-
-  }
 }
 
 

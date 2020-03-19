@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 
-export default function FulfilmentsRow({habit, handleChange}) {
+export default function FulfilmentsRow({habit, streakGoal, handleChange}) {
     const label = habit.title + (habit.description ? ': ' + habit.description : '');
     return (
         <>
@@ -16,7 +16,7 @@ export default function FulfilmentsRow({habit, handleChange}) {
                 onChange={handleChange}
                 label={label}
             />
-            <ProgressBar now={habit.streak * 10}/>
+            <ProgressBar now={habit.streak} max={streakGoal}/>
         </>
     );
 }

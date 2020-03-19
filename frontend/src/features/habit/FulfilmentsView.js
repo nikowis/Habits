@@ -30,7 +30,7 @@ class FulfilmentsView extends React.Component {
         return this.props.fulfilments.map((habit) => {
             return (
                 <ListGroup.Item key={habit.id}>
-                    <FulfillableHabit habit={habit} handleChange={this.handleCheckboxChange}/>
+                    <FulfillableHabit streakGoal={this.props.streakGoal} habit={habit} handleChange={this.handleCheckboxChange}/>
                 </ListGroup.Item>
             );
         });
@@ -62,4 +62,5 @@ class FulfilmentsView extends React.Component {
 
 export default connect(state => ({
     fulfilments: state.data.fulfilments,
+    streakGoal: state.user.streakGoal
 }))(withTranslation()(FulfilmentsView));
