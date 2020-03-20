@@ -26,10 +26,13 @@ const dataReducer = (state = initialState, action) => {
                 ...state,
                 fulfilments: newFulfilments
             };
+        case ActionType.LOGOUT_ACTION + ActionType.PENDING:
+            return initialState;
         case ActionType.CREATE_HABIT:
             return {
                 ...state,
-                habits: null
+                habits: null,
+                fulfilments: null
             };
         default:
             return state
