@@ -21,6 +21,7 @@ import pl.nikowis.habits.util.SecurityUtils;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    public static final int DEFAULT_STREAK_GOAL = 28;
     @Autowired
     private UserRepository userRepository;
 
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
         u.setLogin(userDTO.getLogin());
         u.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         u.setRole(SecurityConstants.ROLE_USER);
+        u.setStreakGoal(DEFAULT_STREAK_GOAL);
         User saved = userRepository.save(u);
         return mapperFacade.map(saved, UserDTO.class);
     }
