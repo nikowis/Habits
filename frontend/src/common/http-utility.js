@@ -38,17 +38,19 @@ class HttpUtility {
                     return response.json()
                 } else {
                     this.handleError(response);
-                    return Promise.reject();
+                    return Promise.reject(response);
                 }
             }).catch(response => {
                 console.log(response);
-                store.dispatch({
-                    type: ActionType.SERVER_ERROR
-                    , payload: i18n.t('servererror')
-                });
-                setTimeout(() => {
-                    store.dispatch({type: ActionType.CLEAR_SERVER_ERROR})
-                }, Const.API_ERROR_NOTIFICATION_DURATION)
+                if(!response.status || response.status > 500) {
+                    store.dispatch({
+                        type: ActionType.SERVER_ERROR
+                        , payload: i18n.t('servererror')
+                    });
+                    setTimeout(() => {
+                        store.dispatch({type: ActionType.CLEAR_SERVER_ERROR})
+                    }, Const.API_ERROR_NOTIFICATION_DURATION)
+                }
                 return Promise.reject();
             }).finally(() => store.dispatch({type: endAction}))
         }

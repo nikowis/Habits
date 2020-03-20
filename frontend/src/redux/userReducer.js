@@ -13,8 +13,6 @@ const userReducer = (state = initialState, action) => {
         case ActionType.LOGIN_ACTION + ActionType.FULFILLED:
             return {
                 ...state,
-                id: payload.id,
-                login: payload.login,
                 authenticated: true
             };
         case ActionType.FETCH_USER + ActionType.FULFILLED:
