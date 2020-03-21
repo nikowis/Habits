@@ -45,7 +45,6 @@ function HabitsView(props) {
     };
 
     const getView = () => {
-        const {t} = props;
         return <>{props.habits.length > 0 ? habitTable() : t('habits.empty')}</>;
     };
 

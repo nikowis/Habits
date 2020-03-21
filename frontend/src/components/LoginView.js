@@ -3,7 +3,7 @@ import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
-import Paths from "../common/paths";
+import {HOME} from "../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Formik} from 'formik';
@@ -20,7 +20,7 @@ function LoginView(props) {
     };
 
     if (props.authenticated) {
-        return <Redirect to={Paths.HOME} push={true}/>
+        return <Redirect to={HOME} push={true}/>
     }
 
     return (

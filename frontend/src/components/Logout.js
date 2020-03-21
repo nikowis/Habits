@@ -3,7 +3,7 @@ import '../App.scss';
 import {Redirect} from "react-router-dom";
 import Api from "../common/api-communication";
 import {connect} from "react-redux";
-import Paths from './../common/paths'
+import {ROOT} from "../common/paths";
 
 function Logout(props) {
 
@@ -17,7 +17,7 @@ function Logout(props) {
         logout();
     }
 
-    return <Redirect to={Paths.ROOT} push={true}/>;
+    return <Redirect to={ROOT} push={true}/>;
 
 }
 

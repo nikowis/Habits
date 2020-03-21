@@ -8,7 +8,7 @@ import Api from "../../common/api-communication";
 import {profileSchema} from "../../common/validation-schemas";
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
-import ActionType from "../../redux/actions";
+import {UPDATE_USER} from "../../redux/actions";
 
 function ProfileView(props) {
 
@@ -23,7 +23,7 @@ function ProfileView(props) {
     const handleSubmit = (data, actions) => {
         Api.updateUser(data.streakGoal, data.password).payload.then((response) => {
             if (!response.status) {
-                props.dispatch({type: ActionType.UPDATE_USER, payload: response})
+                props.dispatch({type: UPDATE_USER, payload: response})
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);

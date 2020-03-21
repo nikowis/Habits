@@ -1,11 +1,9 @@
-export default class Paths {
-    static ROOT = '/';
-    static HOME = '/home';
-    static LOGIN = '/login';
-    static LOGOUT = '/logout';
-    static HABITS = '/habits';
-    static CREATE = this.HABITS + '/create';
-    static FULFILMENTS = this.HABITS + '/fulfill';
-    static REGISTER = '/register';
-    static PROFILE = '/profile';
-}
+export const ROOT = '/';
+export const HOME = '/home';
+export const LOGIN = '/login';
+export const LOGOUT = '/logout';
+export const HABITS = '/habits';
+export const CREATE = HABITS + '/create';
+export const FULFILMENTS = HABITS + '/fulfill';
+export const REGISTER = '/register';
+export const PROFILE = '/profile';

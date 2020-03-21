@@ -1,6 +1,15 @@
-import ApiEndpoint from './endpoints'
+import {API_FULFILMENTS, API_HABITS, API_LOGIN, API_LOGOUT, API_REGISTER, API_USER} from './endpoints'
 import HttpUtility from './http-utility'
-import ActionType from './../redux/actions'
+import {
+    FETCH_FULFILMENTS,
+    FETCH_HABITS,
+    FETCH_USER,
+    FULFIL_HABIT,
+    LOGIN_ACTION,
+    LOGOUT_ACTION,
+    REGISTER_ACTION,
+    UPDATE_USER
+} from "../redux/actions";
 
 class Api {
 
@@ -9,7 +18,7 @@ class Api {
     }
 
     createHabit(habit) {
-        let url = this.API_URL + ApiEndpoint.API_HABITS;
+        let url = this.API_URL + API_HABITS;
 
         return HttpUtility.post({
             url: url,
@@ -18,81 +27,81 @@ class Api {
     };
 
     postLogin(login, password) {
-        let url = this.API_URL + ApiEndpoint.API_LOGIN;
+        let url = this.API_URL + API_LOGIN;
         return HttpUtility.post({
             url: url,
             payload: {
                 login: login,
                 password: password
             },
-            action: ActionType.LOGIN_ACTION
+            action: LOGIN_ACTION
         });
     };
 
     logout() {
-        let url = this.API_URL + ApiEndpoint.API_LOGOUT;
+        let url = this.API_URL + API_LOGOUT;
 
         return HttpUtility.post({
             url: url,
-            action: ActionType.LOGOUT_ACTION
+            action: LOGOUT_ACTION
         });
     };
 
     getHabits() {
-        const url = new URL(this.API_URL + ApiEndpoint.API_HABITS);
+        const url = new URL(this.API_URL + API_HABITS);
         return HttpUtility.get({
             url: url,
-            action: ActionType.FETCH_HABITS
+            action: FETCH_HABITS
         });
     };
 
     getFulfilments() {
-        const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
+        const url = new URL(this.API_URL + API_FULFILMENTS);
         return HttpUtility.get({
             url: url,
-            action: ActionType.FETCH_FULFILMENTS
+            action: FETCH_FULFILMENTS
         });
     };
 
     fulfilHabit(habit) {
-        const url = new URL(this.API_URL + ApiEndpoint.API_FULFILMENTS);
+        const url = new URL(this.API_URL + API_FULFILMENTS);
         return HttpUtility.post({
             url: url,
             payload: {habitId: habit.id},
-            action: ActionType.FULFIL_HABIT
+            action: FULFIL_HABIT
         });
     }
 
 
     postRegister(login, password) {
-        let url = this.API_URL + ApiEndpoint.API_REGISTER;
+        let url = this.API_URL + API_REGISTER;
         return HttpUtility.post({
             url: url,
             payload: {
                 login: login,
                 password: password
             },
-            action: ActionType.REGISTER_ACTION
+            action: REGISTER_ACTION
         });
     }
 
     getUser() {
-        const url = new URL(this.API_URL + ApiEndpoint.API_USER);
+        const url = new URL(this.API_URL + API_USER);
         return HttpUtility.get({
             url: url,
-            action: ActionType.FETCH_USER
+            action: FETCH_USER
         });
     };
 
     updateUser(streakGoal, password) {
-        let url = this.API_URL + ApiEndpoint.API_USER;
+        let url = this.API_URL + API_USER;
         return HttpUtility.put({
             url: url,
             payload: {
                 streakGoal: streakGoal,
                 password: password
             },
-            action: ActionType.UPDATE_USER
+            action: UPDATE_USER
         });
     }
 

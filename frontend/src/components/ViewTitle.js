@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.scss';
 import {useTranslation} from "react-i18next";
 import {withRouter} from 'react-router-dom';
-import Paths from "./../common/paths";
+import {HOME} from './../common/paths'
 
 function ViewTitle(props) {
 
@@ -11,7 +11,7 @@ function ViewTitle(props) {
     const translationKey = (pathname) => {
         let key = pathname.substring(1);
         if (!key) {
-            key = Paths.HOME.substring(1);
+            key = HOME.substring(1);
         }
         key = key.replace('/', '.');
         return t(key + '.title')

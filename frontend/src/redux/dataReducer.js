@@ -1,4 +1,12 @@
-import ActionType from "./actions";
+import {
+    CREATE_HABIT,
+    FETCH_FULFILMENTS,
+    FETCH_HABITS,
+    FULFIL_HABIT,
+    FULFILLED,
+    LOGOUT_ACTION,
+    PENDING
+} from "./actions";
 
 const initialState = {
     habits: null,
@@ -8,17 +16,17 @@ const initialState = {
 const dataReducer = (state = initialState, action) => {
     const payload = action.payload;
     switch (action.type) {
-        case ActionType.FETCH_HABITS + ActionType.FULFILLED:
+        case FETCH_HABITS + FULFILLED:
             return {
                 ...state,
                 habits: payload
             };
-        case ActionType.FETCH_FULFILMENTS + ActionType.FULFILLED:
+        case FETCH_FULFILMENTS + FULFILLED:
             return {
                 ...state,
                 fulfilments: payload
             };
-        case ActionType.FULFIL_HABIT + ActionType.FULFILLED:
+        case FULFIL_HABIT + FULFILLED:
             const newFulfilments = state.fulfilments.map(elem => {
                 return elem.id === payload.id ? payload : elem
             });
@@ -26,9 +34,9 @@ const dataReducer = (state = initialState, action) => {
                 ...state,
                 fulfilments: newFulfilments
             };
-        case ActionType.LOGOUT_ACTION + ActionType.PENDING:
+        case LOGOUT_ACTION + PENDING:
             return initialState;
-        case ActionType.CREATE_HABIT:
+        case CREATE_HABIT:
             return {
                 ...state,
                 habits: null,

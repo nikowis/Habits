@@ -1,4 +1,17 @@
-import ActionType from "./actions";
+import {
+    API_ERROR,
+    AUTH_ERROR,
+    CHANGE_LANG,
+    CLEAR_API_ERROR,
+    CLEAR_AUTH_ERROR,
+    CLEAR_SERVER_ERROR,
+    FULFILLED,
+    HTTP_REQUEST_FINISH,
+    HTTP_REQUEST_START,
+    LOGIN_ACTION,
+    LOGOUT_ACTION,
+    SERVER_ERROR
+} from "./actions";
 
 const initialState = {
     apiError: false,
@@ -11,59 +24,59 @@ const initialState = {
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ActionType.HTTP_REQUEST_START:
+        case HTTP_REQUEST_START:
             return {
                 ...state,
                 pendingRequests: state.pendingRequests + 1
             };
-        case ActionType.HTTP_REQUEST_FINISH:
+        case HTTP_REQUEST_FINISH:
             return {
                 ...state,
                 pendingRequests: state.pendingRequests - 1
             };
-        case ActionType.AUTH_ERROR + ActionType.FULFILLED:
+        case AUTH_ERROR + FULFILLED:
             return {
                 ...state,
                 errorMessage: (action.payload.message ? action.payload.message : action.payload.errors[0].defaultMessage),
                 error: action.payload,
                 authError: true
             };
-        case ActionType.API_ERROR + ActionType.FULFILLED:
+        case API_ERROR + FULFILLED:
             return {
                 ...state,
                 errorMessage: JSON.stringify(action.payload),
                 error: action.payload,
                 apiError: true
             };
-        case ActionType.SERVER_ERROR:
+        case SERVER_ERROR:
             return {
                 ...state,
                 errorMessage: action.payload,
                 error: action.payload,
                 apiError: true
             };
-        case ActionType.LOGIN_ACTION + ActionType.FULFILLED:
+        case LOGIN_ACTION + FULFILLED:
             return {
                 ...state,
                 authError: false
             };
-        case ActionType.LOGOUT_ACTION + ActionType.FULFILLED:
+        case LOGOUT_ACTION + FULFILLED:
             return {
                 ...state,
                 authError: false
             };
-        case ActionType.CLEAR_AUTH_ERROR:
+        case CLEAR_AUTH_ERROR:
             return {
                 ...state,
                 authError: false
             };
-        case ActionType.CLEAR_SERVER_ERROR:
-        case ActionType.CLEAR_API_ERROR:
+        case CLEAR_SERVER_ERROR:
+        case CLEAR_API_ERROR:
             return {
                 ...state,
                 apiError: false
             };
-        case ActionType.CHANGE_LANG:
+        case CHANGE_LANG:
             window.lang = action.payload;
             return {
                 ...state,

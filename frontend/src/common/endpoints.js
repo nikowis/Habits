@@ -1,8 +1,6 @@
-export default class ApiEndpoint {
-    static API_HABITS = '/habits';
-    static API_FULFILMENTS = '/fulfilments';
-    static API_LOGIN = '/login';
-    static API_USER = '/user';
-    static API_LOGOUT = '/logout';
-    static API_REGISTER = '/register';
-}
+export const API_HABITS = '/habits';
+export const API_FULFILMENTS = '/fulfilments';
+export const API_LOGIN = '/login';
+export const API_USER = '/user';
+export const API_LOGOUT = '/logout';
+export const API_REGISTER = '/register';

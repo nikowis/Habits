@@ -2,13 +2,13 @@ import React from 'react';
 import '../../App.scss';
 import {Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import Paths from "../../common/paths";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Api from "../../common/api-communication";
 import {registerSchema} from "../../common/validation-schemas";
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
+import {HOME, LOGIN} from "../../common/paths";
 
 function RegisterView(props) {
 
@@ -17,7 +17,7 @@ function RegisterView(props) {
     const handleSubmit = (data, actions) => {
         Api.postRegister(data.login, data.password).payload.then((response) => {
             if (!response.status) {
-                props.history.push(Paths.LOGIN)
+                props.history.push(LOGIN)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);
@@ -27,7 +27,7 @@ function RegisterView(props) {
     };
 
     if (props.authenticated) {
-        return <Redirect to={Paths.HOME} push={true}/>
+        return <Redirect to={HOME} push={true}/>
     }
 
     return (

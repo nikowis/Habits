@@ -7,40 +7,40 @@ import Home from "./HomeView";
 import Logout from "./Logout";
 import Fulfilments from "./habit/FulfilmentsView";
 import Habits from "./habit/HabitsView";
-import Paths from "./../common/paths";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import Register from "./user/RegisterView";
 import Profile from "./user/ProfileView";
 import NoMatchingView from "./NoMatchingView";
+import {CREATE, FULFILMENTS, HABITS, HOME, LOGIN, LOGOUT, PROFILE, REGISTER, ROOT} from "../common/paths";
 
 export default function ViewRoutes() {
     return (
         <Switch>
-            <Route path={Paths.ROOT} exact={true}>
+            <Route path={ROOT} exact={true}>
                 <Home/>
             </Route>
-            <Route path={Paths.HOME}>
+            <Route path={HOME}>
                 <Home/>
             </Route>
-            <Route path={Paths.LOGIN}>
+            <Route path={LOGIN}>
                 <Login/>
             </Route>
-            <Route path={Paths.REGISTER}>
+            <Route path={REGISTER}>
                 <Register/>
             </Route>
-            <AuthenticatedRoute path={Paths.LOGOUT}>
+            <AuthenticatedRoute path={LOGOUT}>
                 <Logout/>
             </AuthenticatedRoute>
-            <AuthenticatedRoute path={Paths.CREATE}>
+            <AuthenticatedRoute path={CREATE}>
                 <CreateHabit/>
             </AuthenticatedRoute>
-            <AuthenticatedRoute path={Paths.FULFILMENTS}>
+            <AuthenticatedRoute path={FULFILMENTS}>
                 <Fulfilments/>
             </AuthenticatedRoute>
-            <AuthenticatedRoute path={Paths.HABITS}>
+            <AuthenticatedRoute path={HABITS}>
                 <Habits/>
             </AuthenticatedRoute>
-            <AuthenticatedRoute path={Paths.PROFILE}>
+            <AuthenticatedRoute path={PROFILE}>
                 <Profile/>
             </AuthenticatedRoute>
             <Route component={NoMatchingView}/>

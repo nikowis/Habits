@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.scss';
 import {Redirect, Route} from "react-router-dom";
-import Paths from "../common/paths";
+import {LOGIN} from "../common/paths";
 import {connect} from "react-redux";
 
 function AuthenticatedRoute({children, authenticated, ...rest}) {
@@ -14,7 +14,7 @@ function AuthenticatedRoute({children, authenticated, ...rest}) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: Paths.LOGIN,
+                            pathname: LOGIN,
                             state: {from: location}
                         }}
                     />

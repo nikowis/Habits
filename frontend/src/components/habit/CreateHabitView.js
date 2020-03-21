@@ -2,14 +2,14 @@ import React from 'react';
 import '../../App.scss';
 import Api from "./../../common/api-communication"
 import {withRouter} from 'react-router-dom';
-import Paths from "../../common/paths";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import {Formik} from 'formik';
 import {createHabitSchema} from "../../common/validation-schemas";
 import {connect} from "react-redux";
-import ActioType from "./../../redux/actions";
+import {CREATE_HABIT} from "../../redux/actions";
+import {HABITS} from "../../common/paths";
 
 
 function CreateHabitView(props) {
@@ -19,8 +19,8 @@ function CreateHabitView(props) {
     const handleSubmit = (data, actions) => {
         Api.createHabit(data).payload.then((response) => {
             if (!response.status) {
-                props.dispatch({type: ActioType.CREATE_HABIT});
-                props.history.push(Paths.HABITS)
+                props.dispatch({type: CREATE_HABIT});
+                props.history.push(HABITS)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);
@@ -70,4 +70,4 @@ function CreateHabitView(props) {
 
 }
 
-export default connect()(withRouter(withTranslation()(CreateHabitView)));
+export default connect()(withRouter(CreateHabitView));

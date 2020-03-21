@@ -1,4 +1,4 @@
-import ActionType from "./actions";
+import {AUTH_ERROR, FETCH_USER, FULFILLED, LOGIN_ACTION, LOGOUT_ACTION, PENDING, UPDATE_USER} from "./actions";
 
 const initialState = {
     id: null,
@@ -10,21 +10,21 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     const payload = action.payload;
     switch (action.type) {
-        case ActionType.LOGIN_ACTION + ActionType.FULFILLED:
+        case LOGIN_ACTION + FULFILLED:
             return {
                 ...state,
                 authenticated: true
             };
-        case ActionType.UPDATE_USER:
-        case ActionType.FETCH_USER + ActionType.FULFILLED:
+        case UPDATE_USER:
+        case FETCH_USER + FULFILLED:
             return {
                 ...state,
                 id: payload.id,
                 login: payload.login,
                 streakGoal: payload.streakGoal
             };
-        case ActionType.AUTH_ERROR + ActionType.FULFILLED:
-        case ActionType.LOGOUT_ACTION + ActionType.PENDING:
+        case AUTH_ERROR + FULFILLED:
+        case LOGOUT_ACTION + PENDING:
             return initialState;
         default:
             return state
