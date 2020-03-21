@@ -10,12 +10,13 @@ import LoaderView from "../../components/LoaderView";
 function FulfilmentsView(props) {
 
     const {t} = useTranslation();
+    const {dispatch, fulfilments} = props;
 
     useEffect(() => {
-        if (props.fulfilments === null) {
-            props.dispatch(Api.getFulfilments());
+        if (fulfilments === null) {
+            dispatch(Api.getFulfilments());
         }
-    }, [props.fulfilments]);
+    }, [dispatch, fulfilments]);
 
     const handleCheckboxChange = (event) => {
         const {dispatch} = props;

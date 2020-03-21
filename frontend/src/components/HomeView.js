@@ -8,12 +8,13 @@ import LoaderView from "./LoaderView";
 function HomeView(props) {
 
     const {t} = useTranslation();
+    const {dispatch, authenticated, login} = props;
 
     useEffect(() => {
-        if (props.authenticated && props.login === null) {
-            props.dispatch(Api.getUser());
+        if (authenticated && login === null) {
+            dispatch(Api.getUser());
         }
-    }, [props.authenticated, props.login]);
+    }, [dispatch, authenticated, login]);
 
     const getView = () => {
         return (

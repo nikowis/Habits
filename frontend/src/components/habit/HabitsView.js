@@ -9,12 +9,13 @@ import LoaderView from "../../components/LoaderView";
 function HabitsView(props) {
 
     const {t} = useTranslation();
+    const {dispatch, habits} = props;
 
     useEffect(() => {
-        if (props.habits === null) {
-            props.dispatch(Api.getHabits());
+        if (habits === null) {
+            dispatch(Api.getHabits());
         }
-    }, [props.habits]);
+    }, [dispatch, habits]);
 
 
     const habitRows = () => {

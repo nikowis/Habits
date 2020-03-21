@@ -13,12 +13,13 @@ import {UPDATE_USER} from "../../redux/actions";
 function ProfileView(props) {
 
     const {t} = useTranslation();
+    const {dispatch, login} = props;
 
     useEffect(() => {
-        if (props.login === null) {
-            props.dispatch(Api.getUser());
+        if (login === null) {
+            dispatch(Api.getUser());
         }
-    }, [props.login]);
+    }, [dispatch, login]);
 
     const handleSubmit = (data, actions) => {
         Api.updateUser(data.streakGoal, data.password).payload.then((response) => {
