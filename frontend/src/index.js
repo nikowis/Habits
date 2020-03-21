@@ -1,7 +1,7 @@
-import React, {Suspense} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import SuspenseFallbackComponent from './SuspenseFallbackComponent'
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import configureStore from './redux/store/configureStore.js';
@@ -10,23 +10,17 @@ import {PersistGate} from 'redux-persist/integration/react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
 import './common/validation-schemas'
-
-// return fallback gui when translations are not yet loaded
-function AppWithSuspense() {
-    return (
-        <Suspense fallback={<div/>}>
-            <App/>
-        </Suspense>
-    );
-}
+import App from "./App";
 
 export const {persistor, store} = configureStore();
 
 ReactDOM.render(
     <Router>
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <AppWithSuspense/>
+            <PersistGate persistor={persistor}>
+                <SuspenseFallbackComponent>
+                    <App/>
+                </SuspenseFallbackComponent>
             </PersistGate>
         </Provider>
     </Router>
