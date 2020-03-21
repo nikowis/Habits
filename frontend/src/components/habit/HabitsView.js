@@ -1,23 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../../App.scss';
 import Api from "./../../common/api-communication"
 import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
-import {withTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import LoaderView from "../../components/LoaderView";
 
-class HabitsView extends React.Component {
+function HabitsView(props) {
 
-    componentDidMount() {
-        const {dispatch} = this.props;
-        if (this.props.habits === null) {
-            dispatch(Api.getHabits());
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        if (props.habits === null) {
+            props.dispatch(Api.getHabits());
         }
-    }
+    }, [props.habits]);
 
 
-    habitRows = () => {
-        return this.props.habits.map((habit) => {
+    const habitRows = () => {
+        return props.habits.map((habit) => {
             return (<tr key={habit.id}>
                 <td>{habit.id}</td>
                 <td>{habit.title}</td>
@@ -26,9 +27,7 @@ class HabitsView extends React.Component {
         });
     };
 
-    habitTable = () => {
-        const { t } = this.props;
-
+    const habitTable = () => {
         return (
             <Table striped bordered hover size="sm">
                 <thead>
@@ -39,28 +38,25 @@ class HabitsView extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.habitRows()}
+                {habitRows()}
                 </tbody>
             </Table>
         );
     };
 
+    const getView = () => {
+        const {t} = props;
+        return <>{props.habits.length > 0 ? habitTable() : t('habits.empty')}</>;
+    };
 
-    render() {
+    return (
+        <React.Fragment>
+            {props.habits !== null ? getView() : <LoaderView/>}
+        </React.Fragment>
+    );
 
-        return (
-            <React.Fragment>
-                {this.props.habits !== null ? this.getView() : <LoaderView/> }
-            </React.Fragment>
-        );
-    }
-
-    getView() {
-        const { t } = this.props;
-        return <>{this.props.habits.length > 0 ? this.habitTable() : t('habits.empty')}</>;
-    }
 }
 
 export default connect(state => ({
     habits: state.data.habits,
-}))(withTranslation()(HabitsView));
+}))(HabitsView);

@@ -1,8 +1,8 @@
 import ActionType from "./actions";
 
 const initialState = {
-    id: '',
-    login: '',
+    id: null,
+    login: null,
     authenticated: false,
     streakGoal: null
 };
@@ -15,6 +15,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 authenticated: true
             };
+        case ActionType.UPDATE_USER:
         case ActionType.FETCH_USER + ActionType.FULFILLED:
             return {
                 ...state,

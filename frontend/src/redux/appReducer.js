@@ -5,7 +5,7 @@ const initialState = {
     authError: false,
     error: {},
     errorMessage: '',
-    pendingRequests:0,
+    pendingRequests: 0,
     lang: 'en'
 };
 

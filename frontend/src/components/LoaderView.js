@@ -4,7 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import {useTranslation} from "react-i18next";
 
 export default function LoaderView() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <>

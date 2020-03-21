@@ -3,7 +3,7 @@ import '../App.scss';
 import Alert from "react-bootstrap/Alert";
 import {connect} from "react-redux";
 
-function ErrorContainer (props){
+function ErrorContainer(props) {
 
     const errorContainer = (message) => {
         return (

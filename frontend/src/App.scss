@@ -26,6 +26,7 @@
   margin: auto;
   width: 100%;
   max-width: 50rem;
+
   input {
     max-width: 15rem;
     margin: auto;
@@ -34,7 +35,7 @@
   textarea {
     resize: none;
     max-width: 25rem;
-    margin:auto;
+    margin: auto;
   }
 }
 
@@ -75,7 +76,7 @@
       text-align: left;
       padding: 0;
       width: 70%;
-      
+
       input[type="checkbox"] {
         position: relative;
         transform: scale(1.5);

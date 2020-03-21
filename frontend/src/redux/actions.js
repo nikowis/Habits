@@ -19,8 +19,8 @@ export default class ActionType {
     static FETCH_FULFILMENTS = 'FETCH_FULFILMENTS';
     static FETCH_USER = 'FETCH_USER';
     static FULFIL_HABIT = 'FULFIL_HABIT';
-    static CLEAR_SERVER_ERROR='CLEAR_SERVER_ERROR';
-    static CREATE_HABIT='CREATE_HABIT';
+    static CLEAR_SERVER_ERROR = 'CLEAR_SERVER_ERROR';
+    static CREATE_HABIT = 'CREATE_HABIT';
 }
 
 

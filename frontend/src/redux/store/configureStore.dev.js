@@ -24,7 +24,7 @@ const configureStore = () => {
 
     const persistor = persistStore(store);
 
-    return { persistor, store };
+    return {persistor, store};
 };
 
 export default configureStore

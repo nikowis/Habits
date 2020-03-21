@@ -1,36 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../App.scss';
 import {connect} from "react-redux";
-import {withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "react-i18next";
 import Api from "../common/api-communication";
 import LoaderView from "./LoaderView";
 
-class HomeView extends React.Component {
+function HomeView(props) {
 
-    componentDidMount() {
-        const {dispatch} = this.props;
-        if (this.props.authenticated) {
-            dispatch(Api.getUser());
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        if (props.authenticated && props.login === null) {
+            props.dispatch(Api.getUser());
         }
-    }
+    }, [props.authenticated, props.login]);
 
-    getView() {
-        const {t} = this.props;
+    const getView = () => {
         return (
             <h5 className='home'>
-                {this.props.login ? t('home.title', {'name': this.props.login}) : t('home.title', {'name': t('home.stranger')})}
+                {props.login ? t('home.title', {'name': props.login}) : t('home.title', {'name': t('home.stranger')})}
             </h5>
         );
-    }
+    };
 
-    render() {
-        return (
-            <>
-                {!this.props.authenticated || (this.props.authenticated && this.props.login) ? this.getView() :
-                    <LoaderView/>}
-            </>
-        );
-    }
+
+    return (
+        <>
+            {!props.authenticated || (props.authenticated && props.login) ? getView() :
+                <LoaderView/>}
+        </>
+    );
+
 
 }
 

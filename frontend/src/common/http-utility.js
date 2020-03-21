@@ -41,7 +41,7 @@ class HttpUtility {
                     return Promise.reject(response);
                 }
             }).catch(response => {
-                if(!response.status || response.status > 500) {
+                if (!response.status || response.status > 500) {
                     console.log(response);
                     store.dispatch({
                         type: ActionType.SERVER_ERROR
