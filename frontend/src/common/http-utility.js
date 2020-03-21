@@ -1,4 +1,4 @@
-import {store} from '../redux/store/store';
+import {store} from '../index';
 import ActionType from '../redux/actions';
 import Const from './app-constants'
 import i18n from '../i18n';

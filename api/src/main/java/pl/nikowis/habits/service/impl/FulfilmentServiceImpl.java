@@ -80,7 +80,7 @@ class FulfilmentServiceImpl implements FulfilmentService {
         Date startDate = DateUtils.getTodayDayStart();
         Date endDate = DateUtils.getTodayDayEnd();
 
-        List<Fulfilment> fulfilments = fulfilmentRepository.findByUserIdAndCreatedAtBetweenAndHabitIdIn(1L, startDate, endDate, habitIds);
+        List<Fulfilment> fulfilments = fulfilmentRepository.findByUserIdAndCreatedAtBetweenAndHabitIdIn(SecurityUtils.getCurrentUserId(), startDate, endDate, habitIds);
 
         fulfilments.forEach(f -> dailyHabitss.forEach(g -> {
             if (g.getId().equals(f.getHabit().getId())) {
