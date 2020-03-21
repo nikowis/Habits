@@ -44,5 +44,9 @@ export const profileSchema = Yup.object().shape({
         .required(),
     password: Yup.string(),
     repeatPassword: Yup.string()
+        .when("password", {
+            is: (val) => val,
+            then: Yup.string().required()
+        })
         .oneOf([Yup.ref('password')], 'validations.passwordMatch')
 });

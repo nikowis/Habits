@@ -3,9 +3,9 @@ import '../App.scss';
 import Alert from "react-bootstrap/Alert";
 import {connect} from "react-redux";
 
-class ErrorContainer extends React.Component {
+function ErrorContainer (props){
 
-    errorContainer = (message) => {
+    const errorContainer = (message) => {
         return (
             <Alert variant='danger'>
                 {message}
@@ -13,14 +13,13 @@ class ErrorContainer extends React.Component {
         );
     };
 
-    render() {
-        return (
-            <div className='error-container'>
-                {this.props.authError ? this.errorContainer(this.props.errorMessage) : null}
-                {this.props.apiError ? this.errorContainer(this.props.errorMessage) : null}
-            </div>
-        );
-    }
+    return (
+        <div className='error-container'>
+            {props.authError ? errorContainer(props.errorMessage) : null}
+            {props.apiError ? errorContainer(props.errorMessage) : null}
+        </div>
+    );
+
 }
 
 export default connect(state => ({

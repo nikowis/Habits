@@ -5,20 +5,20 @@ import Api from "../common/api-communication";
 import {connect} from "react-redux";
 import Paths from './../common/paths'
 
-class Logout extends React.Component {
+function Logout(props) {
 
-    logout = () => {
-        const {dispatch} = this.props;
+    const logout = () => {
+        const {dispatch} = props;
         localStorage.clear();
         dispatch(Api.logout());
     };
 
-    render() {
-        if (this.props.authenticated) {
-            this.logout();
-        }
-        return <Redirect to={Paths.ROOT} push={true}/>;
+    if (props.authenticated) {
+        logout();
     }
+
+    return <Redirect to={Paths.ROOT} push={true}/>;
+
 }
 
 export default connect(state => ({
