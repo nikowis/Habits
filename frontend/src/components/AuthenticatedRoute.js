@@ -2,8 +2,9 @@ import React from 'react';
 import '../App.scss';
 import {Redirect, Route} from "react-router-dom";
 import Paths from "../common/paths";
+import {connect} from "react-redux";
 
-export default function AuthenticatedRoute({ children, authenticated, ...rest }) {
+function AuthenticatedRoute({ children, authenticated, ...rest }) {
     return (
         <Route
             {...rest}
@@ -22,3 +23,7 @@ export default function AuthenticatedRoute({ children, authenticated, ...rest })
         />
     );
 }
+
+export default connect(state => ({
+    authenticated: state.user.authenticated,
+}))(AuthenticatedRoute);
