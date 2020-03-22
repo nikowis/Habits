@@ -13,7 +13,7 @@ import Profile from "./user/ProfileView";
 import NoMatchingView from "./NoMatchingView";
 import {CREATE, FULFILMENTS, HABITS, HOME, LOGIN, LOGOUT, PROFILE, REGISTER, ROOT} from "../common/paths";
 
-export default function ViewRoutes() {
+function ViewRoutes() {
     return (
         <Switch>
             <Route path={ROOT} exact={true}>
@@ -48,3 +48,8 @@ export default function ViewRoutes() {
         </Switch>
     );
 }
+
+
+ViewRoutes.propTypes = {};
+
+export default ViewRoutes;

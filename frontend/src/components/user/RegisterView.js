@@ -9,6 +9,7 @@ import {registerSchema} from "../../common/validation-schemas";
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 import {HOME, LOGIN} from "../../common/paths";
+import PropTypes from "prop-types";
 
 function RegisterView(props) {
 
@@ -82,9 +83,11 @@ function RegisterView(props) {
             )}
         </Formik>
     );
-
 }
 
+RegisterView.propTypes = {
+    authenticated: PropTypes.bool.isRequired
+};
 
 export default connect(state => ({
     authenticated: state.user.authenticated,

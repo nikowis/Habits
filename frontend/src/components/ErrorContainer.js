@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.scss';
 import Alert from "react-bootstrap/Alert";
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 function ErrorContainer(props) {
 
@@ -21,6 +22,12 @@ function ErrorContainer(props) {
     );
 
 }
+
+ErrorContainer.propTypes = {
+    authError: PropTypes.bool.isRequired,
+    apiError: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string.isRequired
+};
 
 export default connect(state => ({
     authError: state.app.authError,

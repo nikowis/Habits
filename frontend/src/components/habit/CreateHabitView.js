@@ -11,7 +11,6 @@ import {connect} from "react-redux";
 import {CREATE_HABIT} from "../../redux/actions";
 import {HABITS} from "../../common/paths";
 
-
 function CreateHabitView(props) {
 
     const {t} = useTranslation();
@@ -67,7 +66,8 @@ function CreateHabitView(props) {
             )}
         </Formik>
     );
-
 }
+
+CreateHabitView.propTypes = {};
 
 export default connect()(withRouter(CreateHabitView));

@@ -9,6 +9,7 @@ import {profileSchema} from "../../common/validation-schemas";
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 import {UPDATE_USER} from "../../redux/actions";
+import PropTypes from "prop-types";
 
 function ProfileView(props) {
 
@@ -104,6 +105,11 @@ function ProfileView(props) {
 
 }
 
+ProfileView.propTypes = {
+    id: PropTypes.number,
+    login: PropTypes.string,
+    streakGoal: PropTypes.number
+};
 
 export default connect(state => ({
     id: state.user.id,

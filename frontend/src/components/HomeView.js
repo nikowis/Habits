@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {useTranslation, withTranslation} from "react-i18next";
 import Api from "../common/api-communication";
 import LoaderView from "./LoaderView";
+import PropTypes from "prop-types";
 
 function HomeView(props) {
 
@@ -34,6 +35,11 @@ function HomeView(props) {
 
 
 }
+
+HomeView.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    login: PropTypes.string
+};
 
 export default connect(state => ({
     authenticated: state.user.authenticated,

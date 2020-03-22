@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Table from "react-bootstrap/Table";
 import {useTranslation} from "react-i18next";
 import LoaderView from "../../components/LoaderView";
+import PropTypes from "prop-types";
 
 function HabitsView(props) {
 
@@ -54,8 +55,17 @@ function HabitsView(props) {
             {props.habits !== null ? getView() : <LoaderView/>}
         </React.Fragment>
     );
-
 }
+
+HabitsView.propTypes = {
+    habits: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired
+        })
+    )
+};
 
 export default connect(state => ({
     habits: state.data.habits,

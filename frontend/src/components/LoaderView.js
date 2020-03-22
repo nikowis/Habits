@@ -3,7 +3,7 @@ import '../App.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import {useTranslation} from "react-i18next";
 
-export default function LoaderView() {
+function LoaderView() {
     const {t} = useTranslation();
 
     return (
@@ -19,3 +19,7 @@ export default function LoaderView() {
         </>
     );
 }
+
+LoaderView.propTypes = {};
+
+export default LoaderView;

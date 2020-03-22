@@ -6,6 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import {useTranslation} from "react-i18next";
 import FulfillableHabit from "./FulfilmentsRow";
 import LoaderView from "../../components/LoaderView";
+import PropTypes from "prop-types";
 
 function FulfilmentsView(props) {
 
@@ -57,6 +58,11 @@ function FulfilmentsView(props) {
         </React.Fragment>
     );
 }
+
+FulfilmentsView.propTypes = {
+    fulfilments: PropTypes.array,
+    streakGoal: PropTypes.number.isRequired
+};
 
 export default connect(state => ({
     fulfilments: state.data.fulfilments,

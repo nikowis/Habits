@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import {Formik} from 'formik';
 import {loginSchema} from "../common/validation-schemas";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function LoginView(props) {
 
@@ -64,6 +65,10 @@ function LoginView(props) {
     );
 
 }
+
+LoginView.propTypes = {
+    authenticated: PropTypes.bool.isRequired
+};
 
 export default connect(state => ({
     authenticated: state.user.authenticated,

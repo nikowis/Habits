@@ -2,9 +2,9 @@ import React from 'react';
 import '../../App.scss';
 import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import PropTypes from 'prop-types';
 
-
-export default function FulfilmentsRow({habit, streakGoal, handleChange}) {
+function FulfilmentsRow({habit, streakGoal, handleChange}) {
     const label = habit.title + (habit.description ? ': ' + habit.description : '');
     return (
         <>
@@ -20,3 +20,16 @@ export default function FulfilmentsRow({habit, streakGoal, handleChange}) {
         </>
     );
 }
+
+FulfilmentsRow.propTypes = {
+    habit: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        fulfilled: PropTypes.bool.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired
+    }).isRequired,
+    streakGoal: PropTypes.number.isRequired,
+    handleChange: PropTypes.func.isRequired
+};
+
+export default FulfilmentsRow;

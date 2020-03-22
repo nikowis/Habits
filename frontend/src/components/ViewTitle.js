@@ -23,7 +23,8 @@ function ViewTitle(props) {
             {pageTitle ? <h5>{pageTitle}</h5> : null}
         </div>
     );
-
 }
+
+ViewTitle.propTypes = {};
 
 export default withRouter(ViewTitle);
