@@ -10,6 +10,7 @@ import {
     REGISTER_ACTION,
     UPDATE_USER
 } from "../redux/actions";
+import {DEFAULT_PAGE_SIZE} from './app-constants'
 
 class Api {
 
@@ -18,7 +19,7 @@ class Api {
     }
 
     createHabit(habit) {
-        let url = this.API_URL + API_HABITS;
+        const url = this.API_URL + API_HABITS;
 
         return HttpUtility.post({
             url: url,
@@ -27,7 +28,7 @@ class Api {
     };
 
     postLogin(login, password) {
-        let url = this.API_URL + API_LOGIN;
+        const url = this.API_URL + API_LOGIN;
         return HttpUtility.post({
             url: url,
             payload: {
@@ -39,7 +40,7 @@ class Api {
     };
 
     logout() {
-        let url = this.API_URL + API_LOGOUT;
+        const url = this.API_URL + API_LOGOUT;
 
         return HttpUtility.post({
             url: url,
@@ -47,16 +48,30 @@ class Api {
         });
     };
 
-    getHabits() {
+    getHabits(page) {
+        if (!page) {
+            page = 0;
+        }
         const url = new URL(this.API_URL + API_HABITS);
+
+        const params = {size: DEFAULT_PAGE_SIZE, page: page};
+        url.search = new URLSearchParams(params).toString();
+
         return HttpUtility.get({
             url: url,
             action: FETCH_HABITS
         });
     };
 
-    getFulfilments() {
+    getFulfilments(page) {
+        if (!page) {
+            page = 0;
+        }
         const url = new URL(this.API_URL + API_FULFILMENTS);
+
+        const params = {size: DEFAULT_PAGE_SIZE, page: page};
+        url.search = new URLSearchParams(params).toString();
+
         return HttpUtility.get({
             url: url,
             action: FETCH_FULFILMENTS
@@ -74,7 +89,7 @@ class Api {
 
 
     postRegister(login, password) {
-        let url = this.API_URL + API_REGISTER;
+        const url = this.API_URL + API_REGISTER;
         return HttpUtility.post({
             url: url,
             payload: {
@@ -94,7 +109,7 @@ class Api {
     };
 
     updateUser(streakGoal, password) {
-        let url = this.API_URL + API_USER;
+        const url = this.API_URL + API_USER;
         return HttpUtility.put({
             url: url,
             payload: {

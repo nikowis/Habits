@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import FulfillableHabit from "./FulfilmentsRow";
 import LoaderView from "../../components/LoaderView";
 import PropTypes from "prop-types";
+import PaginationComponent from "../PaginationComponent";
 
 function FulfilmentsView(props) {
 
@@ -40,11 +41,19 @@ function FulfilmentsView(props) {
         });
     };
 
+    const handlePageChange = (page) => {
+        dispatch(Api.getFulfilments(page));
+    };
+
     const fulfilmentList = () => {
         return (
-            <ListGroup className="fulfilment-list">
-                {fulfilmentRows()}
-            </ListGroup>
+            <>
+                <ListGroup className="fulfilment-list">
+                    {fulfilmentRows()}
+                </ListGroup>
+                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages}
+                                     onPageChange={handlePageChange}/>
+            </>
         );
     };
 
@@ -54,17 +63,30 @@ function FulfilmentsView(props) {
 
     return (
         <React.Fragment>
-            {props.fulfilments !== null ? getView() : <LoaderView/>}
+            {props.loading || props.fulfilments === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
 
 FulfilmentsView.propTypes = {
-    fulfilments: PropTypes.array,
-    streakGoal: PropTypes.number.isRequired
+    fulfilments: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            fulfilled: PropTypes.bool.isRequired
+        }),
+    ),
+    streakGoal: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    totalPages: PropTypes.number.isRequired,
 };
 
 export default connect(state => ({
-    fulfilments: state.data.fulfilments,
-    streakGoal: state.user.streakGoal
+    fulfilments: state.data.fulfilments.content,
+    streakGoal: state.user.streakGoal,
+    loading: state.data.fulfilments.loading,
+    currentPage: state.data.fulfilments.currentPage,
+    totalPages: state.data.fulfilments.totalPages,
 }))(FulfilmentsView);

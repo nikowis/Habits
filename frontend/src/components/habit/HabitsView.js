@@ -6,6 +6,7 @@ import Table from "react-bootstrap/Table";
 import {useTranslation} from "react-i18next";
 import LoaderView from "../../components/LoaderView";
 import PropTypes from "prop-types";
+import PaginationComponent from "../PaginationComponent";
 
 function HabitsView(props) {
 
@@ -29,30 +30,37 @@ function HabitsView(props) {
         });
     };
 
-    const habitTable = () => {
+    const handlePageChange = (page) => {
+        dispatch(Api.getHabits(page));
+    };
+
+    const habitTableWithPagination = () => {
         return (
-            <Table striped bordered hover size="sm">
-                <thead>
-                <tr>
-                    <th>{t('id')}</th>
-                    <th>{t('title')}</th>
-                    <th>{t('description')}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {habitRows()}
-                </tbody>
-            </Table>
+            <>
+                <Table striped bordered hover size="sm">
+                    <thead>
+                    <tr>
+                        <th>{t('id')}</th>
+                        <th>{t('title')}</th>
+                        <th>{t('description')}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {habitRows()}
+                    </tbody>
+                </Table>
+                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages} onPageChange={handlePageChange}/>
+            </>
         );
     };
 
     const getView = () => {
-        return <>{props.habits.length > 0 ? habitTable() : t('habits.empty')}</>;
+        return <>{props.habits.length > 0 ? habitTableWithPagination() : t('habits.empty')}</>;
     };
 
     return (
         <React.Fragment>
-            {props.habits !== null ? getView() : <LoaderView/>}
+            {props.loading || props.habits === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
@@ -63,10 +71,16 @@ HabitsView.propTypes = {
             id: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired
-        })
-    )
+        }),
+    ),
+    loading: PropTypes.bool.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    totalPages: PropTypes.number.isRequired,
 };
 
 export default connect(state => ({
-    habits: state.data.habits,
+    habits: state.data.habits.content,
+    loading: state.data.habits.loading,
+    currentPage: state.data.habits.currentPage,
+    totalPages: state.data.habits.totalPages,
 }))(HabitsView);

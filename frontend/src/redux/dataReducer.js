@@ -9,22 +9,62 @@ import {
 } from "./actions";
 
 const initialState = {
-    habits: null,
-    fulfilments: null
+    habits: {
+        content: null,
+        loading: false,
+        currentPage: null,
+        totalPages: null,
+    },
+    fulfilments: {
+        content: null,
+        loading: false,
+        currentPage: null,
+        totalPages: null,
+    }
 };
 
 const dataReducer = (state = initialState, action) => {
     const payload = action.payload;
     switch (action.type) {
+        case FETCH_HABITS + PENDING:
+            return {
+                ...state,
+                habits: {
+                    content: state.habits.content,
+                    loading: false,
+                    currentPage: state.habits.number,
+                    totalPages: state.habits.totalPages,
+                }
+            };
         case FETCH_HABITS + FULFILLED:
             return {
                 ...state,
-                habits: payload
+                habits: {
+                    content: payload.content,
+                    loading: false,
+                    currentPage: payload.number,
+                    totalPages: payload.totalPages,
+                }
+            };
+        case FETCH_FULFILMENTS + PENDING:
+            return {
+                ...state,
+                fulfilments: {
+                    content: state.fulfilments.content,
+                    loading: true,
+                    currentPage: state.fulfilments.number,
+                    totalPages: state.fulfilments.totalPages,
+                }
             };
         case FETCH_FULFILMENTS + FULFILLED:
             return {
                 ...state,
-                fulfilments: payload
+                fulfilments: {
+                    content: payload.content,
+                    loading: false,
+                    currentPage: payload.number,
+                    totalPages: payload.totalPages,
+                }
             };
         case FULFIL_HABIT + FULFILLED:
             const newFulfilments = state.fulfilments.map(elem => {
