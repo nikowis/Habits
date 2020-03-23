@@ -2,6 +2,8 @@ package pl.nikowis.habits.service.impl;
 
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.habits.dto.FulfilableHabitDTO;
@@ -51,7 +53,7 @@ class FulfilmentServiceImpl implements FulfilmentService {
         }
 
         List<Fulfilment> existingFulfilments = fulfilmentRepository.findByUserIdAndCreatedAtBetweenAndHabitIdIn(SecurityUtils.getCurrentUserId(), DateUtils.getTodayDayStart(), DateUtils.getTodayDayEnd(), Collections.singletonList(fulfilDTO.getHabitId()));
-        if(existingFulfilments.size()>0) {
+        if (existingFulfilments.size() > 0) {
             throw new HabitAlreadyFulfiledException();
         }
 
@@ -68,8 +70,8 @@ class FulfilmentServiceImpl implements FulfilmentService {
     }
 
     @Override
-    public List<FulfilableHabitDTO> getDailyFulfilments() {
-        List<Habit> habits = habitRepository.findByActiveAndUserId(true, SecurityUtils.getCurrentUserId());
+    public Page<FulfilableHabitDTO> getDailyFulfilments(Pageable pageable) {
+        Page<Habit> habits = habitRepository.findByActiveAndUserId(true, SecurityUtils.getCurrentUserId(), pageable);
         List<Long> habitIds = habits.stream().map(Habit::getId).collect(Collectors.toList());
         List<FulfilableHabitDTO> dailyHabitss = habits.stream().map(g -> {
             FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(false);
@@ -78,16 +80,11 @@ class FulfilmentServiceImpl implements FulfilmentService {
         }).collect(Collectors.toList());
 
         Date startDate = DateUtils.getTodayDayStart();
-        Date endDate = DateUtils.getTodayDayEnd();
 
-        List<Fulfilment> fulfilments = fulfilmentRepository.findByUserIdAndCreatedAtBetweenAndHabitIdIn(SecurityUtils.getCurrentUserId(), startDate, endDate, habitIds);
-
-        fulfilments.forEach(f -> dailyHabitss.forEach(g -> {
-            if (g.getId().equals(f.getHabit().getId())) {
-                g.setFulfilled(true);
-            }
-        }));
-
-        return dailyHabitss;
+        return habits.map(habit -> {
+            FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(habit.getUpdatedAt().after(startDate));
+            mapperFacade.map(habit, fulfilableHabitDTO);
+            return fulfilableHabitDTO;
+        });
     }
 }

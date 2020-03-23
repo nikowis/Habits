@@ -1,6 +1,8 @@
 package pl.nikowis.habits.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nikowis.habits.dto.CreateHabitDTO;
 import pl.nikowis.habits.dto.HabitDTO;
+import pl.nikowis.habits.model.Habit;
 import pl.nikowis.habits.security.SecurityConstants;
 import pl.nikowis.habits.service.HabitService;
 
@@ -32,8 +35,8 @@ public class HabitController {
     private HabitService habitService;
 
     @GetMapping
-    public List<HabitDTO> habitsList() {
-        return habitService.getHabits();
+    public Page<HabitDTO> habitsList(Pageable pageable) {
+        return habitService.getHabits(pageable);
     }
 
     @PostMapping

@@ -4,6 +4,8 @@ import ma.glasnost.orika.MapperFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.habits.dto.CreateHabitDTO;
@@ -18,8 +20,6 @@ import pl.nikowis.habits.util.DateUtils;
 import pl.nikowis.habits.util.SecurityUtils;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -38,8 +38,8 @@ class HabitServiceImpl implements HabitService {
     private MapperFacade mapperFacade;
 
     @Override
-    public List<HabitDTO> getHabits() {
-        return habitRepository.findByUserId(SecurityUtils.getCurrentUserId()).stream().map(g -> mapperFacade.map(g, HabitDTO.class)).collect(Collectors.toList());
+    public Page<HabitDTO> getHabits(Pageable pageable) {
+        return habitRepository.findByUserId(SecurityUtils.getCurrentUserId(), pageable).map(g -> mapperFacade.map(g, HabitDTO.class));
     }
 
     @Override

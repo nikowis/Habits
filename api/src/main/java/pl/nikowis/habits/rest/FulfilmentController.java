@@ -1,6 +1,8 @@
 package pl.nikowis.habits.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class FulfilmentController {
     }
 
     @GetMapping
-    public List<FulfilableHabitDTO> dailyHabitsList() {
-        return fulfilmentService.getDailyFulfilments();
+    public Page<FulfilableHabitDTO> dailyHabitsList(Pageable pageable) {
+        return fulfilmentService.getDailyFulfilments(pageable);
     }
 }
