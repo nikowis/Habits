@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import '../App.scss';
 import {connect} from "react-redux";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 import Api from "../common/api-communication";
 import LoaderView from "./LoaderView";
 import PropTypes from "prop-types";
@@ -44,4 +44,4 @@ HomeView.propTypes = {
 export default connect(state => ({
     authenticated: state.user.authenticated,
     login: state.user.login
-}))(withTranslation()(HomeView));
+}))(HomeView);

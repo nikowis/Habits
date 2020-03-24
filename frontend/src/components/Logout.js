@@ -10,7 +10,6 @@ function Logout(props) {
 
     const logout = () => {
         const {dispatch} = props;
-        localStorage.clear();
         dispatch(Api.logout());
     };
 

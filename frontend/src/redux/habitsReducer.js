@@ -12,7 +12,7 @@ const habitsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_HABITS + PENDING:
             return {
-                ... state,
+                ...state,
                 loading: true
             };
         case FETCH_HABITS + FULFILLED:

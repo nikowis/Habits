@@ -6,16 +6,24 @@ import ViewTitle from "./components/ViewTitle";
 import Api from "./common/api-communication";
 import ViewRoutes from "./components/ViewRoutes";
 import PropTypes from "prop-types";
+import {useTranslation} from "react-i18next";
 
 function App(props) {
 
     const {dispatch, authenticated} = props;
+    const {i18n} = useTranslation();
+    const {lang} = props;
 
     useEffect(() => {
         if (authenticated) {
             dispatch(Api.getUser());
         }
     }, [dispatch, authenticated]);
+
+    useEffect(() => {
+        window.lang = lang;
+        i18n.changeLanguage(lang);
+    }, [lang, i18n]);
 
     return (
         <div className="app">
@@ -34,9 +42,11 @@ function App(props) {
 }
 
 App.propTypes = {
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.bool.isRequired,
+    lang: PropTypes.string.isRequired
 };
 
 export default connect(state => ({
     authenticated: state.user.authenticated,
+    lang: state.user.lang
 }))(App);

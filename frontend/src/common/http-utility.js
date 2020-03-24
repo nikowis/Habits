@@ -12,13 +12,7 @@ import {
 import {API_ERROR_NOTIFICATION_DURATION, AUTH_ERROR_NOTIFICATION_DURATION} from './app-constants'
 import i18n from '../i18n';
 
-
 class HttpUtility {
-
-    constructor() {
-        this.token = '';
-        window.lang = 'en';
-    }
 
     call(params, startAction, endAction) {
         const {url, method, payload, headers, action, json = true} = params;

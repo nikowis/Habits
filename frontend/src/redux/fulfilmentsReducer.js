@@ -12,7 +12,7 @@ const fulfilmentsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_FULFILMENTS + PENDING:
             return {
-                ... state,
+                ...state,
                 loading: true
             };
         case FETCH_FULFILMENTS + FULFILLED:
@@ -23,7 +23,7 @@ const fulfilmentsReducer = (state = initialState, action) => {
                 totalPages: payload.totalPages,
             };
         case FULFIL_HABIT + FULFILLED:
-            const newFulfilments = state.fulfilments.content.map(elem => {
+            const newFulfilments = state.content.map(elem => {
                 return elem.id === payload.id ? payload : elem
             });
             return {

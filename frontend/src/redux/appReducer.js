@@ -1,7 +1,6 @@
 import {
     API_ERROR,
     AUTH_ERROR,
-    CHANGE_LANG,
     CLEAR_API_ERROR,
     CLEAR_AUTH_ERROR,
     CLEAR_SERVER_ERROR,
@@ -19,7 +18,6 @@ const initialState = {
     error: {},
     errorMessage: '',
     pendingRequests: 0,
-    lang: 'en'
 };
 
 const appReducer = (state = initialState, action) => {
@@ -76,12 +74,7 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 apiError: false
             };
-        case CHANGE_LANG:
-            window.lang = action.payload;
-            return {
-                ...state,
-                lang: action.payload
-            };
+
         default:
             return state
     }

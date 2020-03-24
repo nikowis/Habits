@@ -26,7 +26,6 @@ function RegisterView(props) {
             }
         });
     };
-
     if (props.authenticated) {
         return <Redirect to={HOME} push={true}/>
     }

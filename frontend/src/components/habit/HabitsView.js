@@ -73,14 +73,12 @@ HabitsView.propTypes = {
             description: PropTypes.string.isRequired
         }),
     ),
-    loading: PropTypes.bool.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    totalPages: PropTypes.number.isRequired,
+    currentPage: PropTypes.number,
+    totalPages: PropTypes.number,
 };
 
 export default connect(state => ({
     habits: state.habits.content,
-    loading: state.habits.loading,
     currentPage: state.habits.currentPage,
     totalPages: state.habits.totalPages,
 }))(HabitsView);

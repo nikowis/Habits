@@ -78,15 +78,13 @@ FulfilmentsView.propTypes = {
         }),
     ),
     streakGoal: PropTypes.number.isRequired,
-    loading: PropTypes.bool.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    totalPages: PropTypes.number.isRequired,
+    currentPage: PropTypes.number,
+    totalPages: PropTypes.number,
 };
 
 export default connect(state => ({
     fulfilments: state.fulfilments.content,
     streakGoal: state.user.streakGoal,
-    loading: state.fulfilments.loading,
     currentPage: state.fulfilments.currentPage,
     totalPages: state.fulfilments.totalPages,
 }))(FulfilmentsView);

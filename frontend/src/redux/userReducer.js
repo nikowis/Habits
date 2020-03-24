@@ -1,14 +1,25 @@
-import {AUTH_ERROR, FETCH_USER, FULFILLED, LOGIN_ACTION, LOGOUT_ACTION, PENDING, UPDATE_USER} from "./actions";
+import {
+    AUTH_ERROR,
+    CHANGE_LANG,
+    FETCH_USER,
+    FULFILLED,
+    LOGIN_ACTION,
+    LOGOUT_ACTION,
+    PENDING,
+    UPDATE_USER
+} from "./actions";
 
 const initialState = {
     id: null,
     login: null,
     authenticated: false,
-    streakGoal: null
+    streakGoal: null,
+    lang: 'eng'
 };
 
 const userReducer = (state = initialState, action) => {
     const payload = action.payload;
+
     switch (action.type) {
         case LOGIN_ACTION + FULFILLED:
             return {
@@ -23,9 +34,19 @@ const userReducer = (state = initialState, action) => {
                 login: payload.login,
                 streakGoal: payload.streakGoal
             };
+        case CHANGE_LANG:
+            window.lang = action.payload;
+            console.log('CHANGED LANG ', action.payload);
+            return {
+                ...state,
+                lang: action.payload
+            };
         case AUTH_ERROR + FULFILLED:
         case LOGOUT_ACTION + PENDING:
-            return initialState;
+            return {
+                ...initialState,
+                lang: state.lang
+            };
         default:
             return state
     }

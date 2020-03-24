@@ -7,17 +7,17 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Spinner from "react-bootstrap/Spinner";
 import {LinkContainer} from "react-router-bootstrap"
-import {useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {Button} from "react-bootstrap";
 import {CHANGE_LANG} from '../redux/actions'
 import PropTypes from "prop-types";
 
 function TopMenu(props) {
 
-    const {t} = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const changeLang = (lang) => {
-        const {i18n, dispatch} = props;
+        const {dispatch} = props;
         i18n.changeLanguage(lang);
         dispatch({type: CHANGE_LANG, payload: lang});
     };
@@ -91,5 +91,5 @@ export default connect(state => ({
     authenticated: state.user.authenticated,
     authError: state.app.authError,
     pendingRequests: state.app.pendingRequests,
-    lang: state.app.lang
-}))(withTranslation()(TopMenu));
+    lang: state.user.lang
+}))(TopMenu);
