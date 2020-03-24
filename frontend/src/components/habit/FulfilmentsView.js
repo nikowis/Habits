@@ -63,7 +63,7 @@ function FulfilmentsView(props) {
 
     return (
         <React.Fragment>
-            {props.loading || props.fulfilments === null ? <LoaderView/> : getView()}
+            {props.fulfilments === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
@@ -84,9 +84,9 @@ FulfilmentsView.propTypes = {
 };
 
 export default connect(state => ({
-    fulfilments: state.data.fulfilments.content,
+    fulfilments: state.fulfilments.content,
     streakGoal: state.user.streakGoal,
-    loading: state.data.fulfilments.loading,
-    currentPage: state.data.fulfilments.currentPage,
-    totalPages: state.data.fulfilments.totalPages,
+    loading: state.fulfilments.loading,
+    currentPage: state.fulfilments.currentPage,
+    totalPages: state.fulfilments.totalPages,
 }))(FulfilmentsView);

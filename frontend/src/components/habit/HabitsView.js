@@ -60,7 +60,7 @@ function HabitsView(props) {
 
     return (
         <React.Fragment>
-            {props.loading || props.habits === null ? <LoaderView/> : getView()}
+            {props.habits === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
@@ -79,8 +79,8 @@ HabitsView.propTypes = {
 };
 
 export default connect(state => ({
-    habits: state.data.habits.content,
-    loading: state.data.habits.loading,
-    currentPage: state.data.habits.currentPage,
-    totalPages: state.data.habits.totalPages,
+    habits: state.habits.content,
+    loading: state.habits.loading,
+    currentPage: state.habits.currentPage,
+    totalPages: state.habits.totalPages,
 }))(HabitsView);
