@@ -1,4 +1,4 @@
-import {CREATE_HABIT, FETCH_HABITS, FULFILLED, LOGOUT_ACTION, PENDING} from "./actions";
+import {CREATE_HABIT, DELETE_HABIT, FETCH_HABITS, FULFILLED, LOGOUT_ACTION, PENDING} from "./actions";
 
 const initialState = {
     content: null,
@@ -24,6 +24,7 @@ const habitsReducer = (state = initialState, action) => {
             };
         case LOGOUT_ACTION + PENDING:
         case CREATE_HABIT:
+        case DELETE_HABIT + FULFILLED:
             return initialState;
         default:
             return state

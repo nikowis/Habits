@@ -7,6 +7,7 @@
   "id" : "Id",
   "title" : "Tytuł",
   "description" : "Opis",
+  "streak" : "Seria",
   "streakGoal" : "Cel dni pod rząd",
   "submit" : "Zapisz",
   "servererror" : "Błąd serwera",

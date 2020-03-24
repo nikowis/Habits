@@ -1,6 +1,7 @@
 import {API_FULFILMENTS, API_HABITS, API_LOGIN, API_LOGOUT, API_REGISTER, API_USER} from './endpoints'
 import HttpUtility from './http-utility'
 import {
+    DELETE_HABIT,
     FETCH_FULFILMENTS,
     FETCH_HABITS,
     FETCH_USER,
@@ -120,6 +121,14 @@ class Api {
         });
     }
 
+    removeHabit(id) {
+        const url = this.API_URL + API_HABITS + '/' + id;
+
+        return HttpUtility.delete({
+            url: url,
+            action: DELETE_HABIT
+        });
+    }
 }
 
 export default Api = new Api();

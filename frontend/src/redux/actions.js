@@ -20,6 +20,7 @@ export const FETCH_USER = 'FETCH_USER';
 export const FULFIL_HABIT = 'FULFIL_HABIT';
 export const CLEAR_SERVER_ERROR = 'CLEAR_SERVER_ERROR';
 export const CREATE_HABIT = 'CREATE_HABIT';
+export const DELETE_HABIT = 'DELETE_HABIT';
 
 
 

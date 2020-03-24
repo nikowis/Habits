@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "i18n-react": "^0.7.0",
@@ -10,6 +12,7 @@
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
     "node-sass": "^4.13.0",
+    "prop-types": "latest",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.12.0",
@@ -23,8 +26,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
-    "yup": "^0.28.3",
-    "prop-types": "latest"
+    "yup": "^0.28.3"
   },
   "scripts": {
     "start": "react-scripts start",

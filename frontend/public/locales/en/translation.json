@@ -7,6 +7,7 @@
   "id" : "Id",
   "title" : "Title",
   "description" : "Description",
+  "streak" : "Streak",
   "streakGoal" : "Day streak goal",
   "submit" : "Save",
   "servererror" : "Server error",

@@ -7,6 +7,9 @@ import {useTranslation} from "react-i18next";
 import LoaderView from "../../components/LoaderView";
 import PropTypes from "prop-types";
 import PaginationComponent from "../PaginationComponent";
+import {Button} from "react-bootstrap";
+import {Delete, Block} from '@material-ui/icons';
+
 
 function HabitsView(props) {
 
@@ -19,13 +22,23 @@ function HabitsView(props) {
         }
     }, [dispatch, habits]);
 
+    const handleDelete = (id) => {
+        dispatch(Api.removeHabit(id));
+    };
+
+    const actionButtons = (id) => {
+        return (<>
+            <Button size={'sm'} variant="outline-danger" onClick={() => handleDelete(id)}><Delete/></Button>
+        </>);
+    };
 
     const habitRows = () => {
         return props.habits.map((habit) => {
             return (<tr key={habit.id}>
-                <td>{habit.id}</td>
                 <td>{habit.title}</td>
                 <td>{habit.description}</td>
+                <td>{habit.streak}</td>
+                <td className={'table-action-buttons'}>{actionButtons(habit.id)}</td>
             </tr>);
         });
     };
@@ -40,9 +53,10 @@ function HabitsView(props) {
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
-                        <th>{t('id')}</th>
                         <th>{t('title')}</th>
                         <th>{t('description')}</th>
+                        <th>{t('streak')}</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,7 +84,8 @@ HabitsView.propTypes = {
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired
+            description: PropTypes.string.isRequired,
+            streak: PropTypes.number.isRequired
         }),
     ),
     currentPage: PropTypes.number,

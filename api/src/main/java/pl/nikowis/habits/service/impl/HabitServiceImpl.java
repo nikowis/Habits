@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nikowis.habits.dto.CreateHabitDTO;
 import pl.nikowis.habits.dto.HabitDTO;
 import pl.nikowis.habits.exception.HabitAlreadyExistsException;
+import pl.nikowis.habits.exception.HabitDoesntExistException;
 import pl.nikowis.habits.model.Habit;
 import pl.nikowis.habits.model.UserDetailsImpl;
 import pl.nikowis.habits.repository.HabitRepository;
@@ -60,6 +61,9 @@ class HabitServiceImpl implements HabitService {
     @Override
     public HabitDTO updateHabit(Long habitId, CreateHabitDTO habitDTO) {
         Habit habit = habitRepository.findByIdAndUserId(habitId, SecurityUtils.getCurrentUserId());
+        if(habit == null) {
+            throw new HabitDoesntExistException();
+        }
         mapperFacade.map(habitDTO, habit);
         Habit saved = habitRepository.save(habit);
         return mapperFacade.map(saved, HabitDTO.class);
@@ -68,9 +72,12 @@ class HabitServiceImpl implements HabitService {
     @Override
     public HabitDTO deleteHabit(Long habitDTO) {
         Habit habit = habitRepository.findByIdAndUserId(habitDTO, SecurityUtils.getCurrentUserId());
-        habit.setActive(false);
-        Habit saved = habitRepository.save(habit);
-        return mapperFacade.map(saved, HabitDTO.class);
+        if(habit == null) {
+            throw new HabitDoesntExistException();
+        }
+        HabitDTO deletedDTO = mapperFacade.map(habit, HabitDTO.class);
+        habitRepository.delete(habit);
+        return deletedDTO;
     }
 
     @Override
