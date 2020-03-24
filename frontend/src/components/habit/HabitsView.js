@@ -8,7 +8,7 @@ import LoaderView from "../../components/LoaderView";
 import PropTypes from "prop-types";
 import PaginationComponent from "../PaginationComponent";
 import {Button} from "react-bootstrap";
-import {Delete, Block} from '@material-ui/icons';
+import {Delete} from '@material-ui/icons';
 
 
 function HabitsView(props) {

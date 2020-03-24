@@ -14,7 +14,7 @@ const initialState = {
     login: null,
     authenticated: false,
     streakGoal: null,
-    lang: 'eng'
+    lang: 'en'
 };
 
 const userReducer = (state = initialState, action) => {
