@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import {useTranslation} from "react-i18next";
 import {Spinner} from "react-bootstrap";
 import ErrorContainer from "./components/ErrorContainer";
+import NotificationContainer from "./components/NotificationContainer";
 
 function App(props) {
 
@@ -33,6 +34,7 @@ function App(props) {
             </header>
             <TopMenu/>
             <ErrorContainer/>
+            <NotificationContainer/>
             <ViewTitle/>
             <div className="app-card">
                 <div className="app-content">

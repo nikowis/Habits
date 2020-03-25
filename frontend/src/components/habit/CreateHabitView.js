@@ -8,8 +8,10 @@ import {useTranslation} from "react-i18next";
 import {Formik} from 'formik';
 import {createHabitSchema} from "../../common/validation-schemas";
 import {connect} from "react-redux";
-import {CREATE_HABIT} from "../../redux/actions";
+import {CREATE_HABIT, HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../redux/actions";
 import {HABITS} from "../../common/paths";
+import {store} from "../../index";
+import {NOTIFICATION_DURATION} from "../../common/app-constants";
 
 function CreateHabitView(props) {
 
@@ -19,6 +21,10 @@ function CreateHabitView(props) {
         Api.createHabit(data).payload.then((response) => {
             if (!response.status) {
                 props.dispatch({type: CREATE_HABIT});
+                props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.habitCreated')});
+                setTimeout(() => {
+                    store.dispatch({type: HIDE_NOTIFICATION})
+                }, NOTIFICATION_DURATION);
                 props.history.push(HABITS)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {

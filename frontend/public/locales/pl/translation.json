@@ -51,5 +51,10 @@
   "profile": {
     "page" : "Profil",
     "title": "Mój profil"
+  },
+  "notification": {
+    "habitCreated": "Nawyk stworzony",
+    "habitDeleted": "Nawyk usunięty",
+    "registered": "Konto utworzone"
   }
 }

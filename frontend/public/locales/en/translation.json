@@ -51,5 +51,10 @@
   "profile": {
     "page" : "Profile",
     "title": "My profile"
+  },
+  "notification": {
+    "habitCreated": "Habit created",
+    "habitDeleted": "Habit deleted",
+    "registered": "Account created"
   }
 }

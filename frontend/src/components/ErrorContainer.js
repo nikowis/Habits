@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 function ErrorContainer(props) {
 
-    const errorContainer = (message) => {
+    const alertContainer = (message) => {
         return (
             <Alert variant='danger'>
                 {message}
@@ -17,8 +17,8 @@ function ErrorContainer(props) {
     return (
         <div className='error-container'>
             <div className='error-message'>
-                {props.authError ? errorContainer(props.errorMessage) : null}
-                {props.apiError ? errorContainer(props.errorMessage) : null}
+                {props.authError ? alertContainer(props.errorMessage) : null}
+                {props.apiError ? alertContainer(props.errorMessage) : null}
             </div>
         </div>
     );

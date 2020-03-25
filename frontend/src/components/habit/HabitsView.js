@@ -9,6 +9,9 @@ import PropTypes from "prop-types";
 import PaginationComponent from "../PaginationComponent";
 import {Button} from "react-bootstrap";
 import {Delete} from '@material-ui/icons';
+import {HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../redux/actions";
+import {store} from "../../index";
+import {NOTIFICATION_DURATION} from "../../common/app-constants";
 
 
 function HabitsView(props) {
@@ -23,7 +26,14 @@ function HabitsView(props) {
     }, [dispatch, habits]);
 
     const handleDelete = (id) => {
-        dispatch(Api.removeHabit(id));
+        dispatch(Api.removeHabit(id)).then(res => {
+            if (res.action.payload && !res.action.payload.status) {
+                props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.habitDeleted')});
+                setTimeout(() => {
+                    store.dispatch({type: HIDE_NOTIFICATION})
+                }, NOTIFICATION_DURATION);
+            }
+        });
     };
 
     const habitRows = () => {
@@ -33,7 +43,8 @@ function HabitsView(props) {
                 <td>{habit.description}</td>
                 <td>{habit.streak}</td>
                 <td className={'table-action-buttons'}>
-                    <Button size={'sm'} variant="outline-danger" onClick={() => handleDelete(habit.id)}><Delete/></Button>
+                    <Button size={'sm'} variant="outline-danger"
+                            onClick={() => handleDelete(habit.id)}><Delete/></Button>
                 </td>
             </tr>);
         });
@@ -59,7 +70,8 @@ function HabitsView(props) {
                     {habitRows()}
                     </tbody>
                 </Table>
-                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages} onPageChange={handlePageChange}/>
+                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages}
+                                     onPageChange={handlePageChange}/>
             </>
         );
     };

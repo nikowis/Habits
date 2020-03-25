@@ -10,6 +10,9 @@ import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 import {HOME, LOGIN} from "../../common/paths";
 import PropTypes from "prop-types";
+import {HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../redux/actions";
+import {store} from "../../index";
+import {NOTIFICATION_DURATION} from "../../common/app-constants";
 
 function RegisterView(props) {
 
@@ -18,6 +21,10 @@ function RegisterView(props) {
     const handleSubmit = (data, actions) => {
         Api.postRegister(data.login, data.password).payload.then((response) => {
             if (!response.status) {
+                props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.registered')});
+                setTimeout(() => {
+                    store.dispatch({type: HIDE_NOTIFICATION})
+                }, NOTIFICATION_DURATION);
                 props.history.push(LOGIN)
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {

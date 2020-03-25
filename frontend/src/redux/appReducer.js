@@ -4,12 +4,12 @@ import {
     CLEAR_API_ERROR,
     CLEAR_AUTH_ERROR,
     CLEAR_SERVER_ERROR,
-    FULFILLED,
+    FULFILLED, HIDE_NOTIFICATION,
     HTTP_REQUEST_FINISH,
     HTTP_REQUEST_START,
     LOGIN_ACTION,
     LOGOUT_ACTION,
-    SERVER_ERROR
+    SERVER_ERROR, SHOW_NOTIFICATION
 } from "./actions";
 
 const initialState = {
@@ -17,6 +17,8 @@ const initialState = {
     authError: false,
     error: {},
     errorMessage: '',
+    showNotification: false,
+    notificationMessage: '',
     pendingRequests: 0,
 };
 
@@ -74,7 +76,18 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 apiError: false
             };
-
+        case SHOW_NOTIFICATION:
+            return {
+                ...state,
+                notificationMessage: action.payload,
+                showNotification: true
+            };
+        case HIDE_NOTIFICATION:
+            return {
+                ...state,
+                notificationMessage: '',
+                showNotification: false
+            };
         default:
             return state
     }
