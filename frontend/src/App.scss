@@ -41,6 +41,7 @@
 
 .table-action-buttons {
   width: 10%;
+
   button {
     margin-left: 0.2rem;
     margin-right: 0.2rem;
@@ -48,7 +49,7 @@
   }
 }
 
-.pagination{
+.pagination {
   justify-content: center;
 }
 
@@ -60,17 +61,26 @@
   height: 40vmin;
 }
 
+.pending-requests-spinner {
+  position: fixed;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.error-container {
+  position: fixed;
+  width:100%;
+  top: 0.2rem;
+  .error-message {
+    color: red;
+    margin: auto;
+    display: inline-block;
+    max-width: 80%;
+  }
+}
+
 .top-menu {
   width: 100%;
-
-  .error-container {
-    color: red;
-    position: absolute;
-    left: 50%;
-    margin-left: -15%;
-    width: 30%;
-    top: 0rem
-  }
 }
 
 .fulfilment-list {
@@ -101,7 +111,7 @@
 
       label {
         width: 100%;
-        padding: 0.5rem 0 0.5rem 1.5rem
+        padding: 0.3rem 0 0.3rem 1.5rem
       }
     }
   }

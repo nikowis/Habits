@@ -7,6 +7,8 @@ import Api from "./common/api-communication";
 import ViewRoutes from "./components/ViewRoutes";
 import PropTypes from "prop-types";
 import {useTranslation} from "react-i18next";
+import {Spinner} from "react-bootstrap";
+import ErrorContainer from "./components/ErrorContainer";
 
 function App(props) {
 
@@ -30,12 +32,14 @@ function App(props) {
             <header className="app-header">
             </header>
             <TopMenu/>
+            <ErrorContainer/>
             <ViewTitle/>
             <div className="app-card">
                 <div className="app-content">
                     <ViewRoutes/>
                 </div>
             </div>
+            {props.pendingRequests > 0 ? <Spinner className="pending-requests-spinner" animation="border" variant="primary"/> : null}
         </div>
     );
 
@@ -43,10 +47,12 @@ function App(props) {
 
 App.propTypes = {
     authenticated: PropTypes.bool.isRequired,
+    pendingRequests: PropTypes.number.isRequired,
     lang: PropTypes.string.isRequired
 };
 
 export default connect(state => ({
     authenticated: state.user.authenticated,
+    pendingRequests: state.app.pendingRequests,
     lang: state.user.lang
 }))(App);

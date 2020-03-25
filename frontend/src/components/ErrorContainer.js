@@ -16,8 +16,10 @@ function ErrorContainer(props) {
 
     return (
         <div className='error-container'>
-            {props.authError ? errorContainer(props.errorMessage) : null}
-            {props.apiError ? errorContainer(props.errorMessage) : null}
+            <div className='error-message'>
+                {props.authError ? errorContainer(props.errorMessage) : null}
+                {props.apiError ? errorContainer(props.errorMessage) : null}
+            </div>
         </div>
     );
 

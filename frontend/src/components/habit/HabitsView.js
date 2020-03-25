@@ -26,19 +26,15 @@ function HabitsView(props) {
         dispatch(Api.removeHabit(id));
     };
 
-    const actionButtons = (id) => {
-        return (<>
-            <Button size={'sm'} variant="outline-danger" onClick={() => handleDelete(id)}><Delete/></Button>
-        </>);
-    };
-
     const habitRows = () => {
         return props.habits.map((habit) => {
             return (<tr key={habit.id}>
                 <td>{habit.title}</td>
                 <td>{habit.description}</td>
                 <td>{habit.streak}</td>
-                <td className={'table-action-buttons'}>{actionButtons(habit.id)}</td>
+                <td className={'table-action-buttons'}>
+                    <Button size={'sm'} variant="outline-danger" onClick={() => handleDelete(habit.id)}><Delete/></Button>
+                </td>
             </tr>);
         });
     };

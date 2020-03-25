@@ -1,11 +1,9 @@
 import React from 'react';
 import '../App.scss';
 import {connect} from "react-redux";
-import ErrorContainer from "./ErrorContainer";
 import {CREATE, FULFILMENTS, HABITS, HOME, LOGIN, LOGOUT, PROFILE, REGISTER, ROOT} from "../common/paths";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Spinner from "react-bootstrap/Spinner";
 import {LinkContainer} from "react-router-bootstrap"
 import {useTranslation} from 'react-i18next';
 import {Button} from "react-bootstrap";
@@ -21,6 +19,12 @@ function TopMenu(props) {
         i18n.changeLanguage(lang);
         dispatch({type: CHANGE_LANG, payload: lang});
     };
+
+    const languageButton =
+        <>
+            {props.lang !== 'pl' ? <Button className="lang-button" variant="outline-info" onClick={() => changeLang('pl')}>PL</Button> : null}
+            {props.lang !== 'en' ? <Button className="lang-button" variant="outline-info" onClick={() => changeLang('en')}>EN</Button> : null}
+        </>;
 
     return (
         <div className="top-menu">
@@ -48,6 +52,7 @@ function TopMenu(props) {
                             <LinkContainer to={LOGOUT}>
                                 <Nav.Link>{t('logout')}</Nav.Link>
                             </LinkContainer>
+                            {languageButton}
                         </Nav>
                         : <Nav className="mr-auto">
                             <LinkContainer to={HOME}>
@@ -59,19 +64,11 @@ function TopMenu(props) {
                             <LinkContainer to={REGISTER}>
                                 <Nav.Link>{t('register.page')}</Nav.Link>
                             </LinkContainer>
+                            {languageButton}
                         </Nav>
                     }
                 </Navbar.Collapse>
-
-                {props.pendingRequests > 0 ? <Spinner animation="border" variant="primary"/> : null}
-
-                {props.lang !== 'pl' ?
-                    <Button variant="outline-info" onClick={() => changeLang('pl')}>PL</Button> : null}
-                {props.lang !== 'en' ?
-                    <Button variant="outline-info" onClick={() => changeLang('en')}>EN</Button> : null}
-
             </Navbar>
-            <ErrorContainer/>
         </div>
     );
 
@@ -82,7 +79,6 @@ TopMenu.propTypes = {
     login: PropTypes.string,
     authenticated: PropTypes.bool.isRequired,
     authError: PropTypes.bool.isRequired,
-    pendingRequests: PropTypes.number.isRequired,
     lang: PropTypes.string.isRequired
 };
 
@@ -90,6 +86,5 @@ export default connect(state => ({
     login: state.user.login,
     authenticated: state.user.authenticated,
     authError: state.app.authError,
-    pendingRequests: state.app.pendingRequests,
     lang: state.user.lang
 }))(TopMenu);
