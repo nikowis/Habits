@@ -55,6 +55,7 @@
   "notification": {
     "habitCreated": "Habit created",
     "habitDeleted": "Habit deleted",
-    "registered": "Account created"
+    "registered": "Account created",
+    "profileUpdated": "Profile updated"
   }
 }

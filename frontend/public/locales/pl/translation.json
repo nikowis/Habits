@@ -53,8 +53,10 @@
     "title": "Mój profil"
   },
   "notification": {
-    "habitCreated": "Nawyk stworzony",
+    "habitCreated": "Nawyk utworzony",
     "habitDeleted": "Nawyk usunięty",
-    "registered": "Konto utworzone"
+    "registered": "Konto utworzone",
+    "profileUpdated": "Profil zaktualizowany"
+
   }
 }
