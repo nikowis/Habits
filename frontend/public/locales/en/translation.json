@@ -12,6 +12,7 @@
   "submit" : "Save",
   "servererror" : "Server error",
   "loading": "Loading...",
+  "noElementsFound": "No results found",
   "validations" : {
     "default": "Invalid field",
     "required": "Field required",
@@ -26,7 +27,6 @@
   "habits": {
     "page": "Habits",
     "title": "Habit list",
-    "empty": "Create a new habit first",
     "create" : {
       "page": "Create",
       "title": "Create habit",
@@ -34,8 +34,7 @@
     },
     "fulfill" : {
       "page": "Fulfilments",
-      "title": "Fulfill habit",
-      "empty" : "Create a new habit first"
+      "title": "Fulfill habit"
     }
   },
   "login": {

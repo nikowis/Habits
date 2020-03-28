@@ -5,6 +5,7 @@ const initialState = {
     loading: false,
     currentPage: null,
     totalPages: null,
+    totalElements: null
 };
 
 const habitsReducer = (state = initialState, action) => {
@@ -19,8 +20,9 @@ const habitsReducer = (state = initialState, action) => {
             return {
                 content: payload.content,
                 loading: false,
-                currentPage: payload.number,
+                currentPage: payload.number + 1,
                 totalPages: payload.totalPages,
+                totalElements: payload.totalElements,
             };
         case LOGOUT_ACTION + PENDING:
         case CREATE_HABIT:

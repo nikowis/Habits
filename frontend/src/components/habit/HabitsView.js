@@ -12,23 +12,38 @@ import {Delete} from '@material-ui/icons';
 import {HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../redux/actions";
 import {store} from "../../index";
 import {NOTIFICATION_DURATION} from "../../common/app-constants";
-
+import {withRouter} from 'react-router-dom';
 
 function HabitsView(props) {
 
     const {t} = useTranslation();
-    const {dispatch, habits} = props;
+    const {dispatch, habits, location, history, currentPage, totalPages} = props;
+    const {search, pathname} = location;
+    const {replace} = history;
+
+    const pageQuery = Api.getPageParam(search);
+    useEffect(() => {
+        if (!pageQuery || Number.isNaN(pageQuery)) {
+            replace({
+                pathname: pathname,
+                search: "?" + new URLSearchParams({page: 1}).toString()
+            })
+        }
+    }, [replace, pathname, pageQuery]);
 
     useEffect(() => {
-        if (habits === null) {
-            dispatch(Api.getHabits());
+        if (!pageQuery || Number.isNaN(pageQuery)) {
+            return;
         }
-    }, [dispatch, habits]);
+        if (habits === null || (pageQuery !== currentPage)) {
+            dispatch(Api.getHabits(pageQuery - 1));
+        }
+    }, [dispatch, habits, currentPage, pageQuery]);
 
     const handleDelete = (id) => {
         dispatch(Api.removeHabit(id)).then(res => {
             if (res.action.payload && !res.action.payload.status) {
-                props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.habitDeleted')});
+                dispatch({type: SHOW_NOTIFICATION, payload: t('notification.habitDeleted')});
                 setTimeout(() => {
                     store.dispatch({type: HIDE_NOTIFICATION})
                 }, NOTIFICATION_DURATION);
@@ -37,7 +52,7 @@ function HabitsView(props) {
     };
 
     const habitRows = () => {
-        return props.habits.map((habit) => {
+        return habits.map((habit) => {
             return (<tr key={habit.id}>
                 <td>{habit.title}</td>
                 <td>{habit.description}</td>
@@ -51,7 +66,10 @@ function HabitsView(props) {
     };
 
     const handlePageChange = (page) => {
-        dispatch(Api.getHabits(page));
+        history.push({
+            pathname: pathname,
+            search: "?" + new URLSearchParams({page: page}).toString()
+        })
     };
 
     const habitTableWithPagination = () => {
@@ -70,19 +88,19 @@ function HabitsView(props) {
                     {habitRows()}
                     </tbody>
                 </Table>
-                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages}
+                <PaginationComponent currentPage={currentPage} totalPages={totalPages}
                                      onPageChange={handlePageChange}/>
             </>
         );
     };
 
     const getView = () => {
-        return <>{props.habits.length > 0 ? habitTableWithPagination() : t('habits.empty')}</>;
+        return <>{pageQuery <= totalPages ? habitTableWithPagination() : t('noElementsFound')}</>;
     };
 
     return (
         <React.Fragment>
-            {props.habits === null ? <LoaderView/> : getView()}
+            {habits === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
@@ -104,4 +122,4 @@ export default connect(state => ({
     habits: state.habits.content,
     currentPage: state.habits.currentPage,
     totalPages: state.habits.totalPages,
-}))(HabitsView);
+}))(withRouter(HabitsView));

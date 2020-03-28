@@ -8,22 +8,38 @@ import FulfillableHabit from "./FulfilmentsRow";
 import LoaderView from "../../components/LoaderView";
 import PropTypes from "prop-types";
 import PaginationComponent from "../PaginationComponent";
+import {withRouter} from 'react-router-dom';
 
 function FulfilmentsView(props) {
 
     const {t} = useTranslation();
-    const {dispatch, fulfilments} = props;
+    const {dispatch, fulfilments, location, history, currentPage, totalPages, streakGoal} = props;
+    const {search, pathname} = location;
+    const {replace} = history;
+
+    const pageQuery = Api.getPageParam(search);
+    useEffect(() => {
+        if (!pageQuery || Number.isNaN(pageQuery)) {
+            replace({
+                pathname: pathname,
+                search: "?" + new URLSearchParams({page: 1}).toString()
+            })
+        }
+    }, [replace, pathname, pageQuery]);
 
     useEffect(() => {
-        if (fulfilments === null) {
-            dispatch(Api.getFulfilments());
+        if (!pageQuery || Number.isNaN(pageQuery)) {
+            return;
         }
-    }, [dispatch, fulfilments]);
+        if (fulfilments === null || (pageQuery !== currentPage)) {
+            dispatch(Api.getFulfilments(pageQuery - 1));
+        }
+    }, [dispatch, fulfilments, currentPage, pageQuery]);
 
     const handleCheckboxChange = (event) => {
         const {dispatch} = props;
         if (event.target.checked) {
-            const selectedHabit = props.fulfilments.filter((habit) =>
+            const selectedHabit = fulfilments.filter((habit) =>
                 habit.id.toString() === event.target.id
             )[0];
             dispatch(Api.fulfilHabit(selectedHabit));
@@ -31,10 +47,10 @@ function FulfilmentsView(props) {
     };
 
     const fulfilmentRows = () => {
-        return props.fulfilments.map((habit) => {
+        return fulfilments.map((habit) => {
             return (
                 <ListGroup.Item key={habit.id}>
-                    <FulfillableHabit streakGoal={props.streakGoal} habit={habit}
+                    <FulfillableHabit streakGoal={streakGoal} habit={habit}
                                       handleChange={handleCheckboxChange}/>
                 </ListGroup.Item>
             );
@@ -42,7 +58,10 @@ function FulfilmentsView(props) {
     };
 
     const handlePageChange = (page) => {
-        dispatch(Api.getFulfilments(page));
+        history.push({
+            pathname: pathname,
+            search: "?" + new URLSearchParams({page: page}).toString()
+        })
     };
 
     const fulfilmentList = () => {
@@ -51,19 +70,19 @@ function FulfilmentsView(props) {
                 <ListGroup className="fulfilment-list">
                     {fulfilmentRows()}
                 </ListGroup>
-                <PaginationComponent currentPage={props.currentPage} totalPages={props.totalPages}
+                <PaginationComponent currentPage={currentPage} totalPages={totalPages}
                                      onPageChange={handlePageChange}/>
             </>
         );
     };
 
     const getView = () => {
-        return <>{props.fulfilments.length > 0 ? fulfilmentList() : t('habits.fulfill.empty')}</>;
+        return <>{pageQuery <= totalPages ? fulfilmentList() : t('noElementsFound')}</>;
     };
 
     return (
         <React.Fragment>
-            {props.fulfilments === null ? <LoaderView/> : getView()}
+            {fulfilments === null ? <LoaderView/> : getView()}
         </React.Fragment>
     );
 }
@@ -87,4 +106,4 @@ export default connect(state => ({
     streakGoal: state.user.streakGoal,
     currentPage: state.fulfilments.currentPage,
     totalPages: state.fulfilments.totalPages,
-}))(FulfilmentsView);
+}))(withRouter(FulfilmentsView));

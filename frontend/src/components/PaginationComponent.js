@@ -5,11 +5,11 @@ import Pagination from "react-bootstrap/Pagination";
 function PaginationComponent(props) {
 
     const changePage = (e) => {
-        const page = e.target.innerText - 1;
+        const page = e.target.innerText;
         props.onPageChange(page);
     };
 
-    let active = props.currentPage + 1;
+    let active = props.currentPage;
     let items = [];
     for (let number = 1; number <= props.totalPages; number++) {
         items.push(

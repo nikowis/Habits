@@ -11,21 +11,22 @@ import {Formik} from 'formik';
 import {HOME, LOGIN} from "../../common/paths";
 import PropTypes from "prop-types";
 import {HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../redux/actions";
-import {store} from "../../index";
 import {NOTIFICATION_DURATION} from "../../common/app-constants";
+
 
 function RegisterView(props) {
 
     const {t} = useTranslation();
+    const {dispatch, history} = props;
 
     const handleSubmit = (data, actions) => {
         Api.postRegister(data.login, data.password).payload.then((response) => {
             if (!response.status) {
-                props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.registered')});
+                dispatch({type: SHOW_NOTIFICATION, payload: t('notification.registered')});
                 setTimeout(() => {
-                    store.dispatch({type: HIDE_NOTIFICATION})
+                    dispatch({type: HIDE_NOTIFICATION})
                 }, NOTIFICATION_DURATION);
-                props.history.push(LOGIN)
+                history.push(LOGIN);
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);

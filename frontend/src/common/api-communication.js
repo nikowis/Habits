@@ -50,7 +50,7 @@ class Api {
     };
 
     getHabits(page) {
-        if (!page) {
+        if (!page || page < 0) {
             page = 0;
         }
         const url = new URL(this.API_URL + API_HABITS);
@@ -128,6 +128,15 @@ class Api {
             url: url,
             action: DELETE_HABIT
         });
+    }
+
+    getPageParam(searchQuery) {
+        return parseInt(this.getURLParam(searchQuery, 'page'));
+    }
+
+    getURLParam(searchQuery, name) {
+        const params = new URLSearchParams(searchQuery);
+        return  params.get(name);
     }
 }
 

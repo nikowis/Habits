@@ -4,19 +4,20 @@
   "logout": "Wylogowanie",
   "password": "Hasło",
   "repeatPassword": "Powtórz hasło",
-  "id" : "Id",
-  "title" : "Tytuł",
-  "description" : "Opis",
-  "streak" : "Seria",
-  "streakGoal" : "Cel dni pod rząd",
-  "submit" : "Zapisz",
-  "servererror" : "Błąd serwera",
+  "id": "Id",
+  "title": "Tytuł",
+  "description": "Opis",
+  "streak": "Seria",
+  "streakGoal": "Cel dni pod rząd",
+  "submit": "Zapisz",
+  "servererror": "Błąd serwera",
   "loading": "Ładowanie...",
-  "validations" : {
+  "noElementsFound": "Brak wyników",
+  "validations": {
     "default": "Niepoprawne dane",
     "required": "Pole wymagane",
     "email": "Niepoprawny adres email",
-    "passwordMatch" : "Hasła nie pasują"
+    "passwordMatch": "Hasła nie pasują"
   },
   "home": {
     "page": "Start",
@@ -26,16 +27,14 @@
   "habits": {
     "page": "Nawyki",
     "title": "Lista nawyków",
-    "empty": "Najpierw utwórz nawyk",
-    "create" : {
+    "create": {
       "page": "Utwórz",
       "title": "Utwórz nawyk",
       "submit": "Utwórz"
     },
-    "fulfill" : {
+    "fulfill": {
       "page": "Wypełniaj",
-      "title": "Wypełnij nawyk",
-      "empty" : "Najpierw utwórz nawyk"
+      "title": "Wypełnij nawyk"
     }
   },
   "login": {
@@ -49,7 +48,7 @@
     "submit": "Utwórz"
   },
   "profile": {
-    "page" : "Profil",
+    "page": "Profil",
     "title": "Mój profil"
   },
   "notification": {
@@ -57,6 +56,5 @@
     "habitDeleted": "Nawyk usunięty",
     "registered": "Konto utworzone",
     "profileUpdated": "Profil zaktualizowany"
-
   }
 }

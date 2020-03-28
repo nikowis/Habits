@@ -13,6 +13,7 @@ const initialState = {
     loading: false,
     currentPage: null,
     totalPages: null,
+    totalElements: null
 };
 
 const fulfilmentsReducer = (state = initialState, action) => {
@@ -27,8 +28,9 @@ const fulfilmentsReducer = (state = initialState, action) => {
             return {
                 content: payload.content,
                 loading: false,
-                currentPage: payload.number,
+                currentPage: payload.number + 1,
                 totalPages: payload.totalPages,
+                totalElements: payload.totalElements
             };
         case FULFIL_HABIT + FULFILLED:
             const newFulfilments = state.content.map(elem => {
