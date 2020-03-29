@@ -57,21 +57,13 @@ function FulfilmentsView(props) {
         });
     };
 
-    const handlePageChange = (page) => {
-        history.push({
-            pathname: pathname,
-            search: "?" + new URLSearchParams({page: page}).toString()
-        })
-    };
-
     const fulfilmentList = () => {
         return (
             <>
                 <ListGroup className="fulfilment-list">
                     {fulfilmentRows()}
                 </ListGroup>
-                <PaginationComponent currentPage={currentPage} totalPages={totalPages}
-                                     onPageChange={handlePageChange}/>
+                <PaginationComponent currentPathname={pathname} currentPage={currentPage} totalPages={totalPages}/>
             </>
         );
     };

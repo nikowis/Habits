@@ -65,13 +65,6 @@ function HabitsView(props) {
         });
     };
 
-    const handlePageChange = (page) => {
-        history.push({
-            pathname: pathname,
-            search: "?" + new URLSearchParams({page: page}).toString()
-        })
-    };
-
     const habitTableWithPagination = () => {
         return (
             <>
@@ -88,8 +81,7 @@ function HabitsView(props) {
                     {habitRows()}
                     </tbody>
                 </Table>
-                <PaginationComponent currentPage={currentPage} totalPages={totalPages}
-                                     onPageChange={handlePageChange}/>
+                <PaginationComponent currentPathname={pathname} currentPage={currentPage} totalPages={totalPages}/>
             </>
         );
     };
