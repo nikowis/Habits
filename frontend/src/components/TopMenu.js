@@ -9,6 +9,7 @@ import {useTranslation} from 'react-i18next';
 import {Button} from "react-bootstrap";
 import {CHANGE_LANG} from '../redux/actions'
 import PropTypes from "prop-types";
+import {withRouter} from "react-router-dom";
 
 function TopMenu(props) {
 
@@ -26,6 +27,8 @@ function TopMenu(props) {
             {props.lang !== 'en' ? <Button className="lang-button" variant="outline-info" onClick={() => changeLang('en')}>EN</Button> : null}
         </>;
 
+    const currentPathname = props.history.location.pathname
+
     return (
         <div className="top-menu">
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -33,7 +36,7 @@ function TopMenu(props) {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     {props.authenticated ?
-                        <Nav className="mr-auto">
+                        <Nav className="mr-auto" activeKey={currentPathname}>
                             <LinkContainer to={HOME}>
                                 <Nav.Link>{t('home.page')}</Nav.Link>
                             </LinkContainer>
@@ -54,7 +57,7 @@ function TopMenu(props) {
                             </LinkContainer>
                             {languageButton}
                         </Nav>
-                        : <Nav className="mr-auto">
+                        : <Nav className="mr-auto" activeKey={currentPathname}>
                             <LinkContainer to={HOME}>
                                 <Nav.Link>{t('home.page')}</Nav.Link>
                             </LinkContainer>
@@ -87,4 +90,4 @@ export default connect(state => ({
     authenticated: state.user.authenticated,
     authError: state.app.authError,
     lang: state.user.lang
-}))(TopMenu);
+}))(withRouter(TopMenu));
