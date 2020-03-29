@@ -11,7 +11,7 @@ import {
     REGISTER_ACTION,
     UPDATE_USER
 } from "../redux/actions";
-import {DEFAULT_PAGE_SIZE} from './app-constants'
+import {DEFAULT_PAGE_SIZE, DEFAULT_SORT} from './app-constants'
 
 class Api {
 
@@ -55,7 +55,11 @@ class Api {
         }
         const url = new URL(this.API_URL + API_HABITS);
 
-        const params = {size: DEFAULT_PAGE_SIZE, page: page};
+        const params = {
+            size: DEFAULT_PAGE_SIZE,
+            page: page,
+            sort: DEFAULT_SORT
+        };
         url.search = new URLSearchParams(params).toString();
 
         return HttpUtility.get({
@@ -70,7 +74,11 @@ class Api {
         }
         const url = new URL(this.API_URL + API_FULFILMENTS);
 
-        const params = {size: DEFAULT_PAGE_SIZE, page: page};
+        const params = {
+            size: DEFAULT_PAGE_SIZE,
+            page: page,
+            sort: DEFAULT_SORT
+        };
         url.search = new URLSearchParams(params).toString();
 
         return HttpUtility.get({
