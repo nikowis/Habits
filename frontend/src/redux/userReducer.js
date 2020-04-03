@@ -36,7 +36,6 @@ const userReducer = (state = initialState, action) => {
             };
         case CHANGE_LANG:
             window.lang = action.payload;
-            console.log('CHANGED LANG ', action.payload);
             return {
                 ...state,
                 lang: action.payload

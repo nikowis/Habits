@@ -14,7 +14,14 @@ i18n
         },
         react: {
             useSuspense: true
+        },
+        backend: {
+            loadPath: () => {
+                const prefix = process.env.NODE_ENV === "production" ? process.env.REACT_APP_BASENAME : '';
+                return  prefix + '/locales/{{lng}}/{{ns}}.json';
+            },
         }
+
     });
 
 export default i18n;
