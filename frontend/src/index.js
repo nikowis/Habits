@@ -17,7 +17,7 @@ import App from "./App";
 export const {persistor, store} = configureStore();
 
 ReactDOM.render(
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename={process.env.REACT_APP_BASENAME}>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <SuspenseFallbackComponent>
