@@ -16,7 +16,7 @@ public class ProdCorsConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*").allowCredentials(true);
+                registry.addMapping("/**").allowedOrigins("https://nikowis.com", "http://89.65.58.225").allowedMethods("*").allowedHeaders("*").allowCredentials(true);
             }
         };
     }
