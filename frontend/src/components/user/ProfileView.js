@@ -8,8 +8,9 @@ import Api from "../../common/api-communication";
 import {profileSchema} from "../../common/validation-schemas";
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
-import {CREATE_HABIT, SHOW_NOTIFICATION, UPDATE_USER} from "../../redux/actions";
+import {CREATE_HABIT, HIDE_NOTIFICATION, SHOW_NOTIFICATION, UPDATE_USER} from "../../redux/actions";
 import PropTypes from "prop-types";
+import {NOTIFICATION_DURATION} from "../../common/app-constants";
 
 function ProfileView(props) {
 
@@ -28,6 +29,9 @@ function ProfileView(props) {
                 props.dispatch({type: UPDATE_USER, payload: response})
                 props.dispatch({type: CREATE_HABIT});
                 props.dispatch({type: SHOW_NOTIFICATION, payload: t('notification.profileUpdated')});
+                setTimeout(() => {
+                    dispatch({type: HIDE_NOTIFICATION})
+                }, NOTIFICATION_DURATION);
             } else if (response.status && response.status === 400) {
                 response.errors.forEach(err => {
                     actions.setFieldError(err.field, err.defaultMessage);

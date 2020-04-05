@@ -1,3 +1,6 @@
+$primary: #17a2b8;
+$primary-shadow: #128293;
+
 .app {
   text-align: center;
   background-color: #e6e6e6;
@@ -5,7 +8,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  .btn-primary:hover {
+    background-color: $primary-shadow;
+    border-color: $primary-shadow;
+  }
+
+  .btn-primary:active:focus{
+    background-color: $primary-shadow;
+    border-color: $primary-shadow;
+    box-shadow: none;
+  }
+
+  .page-item.active .page-link {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  .page-link {
+    color: $primary;
+  }
+
+  .progress-bar {
+    background-color: $primary;
+  }
 }
+
+
 
 .app-card {
   min-height: 10rem;
@@ -65,6 +99,7 @@
   position: fixed;
   right: 0.5rem;
   bottom: 0.5rem;
+  color: $primary;
 }
 
 .error-container {

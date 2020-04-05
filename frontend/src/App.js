@@ -41,7 +41,7 @@ function App(props) {
                     <ViewRoutes/>
                 </div>
             </div>
-            {props.pendingRequests > 0 ? <Spinner className="pending-requests-spinner" animation="border" variant="primary"/> : null}
+            {props.pendingRequests > 0 ? <Spinner className="pending-requests-spinner" animation="border"/> : null}
         </div>
     );
 
