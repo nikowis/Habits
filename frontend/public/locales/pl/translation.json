@@ -22,7 +22,11 @@
   "home": {
     "page": "Start",
     "title": "Witaj {{name}}",
-    "stranger": "nieznajomy"
+    "stranger": "nieznajomy",
+    "appDescription": "Ta aplikacja pozwoli Ci na śledzenie wypełniania twoich postanowień. Wypracuj nowe nawyki poprzez codzienne monitorowanie postępu. Nie zapomnij wykonać nowych nawyków przed północą żeby utrzymać serię. Ustal własną liczbę dni w serii, a następnie osiągnij swój cel.",
+    "unauthenticatedMonit": "Zarejestruj się lub zaloguj!",
+    "fulfillMonit": "Wypełniaj nawyki!",
+    "noHabitsMonit": "Utwórz swój pierwszy nawyk!"
   },
   "habits": {
     "page": "Nawyki",
@@ -34,7 +38,8 @@
     },
     "fulfill": {
       "page": "Wypełniaj",
-      "title": "Wypełnij nawyk"
+      "title": "Wypełnij nawyk",
+      "submit": "Wypełniaj"
     }
   },
   "login": {

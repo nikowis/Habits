@@ -4,37 +4,42 @@
   "logout": "Logout",
   "password": "Password",
   "repeatPassword": "Repeat password",
-  "id" : "Id",
-  "title" : "Title",
-  "description" : "Description",
-  "streak" : "Streak",
-  "streakGoal" : "Day streak goal",
-  "submit" : "Save",
-  "servererror" : "Server error",
+  "id": "Id",
+  "title": "Title",
+  "description": "Description",
+  "streak": "Streak",
+  "streakGoal": "Day streak goal",
+  "submit": "Save",
+  "servererror": "Server error",
   "loading": "Loading...",
   "noElementsFound": "No results found",
-  "validations" : {
+  "validations": {
     "default": "Invalid field",
     "required": "Field required",
     "email": "Incorrect email",
-    "passwordMatch" : "Passwords don't match"
+    "passwordMatch": "Passwords don't match"
   },
   "home": {
     "page": "Home",
     "title": "Welcome {{name}}",
-    "stranger": "stranger"
+    "stranger": "stranger",
+    "appDescription": "This application will let you register commitments to your resolutions. Shape new habits by tracking your daily efforts. Don't forget to get your habit fulfilment done before midnight to keep the streak. Setup your own days streak goal and achieve it.",
+    "unauthenticatedMonit": "Register or login first, no email verification needed!",
+    "fulfillMonit": "Fulfill habits!",
+    "noHabitsMonit": "Create your first goal here!"
   },
   "habits": {
     "page": "Habits",
     "title": "Habit list",
-    "create" : {
+    "create": {
       "page": "Create",
       "title": "Create habit",
       "submit": "Create"
     },
-    "fulfill" : {
+    "fulfill": {
       "page": "Fulfilments",
-      "title": "Fulfill habit"
+      "title": "Fulfill habit",
+      "submit": "Fulfill"
     }
   },
   "login": {
@@ -48,7 +53,7 @@
     "submit": "Register"
   },
   "profile": {
-    "page" : "Profile",
+    "page": "Profile",
     "title": "My profile"
   },
   "notification": {

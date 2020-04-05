@@ -19,7 +19,7 @@ $primary-shadow: #128293;
     border-color: $primary-shadow;
   }
 
-  .btn-primary:active:focus{
+  .btn-primary:active:focus {
     background-color: $primary-shadow;
     border-color: $primary-shadow;
     box-shadow: none;
@@ -37,9 +37,18 @@ $primary-shadow: #128293;
   .progress-bar {
     background-color: $primary;
   }
+
+  .quick-action-btns {
+    button {
+      margin: 0 0.3rem
+    }
+  }
 }
 
-
+.app-description {
+  text-align: left;
+  padding-bottom: 1rem;
+}
 
 .app-card {
   min-height: 10rem;
@@ -104,9 +113,10 @@ $primary-shadow: #128293;
 
 .error-container {
   position: fixed;
-  width:100%;
+  width: 100%;
   top: 0.2rem;
   z-index: 4;
+
   .error-message {
     color: red;
     margin: auto;
@@ -117,10 +127,11 @@ $primary-shadow: #128293;
 
 .notification-container {
   position: fixed;
-  width:100%;
+  width: 100%;
   bottom: 0.2rem;
   margin: 0;
   z-index: 4;
+
   .notification-message {
     color: red;
     margin: auto;
