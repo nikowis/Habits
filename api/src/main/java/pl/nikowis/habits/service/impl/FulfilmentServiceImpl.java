@@ -72,17 +72,11 @@ class FulfilmentServiceImpl implements FulfilmentService {
     @Override
     public Page<FulfilableHabitDTO> getDailyFulfilments(Pageable pageable) {
         Page<Habit> habits = habitRepository.findByActiveAndUserId(true, SecurityUtils.getCurrentUserId(), pageable);
-        List<Long> habitIds = habits.stream().map(Habit::getId).collect(Collectors.toList());
-        List<FulfilableHabitDTO> dailyHabitss = habits.stream().map(g -> {
-            FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(false);
-            mapperFacade.map(g, fulfilableHabitDTO);
-            return fulfilableHabitDTO;
-        }).collect(Collectors.toList());
 
         Date startDate = DateUtils.getTodayDayStart();
 
         return habits.map(habit -> {
-            FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(habit.getUpdatedAt().after(startDate));
+            FulfilableHabitDTO fulfilableHabitDTO = new FulfilableHabitDTO(habit.getUpdatedAt() != null && habit.getUpdatedAt().after(startDate));
             mapperFacade.map(habit, fulfilableHabitDTO);
             return fulfilableHabitDTO;
         });

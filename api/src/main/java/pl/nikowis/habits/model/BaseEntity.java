@@ -28,7 +28,6 @@ abstract class BaseEntity {
     public void prePersist() {
         if (createdAt == null) {
             createdAt = new Date();
-            updatedAt = new Date();
         }
     }
 
