@@ -25,8 +25,7 @@
     "stranger": "nieznajomy",
     "appDescription": "Ta aplikacja pozwoli Ci na śledzenie wypełniania twoich postanowień. Wypracuj nowe nawyki poprzez codzienne monitorowanie postępu. Nie zapomnij wykonać nowych nawyków przed północą żeby utrzymać serię. Ustal własną liczbę dni w serii, a następnie osiągnij swój cel.",
     "unauthenticatedMonit": "Zarejestruj się lub zaloguj!",
-    "fulfillMonit": "Wypełniaj nawyki!",
-    "noHabitsMonit": "Utwórz swój pierwszy nawyk!"
+    "authenticatedMonit": "Twórz i wypełniaj nawyki!"
   },
   "habits": {
     "page": "Nawyki",

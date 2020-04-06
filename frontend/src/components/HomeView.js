@@ -36,29 +36,23 @@ function HomeView(props) {
         </>;
     };
 
-    const fulfillBtn = () => {
-        return <Button variant="primary" type="submit" onClick={() => redirect(FULFILMENTS)}>
-            {t('habits.fulfill.submit')}
-        </Button>;
-    };
-
-    const createBtn = () => {
-        return <Button variant="primary" type="submit" onClick={() => redirect(CREATE)}>
-            {t('habits.create.submit')}
-        </Button>;
-    };
-
+    function authenticatedBtns() {
+        return <>
+            <Button variant="primary" type="submit" onClick={() => redirect(CREATE)}>
+                {t('habits.create.submit')}
+            </Button>
+            <Button variant="primary" type="submit" onClick={() => redirect(FULFILMENTS)}>
+                {t('habits.fulfill.submit')}
+            </Button>
+        </>;
+    }
 
     const actionButton = () => {
         return (
             <span className='quick-action-btns'>
                 {!props.authenticated ?
                     unauthenticatedBtns() :
-                    (
-                        props.habits !== null && props.habits.length > 0 ?
-                            fulfillBtn() :
-                            createBtn()
-                    )
+                    authenticatedBtns()
                 }
             </span>
         )
@@ -68,11 +62,7 @@ function HomeView(props) {
         return <div className='quick-action-desc'>
             {!props.authenticated ?
                 t('home.unauthenticatedMonit') :
-                (
-                    props.habits !== null && props.habits.length > 0 ?
-                        t('home.fulfillMonit') :
-                        t('home.noHabitsMonit')
-                )
+                t('home.authenticatedMonit')
             }
         </div>;
     };

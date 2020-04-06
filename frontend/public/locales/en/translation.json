@@ -25,8 +25,7 @@
     "stranger": "stranger",
     "appDescription": "This application will let you register commitments to your resolutions. Shape new habits by tracking your daily efforts. Don't forget to get your habit fulfilment done before midnight to keep the streak. Setup your own days streak goal and achieve it.",
     "unauthenticatedMonit": "Register or login first, no email verification needed!",
-    "fulfillMonit": "Fulfill habits!",
-    "noHabitsMonit": "Create your first goal here!"
+    "authenticatedMonit": "Create and fulfill habits!"
   },
   "habits": {
     "page": "Habits",
