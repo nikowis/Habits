@@ -8,7 +8,7 @@ public class SecurityUtils {
 
     public static UserDetailsImpl getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetailsImpl) {
             return ((UserDetailsImpl) authentication.getPrincipal());
         }
         return null;
