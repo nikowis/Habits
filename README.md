@@ -4,4 +4,4 @@
 Build your habits by consistently tracking your daily effort!
 
 Simple Java API + React frontend web project.
-Deployed on: http://89.65.58.225:3000/
+Demo deployment: https://nikowis.com/habits
