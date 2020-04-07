@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
 import './common/validation-schemas'
 import App from "./App";
+import 'typeface-roboto'
 
 export const {persistor, store} = configureStore();
 
