@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh 'cp -r /home/pi/apache-tomcat-9.0.30/webapps/. /home/pi/deployment-backup/'
                 sh 'cp -r /home/pi/nginx-habits-nikowiscom/html/. /home/pi/deployment-backup/html'
-                sh 'rm -rf /home/pi/nginx-habits-nikowiscom/html*'
+                sh 'rm -rf /home/pi/nginx-habits-nikowiscom/html/*'
                 sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/apihabits.war'
                 sh 'rm -rf /home/pi/apache-tomcat-9.0.30/webapps/apihabits'
             }
