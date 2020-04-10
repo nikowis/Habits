@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.nikowis</groupId>
     <artifactId>habits</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Self care</name>
 
     <properties>
@@ -135,18 +135,6 @@
             <properties>
                 <activatedProperties>prod</activatedProperties>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 

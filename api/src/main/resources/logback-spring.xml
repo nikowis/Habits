@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <springProfile name="dev,test">
+        <property scope="context" name="logfolder" value="${user.home}/logs" />
+    </springProfile>
+    <springProfile name="prod">
+        <property scope="context" name="logfolder" value="${user.home}/nikowiscom/habits/logs" />
+    </springProfile>
+
     <appender name="console-appender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
@@ -11,14 +19,14 @@
     </appender>
 
     <appender name="error-file-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${user.home}/logs/habitsapi-errors.log</file>
+        <file>${logfolder}/habitsapi-errors.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
             </Pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.home}/logs/habitsapi-errors-%d{dd-MM-yyyy}.log</fileNamePattern>
+            <fileNamePattern>${logfolder}/habitsapi-errors-%d{dd-MM-yyyy}.log</fileNamePattern>
             <maxHistory>10</maxHistory>
             <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
@@ -28,14 +36,14 @@
     </appender>
 
     <appender name="info-file-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${user.home}/logs/habitsapi-info.log</file>
+        <file>${logfolder}/habitsapi-info.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
             </Pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.home}/logs/habitsapi-info-%d{dd-MM-yyyy}.log</fileNamePattern>
+            <fileNamePattern>${logfolder}/habitsapi-info-%d{dd-MM-yyyy}.log</fileNamePattern>
             <maxHistory>10</maxHistory>
             <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
@@ -45,14 +53,14 @@
     </appender>
 
     <appender name="debug-file-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${user.home}/logs/habitsapi-debug.log</file>
+        <file>${logfolder}/habitsapi-debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
             </Pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.home}/logs/habitsapi-debug-%d{dd-MM-yyyy}.log</fileNamePattern>
+            <fileNamePattern>${logfolder}/habitsapi-debug-%d{dd-MM-yyyy}.log</fileNamePattern>
             <maxHistory>10</maxHistory>
             <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
