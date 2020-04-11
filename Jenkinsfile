@@ -8,7 +8,7 @@ pipeline {
                 sh 'cp /home/pi/nikowiscom/habits/apihabits.jar /home/pi/nikowiscom/habits/backups/'
                 sh 'cp -r /home/pi/nikowiscom/habits/html/. /home/pi/nikowiscom/habits/backups/html'
                 sh 'rm -rf /home/pi/nikowiscom/habits/html/*'
-                sh 'sh /home/pi/nikowiscom/habits/apihabits-stop.sh'
+                sh 'sh /home/pi/nikowiscom/habits/apihabits-stop.sh &'
                 sh 'rm -f /home/pi/nikowiscom/habits/apihabits.jar'
             }
         }
@@ -39,7 +39,10 @@ pipeline {
         stage('Deploy backend') {
             steps {
                 sh 'cp ./api/target/apihabits.jar /home/pi/nikowiscom/habits'
-				sh 'sh /home/pi/nikowiscom/habits/apihabits-start.sh &'
+				withEnv(['JENKINS_NODE_COOKIE=do_not_kill']) {
+					sh 'sh /home/pi/nikowiscom/habits/apihabits-start.sh'
+                }
+
             }
         }
 		
